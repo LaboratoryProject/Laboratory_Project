@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: analyse_container
+    volumes:
+      - postgres_data_analyse:/var/lib/postgresql/data  # Use a different volume
+      - ./initAnalyse.sql:/docker-entrypoint-initdb.d/initAnalyse.sql
+    environment:
+      POSTGRES_DB: analyse_service
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"
+
+volumes:
+  postgres_data_analyse:  # A new volume specifically for analyse_service
