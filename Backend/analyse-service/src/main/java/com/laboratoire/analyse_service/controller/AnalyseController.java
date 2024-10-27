@@ -1,19 +1,20 @@
 package com.laboratoire.analyse_service.controller;
 
 import com.laboratoire.analyse_service.service.AnalyseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.laboratoire.analyse_service.model.Analyse;
 
 import java.util.List;
-import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/analyse")
 public class AnalyseController {
 
     private final AnalyseService analyseService;
 
+    @Autowired
     public AnalyseController(AnalyseService analyseService) {
         this.analyseService = analyseService;
     }
@@ -59,8 +60,8 @@ public class AnalyseController {
     }
 
     @GetMapping("/laboratoire/{laboratoireId}")
-    public ResponseEntity<List<Analyse>> getAnalysesByLaboratoire(@PathVariable Long laboratoireId) {
-        List<Analyse> analyses = analyseService.getAnalysesByLaboratoire(laboratoireId);
-        return ResponseEntity.ok(analyses);
+    public ResponseEntity<String> getAnalysesByLaboratoire(@PathVariable Long laboratoireId) {
+       String name = analyseService.getAnalyseByLaboratoire(laboratoireId);
+        return ResponseEntity.ok(name);
     }
 }

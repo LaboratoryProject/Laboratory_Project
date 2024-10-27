@@ -22,8 +22,6 @@ public class Laboratoire {
 
     private LocalDate dateActivation;
 
-    private long idAnalyse;
-
     public Laboratoire() {
     }
 
@@ -34,7 +32,7 @@ public class Laboratoire {
         this.nrc = nrc;
         this.active = active;
         this.dateActivation = dateActivation;
-        this.idAnalyse= idAnalyse;
+
     }
 
     public Laboratoire(String nom, String logo, String nrc, boolean active, LocalDate dateActivation,long idAnalyse) {
@@ -44,7 +42,7 @@ public class Laboratoire {
         this.nrc = nrc;
         this.active = active;
         this.dateActivation = dateActivation;
-        this.idAnalyse = idAnalyse;
+
     }
 
     public Laboratoire(String nom, String logo, String nrc, boolean active, LocalDate localDate) {
@@ -99,11 +97,5 @@ public class Laboratoire {
         this.dateActivation = dateActivation;
     }
 
-    public long getIdAnalyse() {
-        return idAnalyse;
-    }
 
-    public void setIdAnalyse(long idAnalyse) {
-        this.idAnalyse = idAnalyse;
-    }
 }

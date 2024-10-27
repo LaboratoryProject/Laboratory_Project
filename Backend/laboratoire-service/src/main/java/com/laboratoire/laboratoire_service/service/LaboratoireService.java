@@ -11,4 +11,6 @@ public interface LaboratoireService {
     void createLaboratoire(LaboratoireRequest laboratoireRequest) ;
     List<LaboratoireResponse> getAllLaboratoires() ;
     LaboratoireResponse mapToLaboratoireResponse(Laboratoire laboratoire) ;
+    LaboratoireResponse getLaboratoireById(Long id);
+    String getLaboratoireNameById(Long id);
 }

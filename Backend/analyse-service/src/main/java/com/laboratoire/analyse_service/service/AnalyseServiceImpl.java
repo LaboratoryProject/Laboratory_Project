@@ -28,6 +28,20 @@ public class AnalyseServiceImpl implements AnalyseService {
     }
 
     @Override
+    public String getAnalyseByLaboratoire(Long laboratoireId) {
+        // Get the laboratory name directly
+        String laboratoireName = laboratoireInterface.getLaboratoireNameById(laboratoireId);
+
+        // Fetch analyses by laboratoire ID
+        List<Analyse> analyses = analyseRepository.findByFkIdLaboratoire(laboratoireId);
+
+        // If you need to set the name in each analyse object
+
+
+        return laboratoireName;
+    }
+
+    @Override
     public Optional<Analyse> getAnalyseById(Long id) {
         return analyseRepository.findById(id);
     }
@@ -41,11 +55,11 @@ public class AnalyseServiceImpl implements AnalyseService {
     public void deleteAnalyse(Long id) {
         analyseRepository.deleteById(id);
     }
-
+/*
     @Override
     public List<Analyse> getAnalysesByLaboratoire(Long laboratoireId) {
         // Call the Feign client to fetch the laboratoire by ID
-        ResponseEntity<?> laboratoireResponse = laboratoireInterface.getLaboratoireById(laboratoireId);
+        ResponseEntity<?> laboratoireResponse = laboratoireInterface.getAnalyseByLaboratoire(laboratoireId);
 
         // Check if the laboratoire exists
         if (laboratoireResponse.getStatusCode().is2xxSuccessful() && laboratoireResponse.getBody() != null) {
@@ -56,4 +70,6 @@ public class AnalyseServiceImpl implements AnalyseService {
             throw new RuntimeException("Laboratory with ID " + laboratoireId + " not found.");
         }
     }
+
+ */
 }

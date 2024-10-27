@@ -3,14 +3,15 @@ package com.laboratoire.analyse_service.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(value="laboratoire" , url="http://localhost:8081")
+@FeignClient(name = "laboratoire-service")  // Use the application name as registered in Eureka
 public interface LaboratoireInterface {
 
-    @RequestMapping(method= RequestMethod.GET, value="/api/laboratoire/{id}")
-    ResponseEntity<?> getLaboratoireById(@PathVariable Long id);
+    @GetMapping("/api/laboratoire/{id}")  // Using @GetMapping is preferred over @RequestMapping
+    ResponseEntity<?> getLaboratoireById(@PathVariable("id") Long id);
+
+    @GetMapping("/api/laboratoires/nom/{id}")
+    String getLaboratoireNameById(@PathVariable("id") Long id);
 
 }

@@ -43,6 +43,18 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         return laboratoires.stream().map(this::mapToLaboratoireResponse).toList();
     }
 
+    public LaboratoireResponse getLaboratoireById(Long id) {
+        Laboratoire laboratoire = laboratoireRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Laboratoire not found with id: " + id));
+        return mapToLaboratoireResponse(laboratoire); // Assuming you have a mapping method
+    }
+
+    public String getLaboratoireNameById(Long id) {
+        return laboratoireRepository.findById(id)
+                .map(Laboratoire::getNom)
+                .orElseThrow(() -> new RuntimeException("Laboratory not found with id: " + id));
+    }
+
     // Helper method to map entity to response DTO
     public LaboratoireResponse mapToLaboratoireResponse(Laboratoire laboratoire) {
         return new LaboratoireResponse(

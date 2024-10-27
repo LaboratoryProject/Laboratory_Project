@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/laboratoire")
+@RequestMapping("/api/laboratoires")
 public class LaboratoireController {
 
     private final LaboratoireService laboratoireService;
@@ -23,6 +23,17 @@ public class LaboratoireController {
     public void createLaboratoire(@RequestBody LaboratoireRequest laboratoireRequest) {
         laboratoireService.createLaboratoire(laboratoireRequest);
     }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public LaboratoireResponse getLaboratoireById(@PathVariable Long id) {
+        return laboratoireService.getLaboratoireById(id);
+    }
+    @GetMapping("/nom/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public String getLaboratoireNameById(@PathVariable Long id) {
+        return laboratoireService.getLaboratoireNameById(id);
+    }
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

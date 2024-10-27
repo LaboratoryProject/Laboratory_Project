@@ -9,5 +9,6 @@ public interface AnalyseService {
     Optional<Analyse> getAnalyseById(Long id);
     Analyse saveAnalyse(Analyse analyse);
     void deleteAnalyse(Long id);
-    List<Analyse> getAnalysesByLaboratoire(Long laboratoireId);
+    String getAnalyseByLaboratoire(Long laboratoireId);
+
 }
