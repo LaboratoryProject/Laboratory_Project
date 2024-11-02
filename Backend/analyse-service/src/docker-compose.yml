@@ -1,11 +1,11 @@
+name: analyse-service
 version: '3.8'
-
 services:
   db:
     image: postgres:13
-    container_name: analyse_container
+    container_name: analyse-container
     volumes:
-      - postgres_data_analyse:/var/lib/postgresql/data  # Use a different volume
+      - postgres_data_analyse:/var/lib/postgresql/data
       - ./initAnalyse.sql:/docker-entrypoint-initdb.d/initAnalyse.sql
     environment:
       POSTGRES_DB: analyse_service
@@ -15,4 +15,4 @@ services:
       - "5433:5432"
 
 volumes:
-  postgres_data_analyse:  # A new volume specifically for analyse_service
+  postgres_data_analyse:
