@@ -1,0 +1,70 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+
+                git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project/Backend/analyse-service.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Naviguer vers le dossier du microservice
+                dir('Backend/analyse-service') {
+                    // Construire l'application Spring Boot
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                // Exécuter les tests unitaires
+                dir('Backend/analyse-service') {
+                    sh 'mvn test'
+                }
+            }
+            post {
+                always {
+                    // Publier les résultats des tests JUnit
+                    junit 'Backend/analyse-service/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('Integration Tests') {
+            steps {
+                // Exécuter les tests d'intégration
+                dir('Backend/analyse-service') {
+                    sh 'mvn verify -Pintegration-tests'
+                }
+            }
+        }
+
+        stage('E2E Tests') {
+            steps {
+                // Exécuter les tests de bout en bout avec npm
+                dir('Backend/analyse-service') {
+                    sh 'npm run e2e'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archiver les fichiers JAR construits
+            archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
+        }
+        success {
+            // Notification en cas de succès de la build
+            echo 'Build was successful!'
+        }
+        failure {
+            // Notification en cas d'échec de la build
+            echo 'Build failed! Check the logs for details.'
+        }
+    }
+}
