@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
 
-                git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project/Backend/analyse-service.git'
+                git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
             }
         }
 
