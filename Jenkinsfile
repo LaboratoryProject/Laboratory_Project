@@ -1,12 +1,21 @@
 pipeline {
     agent any
+
     stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the version control system
+                git 'https://github.com/LaboratoryProject/Laboratory_Project.git'
+            }
+        }
+
         stage('Build') {
             steps {
                 // Build the Spring Boot application
                 sh 'mvn clean package'
             }
         }
+
         stage('Unit Tests') {
             steps {
                 // Run unit tests
@@ -14,65 +23,39 @@ pipeline {
             }
             post {
                 always {
+                    // Publish JUnit test results
                     junit 'target/surefire-reports/*.xml'
                 }
             }
         }
+
         stage('Integration Tests') {
             steps {
-                // Integration tests, potentially with JMeter
+                // Run integration tests with Maven
                 sh 'mvn verify -Pintegration-tests'
             }
         }
+
         stage('E2E Tests') {
             steps {
-                // Run Selenium tests or Jest tests
-                sh 'npm run e2e' // Modify this based on your setup
+                // Run end-to-end tests with npm
+                sh 'npm run e2e' // Adjust this command according to your setup
             }
         }
     }
+
     post {
         always {
+            // Archive the built JAR files
             archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
         }
-    }
-}
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                // Build the Spring Boot application
-                sh 'mvn clean package'
-            }
+        success {
+            // Notify on successful build
+            echo 'Build was successful!'
         }
-        stage('Unit Tests') {
-            steps {
-                // Run unit tests
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Integration Tests') {
-            steps {
-                // Integration tests, potentially with JMeter
-                sh 'mvn verify -Pintegration-tests'
-            }
-        }
-        stage('E2E Tests') {
-            steps {
-                // Run Selenium tests or Jest tests
-                sh 'npm run e2e' // Modify this based on your setup
-            }
-        }
-    }
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+        failure {
+            // Notify on build failure
+            echo 'Build failed! Check the logs for details.'
         }
     }
 }
