@@ -19,7 +19,7 @@ pipeline {
             steps {
                 // Navigate to the service folder and build the Spring Boot app
                 dir('Backend/analyse-service') {
-                    sh 'mvn clean package -DskipTests=true'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
