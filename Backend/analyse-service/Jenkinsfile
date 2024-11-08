@@ -34,7 +34,7 @@ pipeline {
             post {
                 always {
                     // Archive JUnit test reports
-                   junit 'Backend/analyse-service/target/surefire-reports/*.xml'
+                   junit 'Backend/analyse-service/src/test/target/surefire-reports/*.xml'
 
                 }
             }
