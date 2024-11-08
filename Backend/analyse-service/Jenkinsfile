@@ -4,39 +4,38 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-
+                // Checkout the main branch
                 git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
             }
         }
 
         stage('Build') {
             steps {
-                // Naviguer vers le dossier du microservice
+                // Navigate to the service folder and build the Spring Boot app
                 dir('Backend/analyse-service') {
-                    // Construire l'application Spring Boot
-                    sh 'mvn clean package'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
         stage('Unit Tests') {
             steps {
-                // Exécuter les tests unitaires
+                // Execute unit tests using Maven
                 dir('Backend/analyse-service') {
                     sh 'mvn test'
                 }
             }
             post {
                 always {
-                    // Publier les résultats des tests JUnit
-                    junit 'Backend/analyse-service/target/surefire-reports/*.xml'
+                    // Archive JUnit test reports
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
 
         stage('Integration Tests') {
             steps {
-                // Exécuter les tests d'intégration
+                // Execute integration tests (assuming you have a profile set up for them)
                 dir('Backend/analyse-service') {
                     sh 'mvn verify -Pintegration-tests'
                 }
@@ -45,8 +44,9 @@ pipeline {
 
         stage('E2E Tests') {
             steps {
-                // Exécuter les tests de bout en bout avec npm
+                // Execute E2E tests, assuming you use npm for this task
                 dir('Backend/analyse-service') {
+                    sh 'npm install'
                     sh 'npm run e2e'
                 }
             }
@@ -55,15 +55,15 @@ pipeline {
 
     post {
         always {
-            // Archiver les fichiers JAR construits
+            // Archive any JAR artifacts built during the build stage
             archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
         }
         success {
-            // Notification en cas de succès de la build
+            // Notify success in the logs
             echo 'Build was successful!'
         }
         failure {
-            // Notification en cas d'échec de la build
+            // Notify failure in the logs
             echo 'Build failed! Check the logs for details.'
         }
     }
