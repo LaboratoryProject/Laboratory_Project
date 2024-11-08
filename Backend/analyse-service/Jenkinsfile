@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Execute unit tests using Maven
                 dir('Backend/analyse-service') {
-                    sh 'mvn test'
+                    bat 'mvn test'
                 }
             }
             post {
@@ -39,6 +39,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Integration Tests') {
             steps {
