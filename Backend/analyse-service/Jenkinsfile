@@ -1,7 +1,7 @@
 pipeline {
      agent any
            tools {
-               'maven:-4.0.0' // Adjust to the appropriate Maven and JDK versions
+                maven 'Maven:-4.0.0' // Adjust to the appropriate Maven and JDK versions
 
       }
 
