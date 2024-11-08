@@ -19,7 +19,7 @@ pipeline {
             steps {
                 // Navigate to the service folder and build the Spring Boot app
                 dir('Backend/analyse-service') {
-                    sh 'mvn clean package -DskipTests'
+                    sh 'mvn clean package -DskipTests=false'
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 // Execute unit tests using Maven
                 dir('Backend/analyse-service') {
-                    bat 'mvn test'
+                    sh 'mvn test'
                 }
             }
             post {
