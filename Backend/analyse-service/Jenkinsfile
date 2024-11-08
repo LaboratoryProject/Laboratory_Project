@@ -1,47 +1,44 @@
 pipeline {
-     agent any
-           tools {
-                maven 'Maven-4.0.0'
-                 jdk 'JDK17'         // Adjust to the appropriate Maven and JDK versions
-
-      }
-
-
+    agent any
+    tools {
+        maven 'Maven-4.0.0'  // Ensure this matches your tool configuration in Jenkins
+        jdk 'JDK17'          // Adjust to the correct JDK version
+    }
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the main branch
+                // Checkout the main branch of the repository
                 git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
             }
         }
 
-       stage('Build') {
-           steps {
-               dir('Backend/analyse-service') {
-                   sh 'mvn clean package'
-               }
-           }
-       }
-
+        stage('Build') {
+            steps {
+                // Navigate to the service folder and build the Spring Boot app (without skipping tests)
+                dir('Backend/analyse-service') {
+                    sh 'mvn clean package -DskipTests=false'  // Ensure tests are not skipped
+                }
+            }
+        }
 
         stage('Unit Tests') {
             steps {
-                // Execute unit tests using Maven
+                // Run unit tests using Maven
                 dir('Backend/analyse-service') {
-                    sh 'mvn test'
+                    sh 'mvn test'  // Execute unit tests
                 }
             }
             post {
                 always {
-                    // Archive JUnit test reports
-                    junit '**/target/surefire-reports/*.xml'
+                    // Archive JUnit test reports after the tests have run
+                    junit '**/target/surefire-reports/*.xml'  // Adjust this path if needed
                 }
             }
         }
 
         stage('Integration Tests') {
             steps {
-                // Execute integration tests (assuming you have a profile set up for them)
+                // Run integration tests (assuming you have a Maven profile set for this)
                 dir('Backend/analyse-service') {
                     sh 'mvn verify -Pintegration-tests'
                 }
@@ -50,7 +47,7 @@ pipeline {
 
         stage('E2E Tests') {
             steps {
-                // Execute E2E tests, assuming you use npm for this task
+                // Run E2E tests with npm (if required)
                 dir('Backend/analyse-service') {
                     sh 'npm install'
                     sh 'npm run e2e'
@@ -61,15 +58,15 @@ pipeline {
 
     post {
         always {
-            // Archive any JAR artifacts built during the build stage
+            // Archive any JAR files generated during the build process
             archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
         }
         success {
-            // Notify success in the logs
+            // Notify success if the pipeline finishes successfully
             echo 'Build was successful!'
         }
         failure {
-            // Notify failure in the logs
+            // Notify failure if the pipeline fails
             echo 'Build failed! Check the logs for details.'
         }
     }
