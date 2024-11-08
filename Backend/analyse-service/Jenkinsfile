@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+     agent any {
+           tools {
+               'maven:-4.0.0' // Adjust to the appropriate Maven and JDK versions
+           }
+
 
     stages {
         stage('Checkout') {
