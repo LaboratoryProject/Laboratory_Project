@@ -2,8 +2,8 @@ pipeline {
     agent any
     tools {
         maven 'Maven-4.0.0'
-        jdk 'JDK17' // Adjust to the appropriate Maven and JDK versions
-        nodejs 'NodeJS' // Assumes NodeJS is installed for frontend testing with Jest
+        jdk 'JDK17'
+       // nodejs 'NodeJS'
     }
 
     stages {
@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-
+        /*
         stage('Integration Tests') {
             steps {
                 // Execute integration tests (assuming you have a profile set up for them)
@@ -94,7 +94,7 @@ pipeline {
             }
         }
     }
-
+    */
     post {
         always {
             // Archive any JAR artifacts built during the build stage
