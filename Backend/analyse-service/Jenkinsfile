@@ -27,7 +27,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 // Execute unit tests using Maven
-                dir('Backend/analyse-service/target/surefire-reports/*.xml') {
+                dir('Backend/analyse-service') {
                     sh 'mvn test'
                 }
             }
