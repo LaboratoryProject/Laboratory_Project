@@ -27,14 +27,14 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 // Execute unit tests using Maven
-                dir('Backend/analyse-service') {
+                dir('Backend/analyse-service/target/surefire-reports/*.xml') {
                     sh 'mvn test'
                 }
             }
             post {
                 always {
                     // Archive JUnit test reports
-                   junit 'Backend/analyse-service/src/test/target/surefire-reports/*.xml'
+                   junit 'Backend/analyse-service/target/surefire-reports/*.xml'
 
                 }
             }
