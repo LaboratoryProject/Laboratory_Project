@@ -3,11 +3,12 @@ pipeline {
 
     environment {
         DOCKER_HOST = "tcp://localhost:2375"
+        DOCKER_TLS_VERIFY = '0'  // Disable TLS for local Docker connection
     }
 
     tools {
-        maven 'Maven-4.0.0'  // Make sure this is the exact Maven version installed on Jenkins
-        jdk 'JDK17'  // Ensure that this JDK version exists on Jenkins
+        maven 'Maven-4.0.0'
+        jdk 'JDK17'  // Make sure you adjust to your actual JDK version
     }
 
     stages {
@@ -20,30 +21,32 @@ pipeline {
 
         stage('Build') {
             steps {
+                // Navigate to the service folder and build the Spring Boot app (skip tests during build)
                 dir('Backend/analyse-service') {
-                    // Build the Spring Boot app (skipping tests during the build stage)
                     sh 'mvn clean package -DskipTests'
                 }
             }
         }
 
-        stage('Test Docker Connectivity') {
-            steps {
-                // Test if Docker is accessible with the configured environment
-                sh 'docker ps'
-            }
-        }
+         stage('Test') {
+                    steps {
+                        // Set Docker to use the TCP socket at localhost:2375
+                        withEnv(['DOCKER_HOST=tcp://localhost:2375']) {
+                            sh 'docker ps'  // Test Docker command
+                            sh 'mvn clean test'  // Run Maven tests with Testcontainers
+                        }
+                    }
 
         stage('Unit Tests') {
             steps {
+                // Run unit tests using Maven
                 dir('Backend/analyse-service') {
-                    // Run unit tests using Maven
                     sh 'mvn test'
                 }
             }
             post {
                 always {
-                    // Archive JUnit test reports after running unit tests
+                    // Archive JUnit test reports generated after running unit tests
                     junit 'Backend/analyse-service/target/surefire-reports/*.xml'
                 }
             }
@@ -51,8 +54,8 @@ pipeline {
 
         stage('Integration Tests') {
             steps {
+                // Execute integration tests, assuming integration test profile is configured
                 dir('Backend/analyse-service') {
-                    // Execute integration tests (assuming profile is configured)
                     sh 'mvn verify -Pintegration-tests'
                 }
             }
@@ -60,8 +63,8 @@ pipeline {
 
         stage('E2E Tests') {
             steps {
+                // Run End-to-End tests using npm (make sure your E2E tests are set up with npm)
                 dir('Backend/analyse-service') {
-                    // Run End-to-End tests using npm
                     sh 'npm install'
                     sh 'npm run e2e'
                 }
@@ -77,16 +80,18 @@ pipeline {
             }
         }
     }
-
+// ccc
     post {
         always {
             // Archive any JAR artifacts built during the build stage
             archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
         }
         success {
+            // Notify success in the logs
             echo 'Build was successful!'
         }
         failure {
+            // Notify failure in the logs
             echo 'Build failed! Check the logs for details.'
         }
     }
