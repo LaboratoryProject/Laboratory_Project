@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_HOST = "tcp://localhost:2375"
-        DOCKER_TLS_VERIFY = '0'  // Disable TLS for local Docker connection
-    }
-
     tools {
         maven 'Maven-4.0.0'
         jdk 'JDK17'  // Make sure you adjust to your actual JDK version
@@ -28,14 +23,15 @@ pipeline {
             }
         }
 
-         stage('Test') {
-                    steps {
-                        // Set Docker to use the TCP socket at localhost:2375
-                        withEnv(['DOCKER_HOST=tcp://localhost:2375']) {
-                            sh 'docker ps'  // Test Docker command
-                            sh 'mvn clean test'  // Run Maven tests with Testcontainers
-                        }
-                    }
+        stage('Test') {
+            steps {
+                // Set Docker to use the TCP socket at localhost:2375
+                withEnv(['DOCKER_HOST=tcp://localhost:2375']) {
+                    sh 'docker ps'  // Test Docker command
+                    sh 'mvn clean test'  // Run Maven tests with Testcontainers
+                }
+            }
+        }  // <-- Missing closing bracket for the 'Test' stage
 
         stage('Unit Tests') {
             steps {
@@ -80,7 +76,7 @@ pipeline {
             }
         }
     }
-// ccc
+
     post {
         always {
             // Archive any JAR artifacts built during the build stage
