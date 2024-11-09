@@ -13,8 +13,12 @@ class TestcontainersConfiguration {
 	@ServiceConnection
 	PostgreSQLContainer<?> postgresContainer() {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:13"))
+
+
 				.withDatabaseName("analyse_service")
 				.withUsername("admin")
 				.withPassword("admin");
+
 	}
+
 }
