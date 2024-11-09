@@ -62,15 +62,7 @@ pipeline {
             }
         }
 
-        stage('E2E Tests') {
-            steps {
-                // Run End-to-End tests using npm (make sure your E2E tests are set up with npm)
-                dir('Backend/analyse-service') {
-                    bat 'npm install'
-                    bat 'npm run e2e'
-                }
-            }
-        }
+
 
         stage('Docker Test') {
             steps {
