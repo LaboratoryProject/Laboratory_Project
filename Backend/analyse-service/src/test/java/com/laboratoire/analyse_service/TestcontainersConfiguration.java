@@ -15,7 +15,7 @@ class TestcontainersConfiguration {
 		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:13"))
 
 
-				.withDatabaseName("analyse_service")
+				.withDatabaseName("analyseService")
 				.withUsername("admin")
 				.withPassword("admin");
 
