@@ -1,23 +1,27 @@
 pipeline {
-     agent any
-           tools {
-                maven 'Maven-4.0.0'
-                 jdk 'JDK17'         // Adjust to the appropriate Maven and JDK versions
+    agent any
 
-      }
+    environment {
+        DOCKER_HOST = "tcp://localhost:2375"
+        DOCKER_TLS_VERIFY = '0'  // Disable TLS for local Docker connection
+    }
 
+    tools {
+        maven 'Maven-4.0.0'
+        jdk 'JDK17'  // Make sure you adjust to your actual JDK version
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the main branch
+                // Checkout the main branch from your GitHub repository
                 git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
             }
         }
 
         stage('Build') {
             steps {
-                // Navigate to the service folder and build the Spring Boot app
+                // Navigate to the service folder and build the Spring Boot app (skip tests during build)
                 dir('Backend/analyse-service') {
                     sh 'mvn clean package -DskipTests'
                 }
@@ -26,24 +30,22 @@ pipeline {
 
         stage('Unit Tests') {
             steps {
-                // Execute unit tests using Maven
+                // Run unit tests using Maven
                 dir('Backend/analyse-service') {
                     sh 'mvn test'
                 }
             }
             post {
                 always {
-                    // Archive JUnit test reports
-                   junit 'Backend/analyse-service/target/surefire-reports/*.xml'
-
+                    // Archive JUnit test reports generated after running unit tests
+                    junit 'Backend/analyse-service/target/surefire-reports/*.xml'
                 }
             }
         }
 
-
         stage('Integration Tests') {
             steps {
-                // Execute integration tests (assuming you have a profile set up for them)
+                // Execute integration tests, assuming integration test profile is configured
                 dir('Backend/analyse-service') {
                     sh 'mvn verify -Pintegration-tests'
                 }
@@ -52,10 +54,19 @@ pipeline {
 
         stage('E2E Tests') {
             steps {
-                // Execute E2E tests, assuming you use npm for this task
+                // Run End-to-End tests using npm (make sure your E2E tests are set up with npm)
                 dir('Backend/analyse-service') {
                     sh 'npm install'
                     sh 'npm run e2e'
+                }
+            }
+        }
+
+        stage('Docker Test') {
+            steps {
+                script {
+                    // Test if Docker is accessible with the configured environment
+                    sh 'docker ps'
                 }
             }
         }
