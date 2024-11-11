@@ -3,13 +3,12 @@ pipeline {
 
     tools {
         maven 'Maven-4.0.0'
-        jdk 'JDK17'  // Ensure this matches your actual JDK version configured in Jenkins
+        jdk 'JDK17'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the main branch from your GitHub repository
                 git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
             }
         }
@@ -22,6 +21,20 @@ pipeline {
                 }
             }
         }
+
+
+        stage('Docker Build & Run') {
+            steps {
+                script {
+                    def imageName = 'local/analyse-service:latest'
+
+                    bat "docker build -t ${imageName} Backend/analyse-service"
+
+                    bat "docker run --rm -d -p 8081:8080 ${imageName}"
+                }
+            }
+        }
+
 
         stage('Test') {
             steps {
