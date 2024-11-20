@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Navigate to the service folder and build the Spring Boot app (skip tests during build)
-                dir('Backend/analyse-service') {
+                dir('Backend/laboratoire-service') {
                     bat 'mvn clean package -DskipTests'
                 }
             }
@@ -26,8 +26,8 @@ pipeline {
         stage('Docker Build & Run') {
             steps {
                 script {
-                    def imageName = 'local/analyse-service:latest'
-                    bat "docker build -t ${imageName} Backend/analyse-service"
+                    def imageName = 'local/laboratoire-service:latest'
+                    bat "docker build -t ${imageName} Backend/laboratoire-service"
                     bat "docker run --rm -d -p 8040:8080 ${imageName}"
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
                         error('Docker is not available. Please check your Docker installation.')
                     }
                 }
-                dir('Backend/analyse-service') {
+                dir('Backend/laboratoire-service') {
                     bat 'mvn clean test'  // Run Maven tests with Testcontainers
                 }
             }
@@ -52,14 +52,14 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 // Run unit tests using Maven
-                dir('Backend/analyse-service') {
+                dir('Backend/laboratoire-service') {
                     bat 'mvn test'
                 }
             }
             post {
                 always {
                     // Archive JUnit test reports generated after running unit tests
-                    junit 'Backend/analyse-service/target/surefire-reports/*.xml'
+                    junit 'Backend/laboratoire-service/target/surefire-reports/*.xml'
                 }
             }
         }
@@ -67,7 +67,7 @@ pipeline {
         stage('Integration Tests') {
             steps {
                 // Execute integration tests, assuming integration test profile is configured
-                dir('Backend/analyse-service') {
+                dir('Backend/laboratoire-service') {
                     bat 'mvn verify -Pintegration-tests'
                 }
             }
@@ -88,7 +88,7 @@ pipeline {
     post {
         always {
             // Archive any JAR artifacts built during the build stage
-            archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'Backend/laboratoire-service/target/*.jar', allowEmptyArchive: true
         }
         success {
             // Notify success in the logs
