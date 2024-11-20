@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/src/main/java/com/laboratoire/config/ConfigApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/src/test/java/com/laboratoire/config/ConfigApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/java/com/laboratoire/laboratoire_registry/LaboratoireRegistryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/java/com/laboratoire/laboratoire_registry/LaboratoireRegistryApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2ofhAmQIjAuyxJlRqI8usyUgayF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.ConfigApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.poratu.idea.plugins.tomcat.setting.TomcatServersConfigurable&quot;
   }
 }</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="" />
+      <created>1731266396657</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731266396657</updated>
+    </task>
+    <servers />
+  </component>
 </project>
