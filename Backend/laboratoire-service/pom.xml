@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.10</version>
+		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.laboratoire</groupId>
@@ -84,7 +84,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Hoxton.SR12</version> <!-- Replace with your preferred version -->
+				<version>2022.0.4</version> <!-- Compatible with Spring Boot 3.x -->
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
