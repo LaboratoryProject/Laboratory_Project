@@ -25,13 +25,19 @@ public class MathControllerSeleniumTest {
     @BeforeEach
     public void setUp() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
-
-        WebDriver webDriver = new RemoteWebDriver(
-                new URL("http://selenium-hub:4444/wd/hub"),
-                options
+        options.addArguments(
+                "--remote-allow-origins=*", // Important for newer Chrome versions
+                "--headless",
+                "--no-sandbox",
+                "--disable-dev-shm-usage"
         );
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        // Use actual IP or hostname where Selenium Grid is running
+        webDriver = new RemoteWebDriver(
+                new URL("http://localhost:4444/wd/hub"),
+                options,
+                false
+        );
     }
 
     @AfterEach
@@ -43,11 +49,12 @@ public class MathControllerSeleniumTest {
 
     @Test
     public void testAdditionEndpoint() {
-        webDriver.get("http://localhost:8082/add?a=3&b=5");
 
-        // Extract text directly
+        String baseUrl = "http://host.docker.internal:8082";  // For local testing
+
+        webDriver.get(baseUrl + "/add?a=3&b=5");
+
         String resultText = webDriver.findElement(By.tagName("body")).getText().trim();
-
         assertEquals("8", resultText, "The addition result should be 8");
     }
 }
