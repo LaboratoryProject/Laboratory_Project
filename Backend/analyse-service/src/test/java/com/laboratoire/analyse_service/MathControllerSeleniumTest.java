@@ -29,7 +29,7 @@ public class MathControllerSeleniumTest {
 
         // Initialize the RemoteWebDriver with Selenium Hub URL and options
         webDriver = new RemoteWebDriver(
-                new URL("http://selenium-hub:4444/wd/hub"), // URL to Selenium Hub
+                new URL("http://localhost:4444/ui"), // URL to Selenium Hub
                 options, false
         );
 
