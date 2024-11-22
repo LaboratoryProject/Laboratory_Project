@@ -1,15 +1,19 @@
 package com.laboratoire.analyse_service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,26 +24,31 @@ public class MathControllerSeleniumTest {
     private WebDriver webDriver;
 
     @BeforeEach
-    public void setUp() throws MalformedURLException {
-        // Initialize ChromeOptions and configure the driver
+    public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-
-        // Initialize the RemoteWebDriver with Selenium Hub URL and options
-        webDriver = new RemoteWebDriver(
-                new URL("http://localhost:4444"), // URL to Selenium Hub
-                options, false
+        options.addArguments(
+                "--headless",
+                "--no-sandbox",
+                "--disable-dev-shm-usage"
         );
+        webDriver = new ChromeDriver(options);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
 
+    @AfterEach
+    public void tearDown() {
+        if (webDriver != null) {
+            webDriver.quit();
+        }
     }
 
     @Test
     public void testAdditionEndpoint() {
-        String baseUrl = "http://localhost:8087/add?a=3&b=5"; // Replace with your actual endpoint
-        webDriver.get(baseUrl); // Access the URL
-        String result = webDriver.getPageSource(); // Get the page source (HTML)
-        assertEquals("8", result, "The addition result should be 8."); // Assert the result is "8"
+        webDriver.get("http://localhost:8082/add?a=3&b=5");
+
+        // Extract text directly
+        String resultText = webDriver.findElement(By.tagName("body")).getText().trim();
+
+        assertEquals("8", resultText, "The addition result should be 8");
     }
 }

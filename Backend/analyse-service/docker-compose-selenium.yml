@@ -11,7 +11,7 @@ services:
       - GRID_TIMEOUT=30000    # Optional: Adjust if needed, in milliseconds
 
   chrome:
-    image: selenium/node-chrome:4.11.0
+    image: selenium/node-chrome:latest
     container_name: selenium-node-chrome
     depends_on:
       - selenium-hub
