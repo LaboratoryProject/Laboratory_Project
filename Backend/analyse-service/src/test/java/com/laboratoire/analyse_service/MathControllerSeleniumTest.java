@@ -7,8 +7,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,14 +23,14 @@ public class MathControllerSeleniumTest {
     private WebDriver webDriver;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments(
-                "--headless",
-                "--no-sandbox",
-                "--disable-dev-shm-usage"
+        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
+
+        WebDriver webDriver = new RemoteWebDriver(
+                new URL("http://selenium-hub:4444/wd/hub"),
+                options
         );
-        webDriver = new ChromeDriver(options);
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
