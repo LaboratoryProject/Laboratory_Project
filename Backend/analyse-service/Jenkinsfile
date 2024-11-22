@@ -36,31 +36,26 @@ pipeline {
             }
         }
 
-      stage('Start Selenium Grid') {
-          steps {
-              script {
-                  // Navigate to the Backend/analyse-service directory where the docker-compose file is located
-                  dir('Backend/analyse-service') {
-                      // Start Selenium Grid using docker-compose from the specified path
-                      bat 'docker-compose -f docker-compose-selenium.yml up -d'
-                      bat 'sleep 10'  // Wait for Selenium Grid to be ready
-                  }
-              }
-          }
-      }
-
-
-        stage('Test') {
+        stage('Start Selenium Grid') {
             steps {
-                // Test Docker command (ensure Docker is accessible)
                 script {
-                    def dockerAvailable = bat(script: 'docker ps', returnStatus: true) == 0
-                    if (!dockerAvailable) {
-                        error('Docker is not available. Please check your Docker installation.')
+                    // Navigate to the Backend/analyse-service directory where the docker-compose file is located
+                    dir('Backend/analyse-service/') {
+                        // Start Selenium Grid using docker-compose from the specified path
+                        bat 'docker-compose -f docker-compose-selenium.yml up -d'
+                        bat 'sleep 10'  // Wait for Selenium Grid to be ready
                     }
                 }
-                dir('Backend/analyse-service') {
-                    bat 'mvn clean test'  // Run Maven tests with Testcontainers
+            }
+        }
+
+        stage('Run Selenium Tests') {
+            steps {
+                script {
+                    // Run Selenium tests via Maven (replace with the actual test command for your project)
+                    dir('Backend/analyse-service') {
+                        bat 'mvn verify -Dtest=MathControllerSeleniumTest'  // Use appropriate test class for Selenium tests
+                    }
                 }
             }
         }
