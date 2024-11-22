@@ -36,18 +36,6 @@ pipeline {
             }
         }
 
-        stage('Start Selenium Grid') {
-            steps {
-                script {
-                    // Navigate to the Backend/analyse-service directory where the docker-compose file is located
-                    dir('Backend/analyse-service/') {
-                        // Start Selenium Grid using docker-compose from the specified path
-                        bat 'docker-compose -f docker-compose-selenium.yml up -d'
-                        bat 'sleep 10'  // Wait for Selenium Grid to be ready
-                    }
-                }
-            }
-        }
 
         stage('Run Selenium Tests') {
             steps {
