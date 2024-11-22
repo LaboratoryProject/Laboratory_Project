@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/src/main/java/com/laboratoire/config/ConfigApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/src/test/java/com/laboratoire/config/ConfigApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/docker-compose-selenium.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/MathControllerSeleniumTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/java/com/laboratoire/laboratoire_registry/LaboratoireRegistryApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/java/com/laboratoire/laboratoire_registry/LaboratoireRegistryApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-registry/laboratoire-registry/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/MathServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/MathServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

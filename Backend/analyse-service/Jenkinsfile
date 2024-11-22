@@ -6,6 +6,10 @@ pipeline {
         jdk 'JDK17'
     }
 
+    environment {
+        DOCKER_COMPOSE_VERSION = '1.29.2'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -22,7 +26,6 @@ pipeline {
             }
         }
 
-
         stage('Docker Build & Run') {
             steps {
                 script {
@@ -33,6 +36,15 @@ pipeline {
             }
         }
 
+        stage('Start Selenium Grid') {
+            steps {
+                script {
+                    // Start Selenium Grid using docker-compose
+                    bat 'docker-compose -f docker-compose-selenium.yml up -d'
+                    bat 'sleep 10'  // Wait for Selenium Grid to be ready
+                }
+            }
+        }
 
         stage('Test') {
             steps {
@@ -73,8 +85,6 @@ pipeline {
             }
         }
 
-
-
         stage('Docker Test') {
             steps {
                 script {
@@ -89,6 +99,9 @@ pipeline {
         always {
             // Archive any JAR artifacts built during the build stage
             archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
+            // Stop and remove Docker containers and Selenium Grid
+            bat 'docker-compose -f docker-compose-selenium.yml down'
+            cleanWs()  // Clean the workspace
         }
         success {
             // Notify success in the logs
