@@ -37,7 +37,7 @@ public class MathControllerSeleniumTest {
 
     @Test
     public void testAdditionEndpoint() {
-        String baseUrl = "http://localhost:8082/add?a=3&b=5"; // Replace with your actual endpoint
+        String baseUrl = "http://localhost:8087/add?a=3&b=5"; // Replace with your actual endpoint
         webDriver.get(baseUrl); // Access the URL
         String result = webDriver.getPageSource(); // Get the page source (HTML)
         assertEquals("8", result, "The addition result should be 8."); // Assert the result is "8"
