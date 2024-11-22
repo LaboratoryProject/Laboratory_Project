@@ -6,6 +6,10 @@ pipeline {
         jdk 'JDK17'
     }
 
+    environment {
+        DOCKER_COMPOSE_VERSION = '1.29.2'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -22,7 +26,6 @@ pipeline {
             }
         }
 
-
         stage('Docker Build & Run') {
             steps {
                 script {
@@ -34,17 +37,13 @@ pipeline {
         }
 
 
-        stage('Test') {
+        stage('Run Selenium Tests') {
             steps {
-                // Test Docker command (ensure Docker is accessible)
                 script {
-                    def dockerAvailable = bat(script: 'docker ps', returnStatus: true) == 0
-                    if (!dockerAvailable) {
-                        error('Docker is not available. Please check your Docker installation.')
+                    // Run Selenium tests via Maven (replace with the actual test command for your project)
+                    dir('Backend/analyse-service') {
+                        bat 'mvn verify -Dtest=MathControllerSeleniumTest'  // Use appropriate test class for Selenium tests
                     }
-                }
-                dir('Backend/analyse-service') {
-                    bat 'mvn clean test'  // Run Maven tests with Testcontainers
                 }
             }
         }
@@ -73,8 +72,6 @@ pipeline {
             }
         }
 
-
-
         stage('Docker Test') {
             steps {
                 script {
@@ -89,6 +86,9 @@ pipeline {
         always {
             // Archive any JAR artifacts built during the build stage
             archiveArtifacts artifacts: 'Backend/analyse-service/target/*.jar', allowEmptyArchive: true
+            // Stop and remove Docker containers and Selenium Grid
+            bat 'docker-compose -f docker-compose-selenium.yml down'
+            cleanWs()  // Clean the workspace
         }
         success {
             // Notify success in the logs
