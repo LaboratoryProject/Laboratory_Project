@@ -4,16 +4,27 @@ services:
     image: selenium/hub:4.11.0
     container_name: selenium-hub
     ports:
-      - "4444:4444"
+      - "4444:4444"   # Expose Hub's WebDriver endpoint
+    networks:
+      - selenium-grid-network
+    environment:
+      - GRID_TIMEOUT=30000    # Optional: Adjust if needed, in milliseconds
 
   chrome:
     image: selenium/node-chrome:4.11.0
+    container_name: selenium-node-chrome
     depends_on:
       - selenium-hub
     environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_SESSIONS=5
+      - SE_EVENT_BUS_HOST=selenium-hub   # Hub hostname
+      - SE_EVENT_BUS_PUBLISH_PORT=4442   # Publish port for events
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443 # Subscribe port for events
+      - SE_NODE_MAX_SESSIONS=5           # Maximum sessions per node
     ports:
-      - "5900:5900"
+      - "5900:5900"   # VNC access for debugging the Chrome node
+    networks:
+      - selenium-grid-network
+
+networks:
+  selenium-grid-network:
+    driver: bridge   # Ensure both containers can communicate on this network
