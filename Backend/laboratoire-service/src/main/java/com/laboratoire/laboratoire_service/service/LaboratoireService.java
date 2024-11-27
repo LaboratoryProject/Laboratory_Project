@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LaboratoireService {
 
-    void createLaboratoire(LaboratoireRequest laboratoireRequest) ;
+    LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) ;
     List<LaboratoireResponse> getAllLaboratoires() ;
     LaboratoireResponse mapToLaboratoireResponse(Laboratoire laboratoire) ;
     LaboratoireResponse getLaboratoireById(Long id);

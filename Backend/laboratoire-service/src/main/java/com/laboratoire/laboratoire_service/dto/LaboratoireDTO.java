@@ -1,58 +1,28 @@
-package com.laboratoire.laboratoire_service.model;
-
-import jakarta.persistence.*;
+package com.laboratoire.laboratoire_service.dto;
 
 import java.time.LocalDate;
 
-@Entity
-public class Laboratoire {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class LaboratoireDTO {
+    private Long Id;
     private String nom;
-
     private String logo;
-
-    @Column(unique = true)
     private String nrc;
-
     private boolean active;
-
     private LocalDate dateActivation;
 
-    public Laboratoire() {
-    }
+    // Constructeurs
+    public LaboratoireDTO() {}
 
-    public Laboratoire(Long id, String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
-        this.id = id;
+    public LaboratoireDTO(String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
         this.nom = nom;
         this.logo = logo;
         this.nrc = nrc;
         this.active = active;
         this.dateActivation = dateActivation;
-
     }
 
-    public Laboratoire(String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
-        this.nom = nom;
-        this.logo = logo;
-        this.nrc = nrc;
-        this.active = active;
-        this.dateActivation = dateActivation;
-
-    }
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters et Setters
+    // ... (à ajouter)
 
     public String getNom() {
         return nom;
@@ -94,5 +64,11 @@ public class Laboratoire {
         this.dateActivation = dateActivation;
     }
 
+    public Long getId() {
+        return Id;
+    }
 
+    public void setId(Long id) {
+        Id = id;
+    }
 }

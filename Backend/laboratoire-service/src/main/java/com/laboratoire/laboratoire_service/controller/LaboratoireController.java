@@ -2,29 +2,37 @@ package com.laboratoire.laboratoire_service.controller;
 
 import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
 import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
-import com.laboratoire.laboratoire_service.service.LaboratoireService;
-import com.laboratoire.analyse_service.notifications.EmailService;  // Import EmailService
-import org.springframework.beans.factory.annotation.Autowired;
+import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
+import com.laboratoire.laboratoire_service.service.LaboratoireServiceImpl;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/laboratoires")
 public class LaboratoireController {
 
-    private final LaboratoireService laboratoireService;
-    private final EmailService emailService;  // Inject EmailService
-
-    // Constructor injection for both services
-    @Autowired
-    public LaboratoireController(LaboratoireService laboratoireService, EmailService emailService) {
+    private final LaboratoireServiceImpl laboratoireService;
+    //  private final EmailService emailService;  // Inject EmailService
+    // Injection de dépendance via constructeur
+    public LaboratoireController(LaboratoireServiceImpl laboratoireService) {
         this.laboratoireService = laboratoireService;
-        this.emailService = emailService;  // Initialize EmailService
+        // this.emailService = emailService;  // Initialize EmailService
     }
 
+    // Endpoint pour créer un laboratoire simple
     @PostMapping
+    public ResponseEntity<LaboratoireResponse> creerLaboratoire(
+            @Valid @RequestBody LaboratoireRequest laboratoireRequest) {
+        LaboratoireResponse response = laboratoireService.createLaboratoire(laboratoireRequest);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    /*   @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createLaboratoire(@RequestBody LaboratoireRequest laboratoireRequest) {
         laboratoireService.createLaboratoire(laboratoireRequest);
@@ -36,23 +44,46 @@ public class LaboratoireController {
 
         // Call the EmailService to send the email
         emailService.sendEmail(recipientEmail, subject, body);
+    }*/
+
+    // Endpoint pour créer un laboratoire complet (avec adresse et contact)
+    @PostMapping("/complet")
+    public ResponseEntity<LaboratoireResponse> creerLaboratoireComplet(
+            @Valid @RequestBody LaboratoireCompletDTO laboratoireCompletDTO) {
+        LaboratoireResponse response = laboratoireService.createLaboratoireComplet(laboratoireCompletDTO);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public LaboratoireResponse getLaboratoireById(@PathVariable Long id) {
-        return laboratoireService.getLaboratoireById(id);
-    }
-
-    @GetMapping("/nom/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public String getLaboratoireNameById(@PathVariable Long id) {
-        return laboratoireService.getLaboratoireNameById(id);
-    }
-
+    // Endpoint pour récupérer tous les laboratoires
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<LaboratoireResponse> getAllLaboratoires() {
-        return laboratoireService.getAllLaboratoires();
+    public ResponseEntity<List<LaboratoireResponse>> getAllLaboratoires() {
+        List<LaboratoireResponse> laboratoires = laboratoireService.getAllLaboratoires();
+        return ResponseEntity.ok(laboratoires);
+    }
+
+    // Endpoint pour récupérer un laboratoire par ID
+    @GetMapping("/{id}")
+    public ResponseEntity<LaboratoireResponse> getLaboratoireById(@PathVariable Long id) {
+        LaboratoireResponse laboratoire = laboratoireService.getLaboratoireById(id);
+        return ResponseEntity.ok(laboratoire);
+    }
+
+    // Endpoint pour récupérer le nom d'un laboratoire par ID
+    @GetMapping("/{id}/nom")
+    public ResponseEntity<String> getLaboratoireNameById(@PathVariable Long id) {
+        String nomLaboratoire = laboratoireService.getLaboratoireNameById(id);
+        return ResponseEntity.ok(nomLaboratoire);
+    }
+
+    // Gestion des exceptions spécifiques au contrôleur
+    @ExceptionHandler(LaboratoireServiceImpl.ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFoundException(LaboratoireServiceImpl.ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    // Gestion des exceptions de validation
+    @ExceptionHandler(jakarta.validation.ValidationException.class)
+    public ResponseEntity<String> handleValidationException(jakarta.validation.ValidationException ex) {
+        return new ResponseEntity<>("Erreur de validation : " + ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

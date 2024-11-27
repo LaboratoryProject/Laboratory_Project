@@ -13,10 +13,12 @@ import java.util.List;
 public class AnalyseController {
 
     private final AnalyseService analyseService;
+    //  private final EmailService emailService;  // Inject EmailService
 
     @Autowired
     public AnalyseController(AnalyseService analyseService) {
         this.analyseService = analyseService;
+
     }
 
     @PostMapping
