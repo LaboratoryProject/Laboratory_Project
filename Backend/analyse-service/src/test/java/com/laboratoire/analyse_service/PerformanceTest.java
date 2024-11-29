@@ -16,7 +16,7 @@ public class PerformanceTest {
         StandardJMeterEngine jmeter = new StandardJMeterEngine();
 
         // JMeter initialization (properties, log levels, locale)
-        JMeterUtils.loadJMeterProperties("/path/to/jmeter/bin/jmeter.properties");
+        JMeterUtils.loadJMeterProperties("C:/apache-jmeter-5.6.3/bin/jmeter.properties");
 
         // Test Plan
         TestPlan testPlan = new TestPlan("Performance Test");

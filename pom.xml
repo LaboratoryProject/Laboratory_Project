@@ -2,18 +2,48 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Définition de l'ID du groupe, de l'artifact et de la version -->
     <groupId>com.laboratoire</groupId>
     <artifactId>laboratory-project</artifactId>
     <version>1.0.0</version>
 
+    <!-- Packaging du projet parent -->
+    <packaging>pom</packaging>
+
+    <!-- Modules inclus dans ce projet parent -->
     <modules>
-        <module>analyse-service</module>
-        <module>laboratoire-service</module>
+        <module>Backend/analyse-service</module>
+        <module>Backend/laboratoire-service</module>
     </modules>
 
+    <!-- Gestion des dépendances communes -->
     <dependencyManagement>
         <dependencies>
-            <!-- Add common dependencies here if needed -->
+            <!-- Dépendances communes pour tous les sous-modules -->
         </dependencies>
     </dependencyManagement>
+
+    <!-- Propriétés globales pour SonarQube -->
+    <properties>
+        <sonar.projectKey>gestion-laboratoire</sonar.projectKey>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Plugin SonarQube -->
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>4.0.0.4121</version>
+                </plugin>
+
+                <!-- Ajoutez d'autres plugins communs ici si nécessaire -->
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
