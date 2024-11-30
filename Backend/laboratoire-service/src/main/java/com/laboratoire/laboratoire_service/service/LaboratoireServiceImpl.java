@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -39,7 +42,7 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         // Créer l'entité Laboratoire
         Laboratoire laboratoire = new Laboratoire(
                 laboratoireRequest.nom(),
-                laboratoireRequest.logo(),
+                laboratoireRequest.logo().getBytes(),
                 laboratoireRequest.nrc(),
                 laboratoireRequest.active(),
                 laboratoireRequest.dateActivation()
@@ -55,19 +58,23 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
     // Méthode de création de laboratoire complet (avec adresse et contact)
     @Transactional
-    public LaboratoireResponse createLaboratoireComplet(LaboratoireCompletDTO dto) {
-        // Créer le laboratoire
-        System.out.println(dto.getLaboratoire().getNom());
+    public LaboratoireResponse createLaboratoireComplet(LaboratoireCompletDTO dto) throws IOException, IOException {
+        // Récupérer le logo (s'il s'agit d'un fichier)
+        byte[] logoBytes = null;
 
+        if (dto.getLaboratoire().getLogo() != null) {
+            // Si le logo est un fichier (par exemple un chemin vers l'image), vous pouvez lire l'image en tant que tableau de bytes
+            logoBytes = Files.readAllBytes(Paths.get(dto.getLaboratoire().getLogo()));
+        }
 
+        // Créer le laboratoire avec le logo sous forme de tableau de bytes
         Laboratoire laboratoire = new Laboratoire(
                 dto.getLaboratoire().getNom(),
-                dto.getLaboratoire().getLogo(),
+                logoBytes,  // Ajouter le logo sous forme de bytes
                 dto.getLaboratoire().getNrc(),
                 dto.getLaboratoire().isActive(),
                 dto.getLaboratoire().getDateActivation()
         );
-
 
         System.out.println(laboratoire.getNrc());
 
@@ -77,9 +84,9 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         // Créer l'adresse via le client Feign
         AdresseDTO adresseDto = dto.getAdresse();
-
         Long adresseId = adresseClient.creerAdresse(adresseDto).getBody().getId();
         System.out.println(adresseDto);
+
         // Créer le contact via le client Feign
         ContactLaboratoireDTO contactDto = dto.getContactLaboratoire();
         contactDto.setFkIdLaboratoire(savedLaboratoire.getId());
@@ -89,6 +96,80 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         log.info("Laboratoire complet créé avec ID: {}", savedLaboratoire.getId());
 
         return mapToLaboratoireResponse(savedLaboratoire);
+    }
+
+    @Transactional
+    public LaboratoireResponse updateLaboratoireComplet(Long id, LaboratoireCompletDTO dto) {
+        // Rechercher le laboratoire existant
+        Laboratoire existingLaboratoire = laboratoireRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratoire not found with id: " + id));
+
+        // Mettre à jour les propriétés du laboratoire
+        existingLaboratoire.setNom(dto.getLaboratoire().getNom());
+        existingLaboratoire.setLogo(dto.getLaboratoire().getLogo());
+        existingLaboratoire.setNrc(dto.getLaboratoire().getNrc());
+        existingLaboratoire.setActive(dto.getLaboratoire().isActive());
+        existingLaboratoire.setDateActivation(dto.getLaboratoire().getDateActivation());
+
+        // Sauvegarder les modifications du laboratoire
+        Laboratoire updatedLaboratoire = laboratoireRepository.save(existingLaboratoire);
+        log.info("Laboratoire {} is updated", updatedLaboratoire.getId());
+
+        // Mettre à jour l'adresse via le client Feign
+        if (dto.getAdresse() != null) {
+            AdresseDTO adresseDto = dto.getAdresse();
+            // Vous devrez ajouter une méthode de mise à jour dans votre AdresseClient
+            // Par exemple :
+             Long adresseId = adresseClient.updateAdresse(adresseDto).getBody().getId();
+            log.info("Adresse update process needed");
+        }
+
+        // Mettre à jour le contact via le client Feign
+        if (dto.getContactLaboratoire() != null) {
+            ContactLaboratoireDTO contactDto = dto.getContactLaboratoire();
+            contactDto.setFkIdLaboratoire(updatedLaboratoire.getId());
+
+            // Vous devrez ajouter une méthode de mise à jour dans votre ContactClient
+            // Par exemple :
+             Long contactId = contactClient.updateContact(contactDto).getBody().getId();
+            log.info("Contact update process needed");
+        }
+
+        return mapToLaboratoireResponse(updatedLaboratoire);
+    }
+    @Transactional
+    public void deleteLaboratoireComplet(Long id) {
+        // Rechercher le laboratoire existant
+        Laboratoire laboratoire = laboratoireRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratoire not found with id: " + id));
+
+        try {
+            // Supprimer les contacts associés via le client Feign
+            try {
+                contactClient.deleteContactsByLaboratoireId(id);
+                log.info("Contacts for Laboratoire {} deleted", id);
+            } catch (Exception e) {
+                log.error("Error deleting contacts for Laboratoire {}: {}", id, e.getMessage());
+                // Vous pouvez choisir de propager l'exception ou de la gérer différemment
+            }
+
+            // Supprimer les adresses associées via le client Feign
+            try {
+                adresseClient.deleteAdressesByLaboratoireId(id);
+                log.info("Adresses for Laboratoire {} deleted", id);
+            } catch (Exception e) {
+                log.error("Error deleting adresses for Laboratoire {}: {}", id, e.getMessage());
+                // Vous pouvez choisir de propager l'exception ou de la gérer différemment
+            }
+
+            // Supprimer le laboratoire
+            laboratoireRepository.delete(laboratoire);
+            log.info("Laboratoire {} is deleted", id);
+
+        } catch (Exception e) {
+            log.error("Error deleting Laboratoire {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to delete Laboratoire and associated records", e);
+        }
     }
 
     // Méthode pour récupérer tous les laboratoires

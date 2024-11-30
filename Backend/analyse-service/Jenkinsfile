@@ -62,20 +62,15 @@ pipeline {
                 }
             }
         }
-        stage('Performance Tests') {
-            steps {
-                dir('Backend/analyse-service') {
-                    // Run JMeter tests
-                    bat 'mvn verify -Pjmeter-tests'
-                }
-            }
-            post {
-                always {
-                    // Publish JMeter performance results
-                    perfReport 'target/jmeter/results/*.jtl'
-                }
-            }
-        }
+  stage('Performance Tests') {
+      steps {
+          dir('Backend/analyse-service') {
+              // Run JMeter tests
+              bat 'mvn verify -Pjmeter-tests'
+          }
+      }
+      }
+
         stage('Integration Tests') {
             steps {
                 // Execute integration tests, assuming integration test profile is configured
