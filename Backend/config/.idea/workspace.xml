@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/resources/jmeter.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" afterDir="false" />
@@ -17,6 +18,18 @@
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/model/Laboratoire.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/model/Laboratoire.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/../gateway/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../sonar-project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/sonar-project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/sonar-project.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/config/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/.idea/gateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway/.idea/gateway.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../pom.xml" afterDir="false" />
+>>>>>>> 4f9e37d436a043a82dc23f40bdf526d2a06ef991
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
