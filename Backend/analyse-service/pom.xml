@@ -60,7 +60,7 @@
 			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
+
 
 		<dependency>
 			<groupId>org.apache.jmeter</groupId>
@@ -108,8 +108,7 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
-=======
->>>>>>> 4f9e37d436a043a82dc23f40bdf526d2a06ef991
+
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
