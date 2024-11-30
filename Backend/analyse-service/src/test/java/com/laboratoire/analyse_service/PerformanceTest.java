@@ -20,14 +20,14 @@ public class PerformanceTest {
             // Programmatically set JMeter home and properties
             // Use a temporary directory or your project's resource directory
 
-<<<<<<< HEAD
+
             // Use this to set the properties path
             String propertiesPath = new File("src/test/resources/jmeter.properties").getAbsolutePath();
             JMeterUtils.loadJMeterProperties(propertiesPath);
-=======
+
         // JMeter initialization (properties, log levels, locale)
         JMeterUtils.loadJMeterProperties("C:/apache-jmeter-5.6.3/bin/jmeter.properties");
->>>>>>> 4f9e37d436a043a82dc23f40bdf526d2a06ef991
+
 
 
             JMeterUtils.initLocale();
