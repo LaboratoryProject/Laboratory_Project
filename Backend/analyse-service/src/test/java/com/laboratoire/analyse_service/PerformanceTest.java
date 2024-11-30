@@ -25,8 +25,7 @@ public class PerformanceTest {
             String propertiesPath = new File("src/test/resources/jmeter.properties").getAbsolutePath();
             JMeterUtils.loadJMeterProperties(propertiesPath);
 
-        // JMeter initialization (properties, log levels, locale)
-        JMeterUtils.loadJMeterProperties("C:/apache-jmeter-5.6.3/bin/jmeter.properties");
+        
 
 
 
