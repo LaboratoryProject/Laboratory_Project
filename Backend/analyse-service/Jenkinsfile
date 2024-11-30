@@ -70,7 +70,7 @@ pipeline {
           }
       }
       }
-        }
+
         stage('Integration Tests') {
             steps {
                 // Execute integration tests, assuming integration test profile is configured
