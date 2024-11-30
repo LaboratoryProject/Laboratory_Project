@@ -1,0 +1,77 @@
+
+
+<!-- app.component.html -->
+<div class="container-fluid">
+    <!-- Header Fixe -->
+    <div class="container-fluid">
+      <!-- Header Fixe -->
+      <header class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="#">Mon Site</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#section1">Section 1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#section2">Section 2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#section3">Section 3</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#section4">Section 4</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Ajoutez le bouton sophistiqué ici -->
+          <button mat-raised-button color="accent" routerLink="/home" class="ml-auto">
+            <mat-icon>home</mat-icon> Home
+          </button>
+        </nav>
+      </header>
+  
+    <!-- Contenu Principal -->
+    <div class="content">
+      <section id="section1" class="section" style="background-image: url('/analyse.jpeg');">
+        <div class="content-card">
+          <h2>Section 1</h2>
+          <p>Contenu de la première section.</p>
+        </div>
+      </section>
+      <section id="section2" class="section" style="background-image: url('/staf.jpeg');">
+        <div class="content-card">
+          <h2>Section 2</h2>
+          <p>Contenu de la deuxième section.</p>
+        </div>
+      </section>
+      <section id="section3" class="section" style="background-image: url('/analyse.jpeg');">
+        <div class="content-card">
+          <h2>Section 3</h2>
+          <p>Contenu de la troisième section.</p>
+        </div>
+      </section>
+      <section id="section4" class="section" style="background-image: url('/staf.jpeg');">
+        <div class="content-card">
+          <h2>Section 4</h2>
+          <p>Contenu de la quatrième section.</p>
+          <!-- Bouton pour ouvrir la boîte de dialogue -->
+          <button mat-raised-button color="primary" (click)="openDialog()">Consulter les résultats de vos analyses</button>
+        </div>
+      </section>
+    </div>
+  
+    
+    <!-- Footer Fixe -->
+    <footer class="footer">
+      <p class="text-center">© 2024 Tous droits réservés</p>
+    </footer>
+  
+     <!-- Le router-outlet est essentiel pour afficher les composants de la route -->
+     
+  
+  </div>
+  
