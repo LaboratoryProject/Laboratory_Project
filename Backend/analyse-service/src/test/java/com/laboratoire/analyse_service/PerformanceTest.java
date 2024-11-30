@@ -25,7 +25,7 @@ public class PerformanceTest {
             String propertiesPath = new File("src/test/resources/jmeter.properties").getAbsolutePath();
             JMeterUtils.loadJMeterProperties(propertiesPath);
 
-        
+
 
 
 
