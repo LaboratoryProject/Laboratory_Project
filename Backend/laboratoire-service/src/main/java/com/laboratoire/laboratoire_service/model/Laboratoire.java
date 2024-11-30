@@ -13,7 +13,7 @@ public class Laboratoire {
 
     private String nom;
 
-    private String logo;
+    private byte[] logo;
 
     @Column(unique = true)
     private String nrc;
@@ -25,7 +25,7 @@ public class Laboratoire {
     public Laboratoire() {
     }
 
-    public Laboratoire(Long id, String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
+    public Laboratoire(Long id, String nom, byte[] logo, String nrc, boolean active, LocalDate dateActivation) {
         this.id = id;
         this.nom = nom;
         this.logo = logo;
@@ -35,7 +35,7 @@ public class Laboratoire {
 
     }
 
-    public Laboratoire(String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
+    public Laboratoire(String nom, byte[] logo, String nrc, boolean active, LocalDate dateActivation) {
         this.nom = nom;
         this.logo = logo;
         this.nrc = nrc;
@@ -43,6 +43,7 @@ public class Laboratoire {
         this.dateActivation = dateActivation;
 
     }
+
 
 
 
@@ -62,12 +63,12 @@ public class Laboratoire {
         this.nom = nom;
     }
 
-    public String getLogo() {
+    public byte[] getLogo() {
         return logo;
     }
 
     public void setLogo(String logo) {
-        this.logo = logo;
+        this.logo = logo.getBytes();
     }
 
     public String getNrc() {

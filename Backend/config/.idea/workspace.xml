@@ -5,39 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../adresse-service/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/initAdresse.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/controller/AdresseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/dto/AdresseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/feign/AdresseInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/model/Adresse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/repository/AdresseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/service/AdresseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/initContactLabo.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/controller/ContactLaboratoireController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/dto/ContactLaboratoireDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/feign/ContactLaboratoireInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/model/ContactLaboratoire.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/repository/ContactLaboratoireRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/service/ContactLaboratoireService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/AdresseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/ContactLaboratoireDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireCompletDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/AdresseClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/resources/jmeter.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contactLabo-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/LaboratoireServiceApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/LaboratoireInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/AdresseClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/AdresseClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/model/Laboratoire.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/model/Laboratoire.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +37,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.ConfigApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ConfigApplicationTests.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,

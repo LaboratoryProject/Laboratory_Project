@@ -66,6 +66,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.jmeter</groupId>
+			<artifactId>ApacheJMeter_config</artifactId>
+			<version>5.5</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- JMeter HTTP Request -->
 		<dependency>
 			<groupId>org.apache.jmeter</groupId>

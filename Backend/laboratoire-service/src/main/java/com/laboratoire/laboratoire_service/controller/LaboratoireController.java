@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -49,7 +51,7 @@ public class LaboratoireController {
     // Endpoint pour créer un laboratoire complet (avec adresse et contact)
     @PostMapping("/complet")
     public ResponseEntity<LaboratoireResponse> creerLaboratoireComplet(
-            @Valid @RequestBody LaboratoireCompletDTO laboratoireCompletDTO) {
+            @Valid @RequestBody LaboratoireCompletDTO laboratoireCompletDTO) throws IOException {
         LaboratoireResponse response = laboratoireService.createLaboratoireComplet(laboratoireCompletDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -74,6 +76,8 @@ public class LaboratoireController {
         String nomLaboratoire = laboratoireService.getLaboratoireNameById(id);
         return ResponseEntity.ok(nomLaboratoire);
     }
+
+
 
     // Gestion des exceptions spécifiques au contrôleur
     @ExceptionHandler(LaboratoireServiceImpl.ResourceNotFoundException.class)
