@@ -69,14 +69,6 @@ pipeline {
               bat 'mvn verify -Pjmeter-tests'
           }
       }
-      post {
-          always {
-              // Archive JMeter results instead
-              archiveArtifacts artifacts: 'target/jmeter/results/*.jtl', fingerprint: true
-
-              // Optionally, you can use the JUnit-style reporting if your results can be converted
-              junit testResults: 'target/jmeter/results/*.jtl', allowEmptyResults: true
-          }
       }
         }
         stage('Integration Tests') {
