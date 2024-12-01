@@ -1,0 +1,45 @@
+
+.sidebar {
+    background-color: #f7f9fc;
+    width: 250px;
+    height: 100vh;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+  
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+.logo-image {
+    width: 40px;    /* Ajuste la taille selon tes besoins */
+    height: auto;   /* Garde le ratio de l'image */
+    margin-right: 10px;  /* Espace entre l'image et le texte */
+  }
+
+.nav {
+  list-style: none;
+  padding: 0;
+}
+
+.nav li {
+  padding: 10px 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.nav li i {
+  margin-right: 10px;
+}
+
+.nav li ul {
+  padding-left: 20px;
+  display: none;
+}
+
+.nav li:hover ul {
+  display: block;
+}
