@@ -5,17 +5,16 @@ import com.laboratoire.laboratoire_service.model.Laboratoire;
 import com.laboratoire.laboratoire_service.repository.LaboratoireRepository;
 import com.laboratoire.laboratoire_service.feign.AdresseClient;
 import com.laboratoire.laboratoire_service.feign.ContactClient;
-
+import io.minio.MinioClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
+
 
 @Service
 public class LaboratoireServiceImpl implements LaboratoireService {
@@ -24,25 +23,31 @@ public class LaboratoireServiceImpl implements LaboratoireService {
     private final LaboratoireRepository laboratoireRepository;
     private final AdresseClient adresseClient;
     private final ContactClient contactClient;
+    private final MinioService minioService;
+    private final MinioClient minioClient;
+    private final String defaultBucket;
 
 
     public LaboratoireServiceImpl(
             LaboratoireRepository laboratoireRepository,
             AdresseClient adresseClient,
-            ContactClient contactClient
+            ContactClient contactClient, MinioService minioService, MinioClient minioClient,  @Value("${minio.bucket}") String defaultBucket
     ) {
         this.laboratoireRepository = laboratoireRepository;
         this.adresseClient = adresseClient;
         this.contactClient = contactClient;
+        this.minioService = minioService;
+        this.minioClient = minioClient;
+        this.defaultBucket = defaultBucket;
     }
 
     // Méthode de création de laboratoire avec gestion des services externes
-    @Transactional
+    /*@Transactional
     public LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) {
         // Créer l'entité Laboratoire
         Laboratoire laboratoire = new Laboratoire(
                 laboratoireRequest.nom(),
-                laboratoireRequest.logo().getBytes(),
+                laboratoireRequest.logo(),
                 laboratoireRequest.nrc(),
                 laboratoireRequest.active(),
                 laboratoireRequest.dateActivation()
@@ -55,49 +60,64 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         // Mapper et retourner la réponse
         return mapToLaboratoireResponse(savedLaboratoire);
     }
-
+*/
     // Méthode de création de laboratoire complet (avec adresse et contact)
     @Transactional
-    public LaboratoireResponse createLaboratoireComplet(LaboratoireCompletDTO dto) throws IOException, IOException {
-        // Récupérer le logo (s'il s'agit d'un fichier)
-        byte[] logoBytes = null;
-
-        if (dto.getLaboratoire().getLogo() != null) {
-            // Si le logo est un fichier (par exemple un chemin vers l'image), vous pouvez lire l'image en tant que tableau de bytes
-            logoBytes = Files.readAllBytes(Paths.get(dto.getLaboratoire().getLogo()));
+    public Laboratoire createLaboratoireComplet(LaboratoireCompletDTO dto) throws IOException {
+        // Validation des données d'entrée
+        if (dto == null || dto.getLaboratoire() == null) {
+            throw new IllegalArgumentException("Les informations du laboratoire sont obligatoires");
         }
 
-        // Créer le laboratoire avec le logo sous forme de tableau de bytes
+        // Gestion du téléchargement du logo
+        String logoFileName = null;
+        if (dto.getLaboratoire().getLogo() != null && !dto.getLaboratoire().getLogo().isEmpty()) {
+            try {
+                logoFileName = minioService.uploadFile(
+                        dto.getLaboratoire().getLogo(),
+                        dto.getLaboratoire().getLogo().getOriginalFilename()
+                );
+            } catch (Exception e) {
+                log.error("Échec du téléchargement du logo", e);
+                throw new IOException("Impossible de télécharger le logo", e);
+            }
+        }
+
+        // Création de l'entité Laboratoire
         Laboratoire laboratoire = new Laboratoire(
                 dto.getLaboratoire().getNom(),
-                logoBytes,  // Ajouter le logo sous forme de bytes
+                logoFileName,  // Stocker le nom du fichier
                 dto.getLaboratoire().getNrc(),
                 dto.getLaboratoire().isActive(),
                 dto.getLaboratoire().getDateActivation()
         );
 
-        System.out.println(laboratoire.getNrc());
-
+        // Sauvegarde du laboratoire
         Laboratoire savedLaboratoire = laboratoireRepository.save(laboratoire);
-        System.out.println(savedLaboratoire.getId());
-        System.out.println(savedLaboratoire.getNom());
+        log.info("Laboratoire créé avec succès - ID: {}, Nom: {}", savedLaboratoire.getId(), savedLaboratoire.getNom());
 
-        // Créer l'adresse via le client Feign
+        // Vérification et création de l'adresse
+        if (dto.getAdresse() == null) {
+            throw new IllegalArgumentException("Les informations d'adresse sont obligatoires");
+        }
         AdresseDTO adresseDto = dto.getAdresse();
         Long adresseId = adresseClient.creerAdresse(adresseDto).getBody().getId();
-        System.out.println(adresseDto);
+        log.info("Adresse créée avec succès - ID: {}", adresseId);
 
-        // Créer le contact via le client Feign
+        // Vérification et création du contact
+        if (dto.getContactLaboratoire() == null) {
+            throw new IllegalArgumentException("Les informations de contact sont obligatoires");
+        }
         ContactLaboratoireDTO contactDto = dto.getContactLaboratoire();
         contactDto.setFkIdLaboratoire(savedLaboratoire.getId());
         contactDto.setFkIdAdresse(adresseId);
         Long contactId = contactClient.createContact(contactDto).getBody().getId();
-
-        log.info("Laboratoire complet créé avec ID: {}", savedLaboratoire.getId());
+        log.info("Contact créé avec succès - ID: {}", contactId);
 
         return mapToLaboratoireResponse(savedLaboratoire);
     }
 
+    /*
     @Transactional
     public LaboratoireResponse updateLaboratoireComplet(Long id, LaboratoireCompletDTO dto) {
         // Rechercher le laboratoire existant
@@ -137,6 +157,7 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         return mapToLaboratoireResponse(updatedLaboratoire);
     }
+    */
     @Transactional
     public void deleteLaboratoireComplet(Long id) {
         // Rechercher le laboratoire existant
@@ -172,8 +193,18 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         }
     }
 
-    // Méthode pour récupérer tous les laboratoires
+    @Override
+    public LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) {
+        return null;
+    }
+
+    @Override
     public List<LaboratoireResponse> getAllLaboratoires() {
+        return List.of();
+    }
+
+    // Méthode pour récupérer tous les laboratoires
+  /*  public List<LaboratoireResponse> getAllLaboratoires() {
         List<Laboratoire> laboratoires = laboratoireRepository.findAll();
         return laboratoires.stream()
                 .map(this::mapToLaboratoireResponse)
@@ -193,17 +224,37 @@ public class LaboratoireServiceImpl implements LaboratoireService {
                 .map(Laboratoire::getNom)
                 .orElseThrow(() -> new ResourceNotFoundException("Laboratory not found with id: " + id));
     }
-
+*/
     // Méthode de mapping Laboratoire vers LaboratoireResponse
-    public LaboratoireResponse mapToLaboratoireResponse(Laboratoire laboratoire) {
-        return new LaboratoireResponse(
-                laboratoire.getId().toString(),
-                laboratoire.getNom(),
-                laboratoire.getLogo(),
-                laboratoire.getNrc(),
-                laboratoire.isActive(),
-                laboratoire.getDateActivation()
-        );
+    public Laboratoire mapToLaboratoireResponse(Laboratoire laboratoire) {
+        Laboratoire response = new Laboratoire();
+
+
+        response.setId(laboratoire.getId());
+        response.setNom(laboratoire.getNom());
+        response.setNrc(laboratoire.getNrc());
+        response.setActive(laboratoire.isActive());
+        response.setDateActivation(laboratoire.getDateActivation());
+
+
+        if (laboratoire.getLogo() != null) {
+            response.setLogo(generateMinioUrl(laboratoire.getLogo()));
+        }
+
+        return response;
+    }
+
+    @Override
+    public LaboratoireResponse getLaboratoireById(Long id) {
+        return null;
+    }
+
+    @Override
+    public String getLaboratoireNameById(Long id) {
+        return "";
+    }
+    private String generateMinioUrl(String fileName) {
+        return minioService.getFileUrl(fileName);
     }
 
     // Exception personnalisée pour les ressources non trouvées

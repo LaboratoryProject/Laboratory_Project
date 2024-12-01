@@ -1,0 +1,23 @@
+/* home-container.component.css */
+
+/* Container global qui contient la sidebar et le contenu principal */
+.home-container {
+    display: flex; /* Utilisation de Flexbox pour aligner les éléments */
+    height: 100vh;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  }
+  
+ 
+  
+  /* Style pour le contenu principal */
+  .main-content {
+    height: 100vh;
+    margin-left: 250px; /* Décale le contenu principal vers la droite pour faire de la place pour la sidebar */
+    padding: 20px; /* Espacement autour du contenu */
+    flex-grow: 1; /* Le contenu principal prend toute la largeur restante */
+    background-color: #8facc9;
+    width: 100%; 
+  }
+  
+ 
+  

@@ -10,7 +10,7 @@ public interface LaboratoireService {
 
     LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) ;
     List<LaboratoireResponse> getAllLaboratoires() ;
-    LaboratoireResponse mapToLaboratoireResponse(Laboratoire laboratoire) ;
+    Laboratoire mapToLaboratoireResponse(Laboratoire laboratoire) ;
     LaboratoireResponse getLaboratoireById(Long id);
     String getLaboratoireNameById(Long id);
 }
