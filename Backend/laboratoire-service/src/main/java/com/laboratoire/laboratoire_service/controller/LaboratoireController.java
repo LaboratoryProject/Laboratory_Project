@@ -3,6 +3,7 @@ package com.laboratoire.laboratoire_service.controller;
 import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
 import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
 import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
+import com.laboratoire.laboratoire_service.model.Laboratoire;
 import com.laboratoire.laboratoire_service.service.LaboratoireServiceImpl;
 
 import org.springframework.http.HttpStatus;
@@ -50,9 +51,9 @@ public class LaboratoireController {
 
     // Endpoint pour créer un laboratoire complet (avec adresse et contact)
     @PostMapping("/complet")
-    public ResponseEntity<LaboratoireResponse> creerLaboratoireComplet(
+    public ResponseEntity<Laboratoire> creerLaboratoireComplet(
             @Valid @RequestBody LaboratoireCompletDTO laboratoireCompletDTO) throws IOException {
-        LaboratoireResponse response = laboratoireService.createLaboratoireComplet(laboratoireCompletDTO);
+        Laboratoire response = laboratoireService.createLaboratoireComplet(laboratoireCompletDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
