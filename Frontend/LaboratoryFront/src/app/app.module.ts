@@ -10,6 +10,9 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddLaboratoireComponent } from './add-laboratoire/add-laboratoire.component';
 import { AjouterUtilisateurComponent } from './ajouter-utilisateur/ajouter-utilisateur.component';
+import { SupprimerUtilisateurComponent } from './supprimer-utilisateur/supprimer-utilisateur.component';
+import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-utilisateur.component';
+import { RechercherUtilisateurComponent } from './rechercher-utilisateur/rechercher-utilisateur.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,14 +23,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainContentComponent,
-    SidebarComponent,        // Déplacement ici
-    AddLaboratoireComponent, // Déplacement ici
-    AjouterUtilisateurComponent
+    SidebarComponent,
+    AddLaboratoireComponent,
+    AjouterUtilisateurComponent,
+    SupprimerUtilisateurComponent,
+    ModifierUtilisateurComponent,
+    RechercherUtilisateurComponent
   ],
   imports: [
     BrowserModule,

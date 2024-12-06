@@ -31,6 +31,33 @@ describe('UtilisateurService', () => {
     req.flush(mockData);
   });
 
+  it('should call getUtilisateurById and return the result', () => {
+    const mockData = { id: 1, nomComplet: 'Test User', email: 'test@example.com' };
+
+    service.getUtilisateurById(1).subscribe((response) => {
+      expect(response).toEqual(mockData);
+    });
+
+    const req = httpMock.expectOne('http://localhost:8085/utilisateurs/1');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockData);
+  });
+
+  it('should call getUtilisateursByRole and return the result', () => {
+    const mockData = [
+      { id: 1, nomComplet: 'Admin User', role: 'ADMIN' },
+      { id: 2, nomComplet: 'Technicien User', role: 'TECHNICIEN' },
+    ];
+
+    service.getUtilisateursByRole('ADMIN').subscribe((response) => {
+      expect(response).toEqual(mockData);
+    });
+
+    const req = httpMock.expectOne('http://localhost:8085/utilisateurs/role/ADMIN');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockData);
+  });
+
   afterEach(() => {
     httpMock.verify();
   });

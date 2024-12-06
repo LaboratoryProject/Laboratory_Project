@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root', // Rend ce service disponible partout dans l'application
 })
 export class UtilisateurService {
-  private baseUrl = 'http://localhost:8085/utilisateurs'; // URL de votre API backend
+  private baseUrl = 'http://localhost:8085/utilisateurs';
 
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,11 @@ export class UtilisateurService {
   // Récupérer un utilisateur par ID
   getUtilisateurById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
+  }
+
+  // Récupérer des utilisateurs par rôle
+  getUtilisateursByRole(role: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/role/${role}`);
   }
 
   // Mettre à jour un utilisateur
