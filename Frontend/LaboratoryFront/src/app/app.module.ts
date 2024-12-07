@@ -39,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,

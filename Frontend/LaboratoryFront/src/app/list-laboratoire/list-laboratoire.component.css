@@ -139,3 +139,15 @@ h1 {
 .button--edit:hover {
   background-color: #059669; /* green-600 */
 }
+.mat-button {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mat-raised-button {
+  transition: transform 0.1s ease-in-out;
+}
+
+.mat-raised-button:hover {
+  transform: translateY(-2px);
+}
