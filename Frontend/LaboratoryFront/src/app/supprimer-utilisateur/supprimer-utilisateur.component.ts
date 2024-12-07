@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { UtilisateurService } from '../utilisateur.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-supprimer-utilisateur',
   templateUrl: './supprimer-utilisateur.component.html',
-  styleUrls: ['./supprimer-utilisateur.component.css']
+  styleUrls: ['./supprimer-utilisateur.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
 })
 export class SupprimerUtilisateurComponent {
   idUtilisateur: number = 0; // ID de l'utilisateur à supprimer

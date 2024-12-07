@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { LaboratoireListComponent } from './list-laboratoire/list-laboratoire.component';
+import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.module';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -29,13 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HomeComponent,
     MainContentComponent,
-    SidebarComponent,
-    AddLaboratoireComponent,
-    AjouterUtilisateurComponent,
-    SupprimerUtilisateurComponent,
-    ModifierUtilisateurComponent,
-    RechercherUtilisateurComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,7 +43,15 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatFormFieldModule,
     FormsModule,
-    HttpClientModule
+    SidebarComponent,
+    AddLaboratoireComponent,
+    BrowserModule,
+    AppRoutingModule,
+    ListLaboratoireModule,
+    CommonModule,  
+    LaboratoireListComponent,
+    RechercherUtilisateurComponent,
+    HttpClientModule ,
   ],
   providers: [
     provideClientHydration(withEventReplay()),

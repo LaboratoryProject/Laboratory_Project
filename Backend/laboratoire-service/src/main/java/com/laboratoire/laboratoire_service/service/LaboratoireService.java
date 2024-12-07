@@ -9,7 +9,7 @@ import java.util.List;
 public interface LaboratoireService {
 
     LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) ;
-    List<LaboratoireResponse> getAllLaboratoires() ;
+    List<Laboratoire> getAllLaboratoires() ;
     Laboratoire mapToLaboratoireResponse(Laboratoire laboratoire) ;
     LaboratoireResponse getLaboratoireById(Long id);
     String getLaboratoireNameById(Long id);

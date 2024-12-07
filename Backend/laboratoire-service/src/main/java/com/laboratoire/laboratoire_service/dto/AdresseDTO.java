@@ -7,11 +7,17 @@ public class AdresseDTO{
       private String codePostal;
       private String ville;
       private String commune;
+      private static Long count= 0L;
 
     public Long getId() {
         return this.Id;
     }
 
+    public AdresseDTO() {
+        this.Id=count;
+        count++;
+
+    }
     public AdresseDTO(Long id, String numVoie, String nomVoie, String codePostal, String ville, String commune) {
         Id = id;
         this.numVoie = numVoie;
@@ -20,6 +26,17 @@ public class AdresseDTO{
         this.ville = ville;
         this.commune = commune;
     }
+
+
+    public AdresseDTO( String numVoie, String nomVoie, String codePostal, String ville, String commune) {
+
+        this.numVoie = numVoie;
+        this.nomVoie = nomVoie;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.commune = commune;
+    }
+
 
     public void setId(Long id) {
         Id = id;

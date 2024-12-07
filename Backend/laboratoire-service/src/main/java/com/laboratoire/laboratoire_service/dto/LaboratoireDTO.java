@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class LaboratoireDTO {
     private Long Id;
     private String nom;
-    private MultipartFile logo;
+    private String logo;
     private String nrc;
     private boolean active;
     private LocalDate dateActivation;
@@ -15,7 +15,7 @@ public class LaboratoireDTO {
     // Constructeurs
     public LaboratoireDTO() {}
 
-    public LaboratoireDTO(String nom, MultipartFile logo, String nrc, boolean active, LocalDate dateActivation) {
+    public LaboratoireDTO(String nom, String logo, String nrc, boolean active, LocalDate dateActivation) {
         this.nom = nom;
         this.logo = logo;
         this.nrc = nrc;
@@ -34,11 +34,11 @@ public class LaboratoireDTO {
         this.nom = nom;
     }
 
-    public MultipartFile getLogo() {
+    public String getLogo() {
         return logo;
     }
 
-    public void setLogo(MultipartFile logo) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 
