@@ -4,6 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MainContentComponent } from './main-content/main-content.component';
+import { CreatePatientModule } from './create-patient/create-patient.module';
+import { PatientDossiersModule } from './patient-dossiers/patient-dossiers.module';
+import { AddAnalyseDialogModule } from './add-analyse-dialog/add-analyse-dialog.module';
 
 // Import standalone components
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -46,16 +49,7 @@ import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.modul
     AppComponent,
     HomeComponent,
     MainContentComponent,
-    AddLaboratoireComponent,
-    AjouterUtilisateurComponent,
-    SupprimerUtilisateurComponent,
-    ModifierUtilisateurComponent,
-    RechercherUtilisateurComponent,
-    AddAnalyseDialogComponent,
-    AnalyseDashboardComponent,
-    CreatePatientComponent,
-    PatientDossiersComponent,
-    SidebarComponent,
+    // SidebarComponent removed from declarations (standalone)
   ],
   imports: [
     BrowserModule,
@@ -69,7 +63,16 @@ import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.modul
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ListLaboratoireModule,  // Other module
+    ListLaboratoireModule,
+    AddLaboratoireComponent, // Imported as standalone
+    AjouterUtilisateurComponent, // Imported as standalone
+    SupprimerUtilisateurComponent, // Imported as standalone
+    ModifierUtilisateurComponent, // Imported as standalone
+    RechercherUtilisateurComponent, // Imported as standalone
+    AddAnalyseDialogComponent, // Imported as standalone
+    AnalyseDashboardComponent, // Imported as standalone
+    CreatePatientComponent, // Imported as standalone
+    PatientDossiersComponent, // Imported as standalone
   ],
   providers: [
     PatientService,

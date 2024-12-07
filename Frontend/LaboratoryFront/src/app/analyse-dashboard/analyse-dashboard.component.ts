@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddAnalyseDialogComponent } from './add-analyse-dialog/add-analyse-dialog.component';
 
 @Component({
   selector: 'app-analyse-dashboard',

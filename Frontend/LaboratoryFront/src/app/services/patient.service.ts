@@ -35,4 +35,9 @@ export class PatientService {
   deletePatient(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  // Récupérer les dossiers d'un patient par CIN
+  getDossiersByCin(cin: string): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8072/dossiers/${cin}`);
+  }
 }

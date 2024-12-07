@@ -28,7 +28,7 @@ export class CreatePatientComponent {
 
   onSubmit() {
     if (this.patientForm.valid) {
-      this.patientService.addPatient(this.patientForm.value).subscribe(
+      this.patientService.createPatient(this.patientForm.value).subscribe(
         () => {
           this.snackBar.open('Patient créé avec succès !', 'Fermer', { duration: 3000 });
           this.patientForm.reset();
