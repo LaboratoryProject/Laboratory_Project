@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class UtilisateurService {
   private baseUrl = 'http://localhost:8085/utilisateurs';
 
+  //HttpClient est un objet injecté via le constructeur , qui va permettre l'envoi de requetes HTTP vers le backend
   constructor(private http: HttpClient) {}
 
   // Ajouter un utilisateur

@@ -1,3 +1,4 @@
+// Ce fichier contient les tests unitaires pour vérifier que le service fonctionne correctement
 import { TestBed } from '@angular/core/testing';
 import { UtilisateurService } from './utilisateur.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -6,6 +7,7 @@ describe('UtilisateurService', () => {
   let service: UtilisateurService;
   let httpMock: HttpTestingController;
 
+// Le service et le mock HTTP (HttpTestingController) sont initialisés avant chaque test
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],

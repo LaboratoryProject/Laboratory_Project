@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ajouter-utilisateur',
+  standalone: true,
   templateUrl: './ajouter-utilisateur.component.html',
   styleUrls: ['./ajouter-utilisateur.component.css'],
   imports: [FormsModule], // Import FormsModule ici

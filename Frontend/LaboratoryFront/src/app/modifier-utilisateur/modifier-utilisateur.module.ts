@@ -1,6 +1,42 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+<<<<<<< HEAD
+import { ModifierUtilisateurComponent } from './modifier-utilisateur.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+  ],
+  exports: [
+  ]
+})
+export class ModifierUtilisateurModule { }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
  // Import your component
 
 @NgModule({
@@ -13,3 +49,4 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class ModifierLaboratoireModule { }
+>>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
