@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { UtilisateurService } from '../utilisateur.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modifier-utilisateur',
+  standalone: true,
   templateUrl: './modifier-utilisateur.component.html',
-  styleUrls: ['./modifier-utilisateur.component.css']
+  imports: [CommonModule, FormsModule],
+  styleUrls: ['./modifier-utilisateur.component.css'],
 })
 export class ModifierUtilisateurComponent {
   idUtilisateur: number = 0; // ID de l'utilisateur à modifier
