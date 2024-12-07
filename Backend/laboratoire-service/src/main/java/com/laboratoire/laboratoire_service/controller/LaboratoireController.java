@@ -1,5 +1,6 @@
 package com.laboratoire.laboratoire_service.controller;
 
+import com.laboratoire.laboratoire_service.dto.LaboratoireDTO;
 import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
 import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
 import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
@@ -7,10 +8,12 @@ import com.laboratoire.laboratoire_service.model.Laboratoire;
 import com.laboratoire.laboratoire_service.service.LaboratoireServiceImpl;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,17 +55,19 @@ public class LaboratoireController {
     }*/
 
     // Endpoint pour créer un laboratoire complet (avec adresse et contact)
-    @PostMapping("/complet")
-    public ResponseEntity<Laboratoire> creerLaboratoireComplet(
-            @Valid @RequestBody LaboratoireCompletDTO laboratoireCompletDTO) throws IOException {
-        Laboratoire response = laboratoireService.createLaboratoireComplet(laboratoireCompletDTO);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @PostMapping(value = "/complet", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Laboratoire> createLaboratoire(
+            @RequestPart("laboratoireCompletDTO") LaboratoireCompletDTO laboratoireDTO,
+            @RequestPart(value = "logoFile", required = false) MultipartFile logo
+    ) throws IOException {
+        Laboratoire createdLaboratoire = laboratoireService.createLaboratoireComplet(laboratoireDTO, logo);
+        return ResponseEntity.ok(createdLaboratoire);
     }
 
     // Endpoint pour récupérer tous les laboratoires
     @GetMapping
-    public ResponseEntity<List<LaboratoireResponse>> getAllLaboratoires() {
-        List<LaboratoireResponse> laboratoires = laboratoireService.getAllLaboratoires();
+    public ResponseEntity<List<Laboratoire>> getAllLaboratoires() {
+        List<Laboratoire> laboratoires = laboratoireService.getAllLaboratoires();
         return ResponseEntity.ok(laboratoires);
     }
 

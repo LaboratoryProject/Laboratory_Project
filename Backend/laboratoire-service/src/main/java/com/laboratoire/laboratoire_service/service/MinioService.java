@@ -55,7 +55,7 @@ public class MinioService {
                             .build()
             );
 
-            return uniqueFileName;
+            return String.format("%s/%s/%s", minioEndpoint, bucketName, uniqueFileName);
         } catch (MinioException | InvalidKeyException | NoSuchAlgorithmException e) {
             throw new IOException("Failed to upload file to MinIO", e);
         }

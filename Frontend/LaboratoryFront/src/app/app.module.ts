@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -25,14 +24,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LaboratoireListComponent } from './list-laboratoire/list-laboratoire.component';
+import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.module';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
 @NgModule({
   declarations: [
     AppComponent, // Only non-standalone components should be declared here
     HomeComponent,
+<<<<<<< HEAD
     MainContentComponent
   ],
+=======
+    MainContentComponent,
+    ],
+>>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -44,6 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     CommonModule,
     FormsModule,
+<<<<<<< HEAD
     HttpClientModule,
 
     // Import standalone components
@@ -53,6 +66,17 @@ import { HttpClientModule } from '@angular/common/http';
     SupprimerUtilisateurComponent,
     ModifierUtilisateurComponent,
     RechercherUtilisateurComponent
+=======
+    SidebarComponent,
+    AddLaboratoireComponent,
+    BrowserModule,
+    AppRoutingModule,
+    ListLaboratoireModule,
+    CommonModule,  
+    LaboratoireListComponent,
+    RechercherUtilisateurComponent,
+    HttpClientModule ,
+>>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
   ],
   providers: [
     provideClientHydration(withEventReplay()),

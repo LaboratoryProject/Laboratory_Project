@@ -35,48 +35,50 @@ export class AddLaboratoireComponent {
     }
   }
 
-  // Form submission logic
   onSubmit(): void {
     if (this.laboratoire.logo) {
-      const reader = new FileReader(); // Create a FileReader instance
-      reader.onload = () => {
-        // Base64 conversion completed
-        const laboratoireCompletDTO = {
-          laboratoire: {
-            nom: this.laboratoire.nom,
-            nrc: this.laboratoire.nrc,
-            active: this.laboratoire.active,
-            dateActivation: this.laboratoire.dateActivation,
-            logoBase64: reader.result, // Base64 representation of the logo
-          },
-          contactLaboratoire: {
-            numTel: this.laboratoire.numTel,
-            fax: this.laboratoire.fax,
-            email: this.laboratoire.email,
-          },
-          adresse: {
-            numVoie: this.laboratoire.numVoie,
-            nomVoie: this.laboratoire.nomVoie,
-            codePostal: this.laboratoire.codePostal,
-            ville: this.laboratoire.ville,
-            commune: this.laboratoire.commune,
-          },
-        };
-
-        // Send the JSON object to the backend
-        this.laboratoireService.createLaboratoire(laboratoireCompletDTO).subscribe({
-          next: (response) => {
-            console.log('Laboratoire créé avec succès :', response);
-            alert('Laboratoire ajouté avec succès !');
-          },
-          error: (error) => {
-            console.error('Erreur lors de la création du laboratoire :', error);
-            alert('Échec de l’ajout du laboratoire.');
-          },
-        });
+      const formData = new FormData();
+  
+      // Create a DTO object that matches your backend expectation
+      const laboratoireCompletDTO = {
+        laboratoire: {
+          nom: this.laboratoire.nom,
+          nrc: this.laboratoire.nrc,
+          active: this.laboratoire.active,
+          dateActivation: this.laboratoire.dateActivation
+        },
+        contactLaboratoire: {
+          numTel: this.laboratoire.numTel,
+          fax: this.laboratoire.fax,
+          email: this.laboratoire.email
+        },
+        adresse: {
+          numVoie: this.laboratoire.numVoie,
+          nomVoie: this.laboratoire.nomVoie,
+          codePostal: this.laboratoire.codePostal,
+          ville: this.laboratoire.ville,
+          commune: this.laboratoire.commune
+        }
       };
-      // Read the logo file as a Base64 string
-      reader.readAsDataURL(this.laboratoire.logo);
+      console.log(laboratoireCompletDTO)
+  
+      // Append the DTO as a JSON string
+      formData.append('laboratoireCompletDTO', new Blob([JSON.stringify(laboratoireCompletDTO)], { type: 'application/json' }));
+      
+      // Append logo file to FormData
+      formData.append('logoFile', this.laboratoire.logo);
+  
+      // Send the form data to the backend
+      this.laboratoireService.createLaboratoire(formData).subscribe({
+        next: (response) => {
+          console.log('Laboratoire créé avec succès:', response);
+          alert('Laboratoire ajouté avec succès !');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la création du laboratoire:', error);
+          alert('Échec de lajout du laboratoire.');
+        }
+      });
     } else {
       alert('Veuillez sélectionner un fichier logo.');
     }

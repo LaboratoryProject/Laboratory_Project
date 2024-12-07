@@ -44,7 +44,14 @@ public class Laboratoire {
 
     }
 
-
+    public Laboratoire(Laboratoire laboratoire) {
+        this.id = laboratoire.id;
+        this.nom = laboratoire.nom;
+        this.logo = laboratoire.logo;
+        this.nrc = laboratoire.nrc;
+        this.active = laboratoire.active;
+        this.dateActivation = laboratoire.dateActivation;
+    }
 
 
     public Long getId() {
