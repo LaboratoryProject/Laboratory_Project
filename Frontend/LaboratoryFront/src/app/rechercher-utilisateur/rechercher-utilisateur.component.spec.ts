@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RechercherUtilisateurComponent } from './rechercher-utilisateur.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
-import { UtilisateurService } from '../utilisateur.service';
+import { UtilisateurService } from '../services/utilisateur.service';
+
 
 describe('RechercherUtilisateurComponent', () => {
   let component: RechercherUtilisateurComponent;

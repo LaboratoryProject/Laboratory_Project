@@ -1,0 +1,79 @@
+<div class="container mx-auto mt-10 max-w-lg">
+  <h2 class="text-2xl font-bold mb-6 text-center">Créer un nouveau patient</h2>
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="cin" class="block text-sm font-medium mb-1">CIN</label>
+      <input
+        id="cin"
+        type="text"
+        formControlName="cin"
+        class="w-full border rounded px-4 py-2"
+        placeholder="Entrez le CIN"
+      />
+      <div *ngIf="patientForm.get('cin')?.invalid && patientForm.get('cin')?.touched" class="text-red-500">
+        Le CIN est requis et doit comporter au moins 8 caractères.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="nom" class="block text-sm font-medium mb-1">Nom</label>
+      <input
+        id="nom"
+        type="text"
+        formControlName="nom"
+        class="w-full border rounded px-4 py-2"
+        placeholder="Entrez le nom"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="prenom" class="block text-sm font-medium mb-1">Prénom</label>
+      <input
+        id="prenom"
+        type="text"
+        formControlName="prenom"
+        class="w-full border rounded px-4 py-2"
+        placeholder="Entrez le prénom"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="dateNaissance" class="block text-sm font-medium mb-1">Date de naissance</label>
+      <input
+        id="dateNaissance"
+        type="date"
+        formControlName="dateNaissance"
+        class="w-full border rounded px-4 py-2"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="telephone" class="block text-sm font-medium mb-1">Téléphone</label>
+      <input
+        id="telephone"
+        type="text"
+        formControlName="telephone"
+        class="w-full border rounded px-4 py-2"
+        placeholder="Entrez le numéro de téléphone"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="adresse" class="block text-sm font-medium mb-1">Adresse</label>
+      <textarea
+        id="adresse"
+        formControlName="adresse"
+        class="w-full border rounded px-4 py-2"
+        placeholder="Entrez l'adresse"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+      [disabled]="patientForm.invalid"
+    >
+      Ajouter le patient
+    </button>
+  </form>
+</div>

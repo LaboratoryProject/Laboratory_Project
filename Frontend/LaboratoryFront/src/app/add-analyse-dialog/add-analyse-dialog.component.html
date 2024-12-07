@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Ajouter une Analyse</h1>
+<div mat-dialog-content>
+  <p>Veuillez entrer le CIN du patient pour vérifier s'il existe déjà :</p>
+  <mat-form-field>
+    <mat-label>CIN</mat-label>
+    <input matInput [(ngModel)]="cin" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annuler</button>
+  <button mat-raised-button color="primary" (click)="checkPatient()">Suivant</button>
+</div>

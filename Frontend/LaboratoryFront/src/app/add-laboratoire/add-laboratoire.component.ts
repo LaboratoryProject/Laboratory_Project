@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LaboratoireService } from '../laboratoire.service';
+import { LaboratoireService } from '../services/laboratoire.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -38,7 +38,7 @@ export class AddLaboratoireComponent {
   onSubmit(): void {
     if (this.laboratoire.logo) {
       const formData = new FormData();
-  
+
       // Create a DTO object that matches your backend expectation
       const laboratoireCompletDTO = {
         laboratoire: {
@@ -61,13 +61,13 @@ export class AddLaboratoireComponent {
         }
       };
       console.log(laboratoireCompletDTO)
-  
+
       // Append the DTO as a JSON string
       formData.append('laboratoireCompletDTO', new Blob([JSON.stringify(laboratoireCompletDTO)], { type: 'application/json' }));
-      
+
       // Append logo file to FormData
       formData.append('logoFile', this.laboratoire.logo);
-  
+
       // Send the form data to the backend
       this.laboratoireService.createLaboratoire(formData).subscribe({
         next: (response) => {

@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c65afc19-e14a-4b52-986d-cb5a593452e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

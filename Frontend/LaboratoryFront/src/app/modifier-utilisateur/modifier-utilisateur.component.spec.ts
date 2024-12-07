@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModifierUtilisateurComponent } from './modifier-utilisateur.component';
-import { UtilisateurService } from '../utilisateur.service';
+import { UtilisateurService } from '../services/utilisateur.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 

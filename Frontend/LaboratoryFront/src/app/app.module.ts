@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +12,20 @@ import { AjouterUtilisateurComponent } from './ajouter-utilisateur/ajouter-utili
 import { SupprimerUtilisateurComponent } from './supprimer-utilisateur/supprimer-utilisateur.component';
 import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-utilisateur.component';
 import { RechercherUtilisateurComponent } from './rechercher-utilisateur/rechercher-utilisateur.component';
+import { AddAnalyseDialogComponent } from './add-analyse-dialog/add-analyse-dialog.component';
+import { AnalyseDashboardComponent } from './analyse-dashboard/analyse-dashboard.component';
+import { CreatePatientComponent } from './create-patient/create-patient.component';
+import { PatientDossiersComponent } from './patient-dossiers/patient-dossiers.component';
+
+// Services
+import { PatientService } from './services/patient.service';
+import { AnalyseService } from './services/analyse.service';
+import { LaboratoireService } from './services/laboratoire.service';
+
+// Models
+import { Analyse } from './models/analyse.model';
+import { Patient } from './models/patient.model';
+import { Laboratoire } from './models/laboratoire.model';
 
 // Angular Material modules
 import { MatCardModule } from '@angular/material/card';
@@ -24,27 +36,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LaboratoireListComponent } from './list-laboratoire/list-laboratoire.component';
-import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.module';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-<<<<<<< HEAD
-=======
+// Other modules
+import { ListLaboratoireModule } from './list-laboratoire/list-laboratoire.module';
 
-
->>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
 @NgModule({
   declarations: [
-    AppComponent, // Only non-standalone components should be declared here
+    AppComponent,
     HomeComponent,
-<<<<<<< HEAD
-    MainContentComponent
-  ],
-=======
     MainContentComponent,
-    ],
->>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
+    AddLaboratoireComponent,
+    AjouterUtilisateurComponent,
+    SupprimerUtilisateurComponent,
+    ModifierUtilisateurComponent,
+    RechercherUtilisateurComponent,
+    AddAnalyseDialogComponent,
+    AnalyseDashboardComponent,
+    CreatePatientComponent,
+    PatientDossiersComponent,
+    SidebarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,38 +64,18 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatIconModule,
     MatInputModule,
     MatIconModule,
-    MatFormFieldModule,
     CommonModule,
     FormsModule,
-<<<<<<< HEAD
     HttpClientModule,
-
-    // Import standalone components
-    SidebarComponent,
-    AddLaboratoireComponent,
-    AjouterUtilisateurComponent,
-    SupprimerUtilisateurComponent,
-    ModifierUtilisateurComponent,
-    RechercherUtilisateurComponent
-=======
-    SidebarComponent,
-    AddLaboratoireComponent,
-    BrowserModule,
-    AppRoutingModule,
-    ListLaboratoireModule,
-    CommonModule,  
-    LaboratoireListComponent,
-    RechercherUtilisateurComponent,
-    HttpClientModule ,
->>>>>>> d7eb7f9e8985a72a66b1ac0e55bd95720a87ee2a
+    ListLaboratoireModule,  // Other module
   ],
   providers: [
-    provideClientHydration(withEventReplay()),
-    provideAnimationsAsync()
+    PatientService,
+    AnalyseService,
+    LaboratoireService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

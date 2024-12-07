@@ -1,0 +1,14 @@
+<h1>Dossiers du Patient (CIN: {{ cin }})</h1>
+<div *ngIf="patientDossiers.length > 0; else noDossiers">
+  <div *ngFor="let dossier of patientDossiers" class="dossier-card">
+    <h2>Dossier: {{ dossier.id }}</h2>
+    <p>Créé le: {{ dossier.dateCreation }}</p>
+    <button mat-raised-button color="primary" (click)="addAnalyse(dossier.id)">
+      Ajouter une Analyse
+    </button>
+  </div>
+</div>
+
+<ng-template #noDossiers>
+  <p>Aucun dossier trouvé pour ce patient.</p>
+</ng-template>
