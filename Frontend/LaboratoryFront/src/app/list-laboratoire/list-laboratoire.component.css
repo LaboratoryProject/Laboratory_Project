@@ -1,153 +1,248 @@
-.container {
-  max-width: 1280px;
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.labos-style {
+  margin-top: 20px; /* Adds margin at the top */
+  padding-top: 20px; /* Adds internal padding at the top */
+  border-radius: 12px; /* Soft rounded corners */
+  background-color: #e6ebf7; /* White background for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  overflow: hidden; /* Ensures content stays within the rounded borders */
+}
+
+.non-bold-text {
+  font-weight: normal !important; /* Forces text inside h5 to not be bold */
+}
+
+  
+  
+.labos-style:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.labos-style h3 {
+  font-size: 1.25rem; /* Slightly larger title font */
+  color: #1a202c; /* Dark gray for better readability */
+}
+
+.labos-style span {
+  color: #4a5568; /* Softer gray for supporting text */
+}
+
+.labos-style .border-t {
+  border-top: 1px solid #e2e8f0; /* Light gray separator line */
+}
+
+.sidebar {
+  width: 280px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Add a custom class to make the input slightly longer */
+.custom-width {
+  width: 350px;  /* Set to any desired length */
+}
+
+  
+.inline {
+  display: inline; /* Makes both h5 elements appear inline */
+}
+
+
+.content-wrapper {
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  background-color: #f9fafb;
-  min-height: 100vh;
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto; /* Add this to enable scrolling in the content area */
+}
+
+.search-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+/* Input search styling */
+input[type="text"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  width: 100%; /* Set it to take full width of its container */
+}
+
+input[type="text"]:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+.mat-form-field {
+  width: 100%; /* Ensure the input field takes full width within its container */
+}
+
+
+.content-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.rechercher-style{
+  position: absolute;
+  align-items: center;
+  top: 20px;
+  left: 330px;
+  max-width:700px;
+}
+
+/* Styling for the header and buttons */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:60px;
+}
+
+.search-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 h1 {
-  font-size: 1.875rem; /* 3xl */
-  font-weight: 800; /* extrabold */
-  color: #1f2937; /* gray-800 */
-  margin-bottom: 1.5rem;
-  text-align: center;
-  letter-spacing: -0.025em; /* tighter tracking */
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
 }
 
-.error-message {
-  max-width: 36rem; /* xl */
-  margin: 0 auto;
-  background-color: #fff5f5; /* red-50 */
-  border-left: 4px solid #f87171; /* red-500 */
-  color: #991b1b; /* red-700 */
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem; /* rounded-lg */
-}
-
-.grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* responsive grid */
-}
-
-.card {
-  background-color: #ffffff; /* white */
-  border: 1px solid #e5e7eb; /* gray-200 */
-  border-radius: 0.75rem; /* rounded-xl */
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
+button:hover {
+  opacity: 0.8;
+}
+
+button.bg-green-500 {
+  background-color: #38a169;
+  color: white;
+}
+
+button.bg-blue-500 {
+  background-color: #3182ce;
+  color: white;
+}
+
+button.bg-red-500 {
+  background-color: #e53e3e;
+  color: white;
+}
+
+
+button:focus {
+  outline: none;
+}
+
+/* Input search styling */
+input[type="text"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+.mat-form-field {
+  width: 300px;
+}
+
+.mat-icon {
+  font-size: 20px;
+}
+
+/* For the laboratorio cards */
+.card {
+  width: 300px; /* Ajustez la largeur des cartes */
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem; /* Pour éviter que les cartes se collent trop si elles passent à la ligne */
+}
+
+
 .card:hover {
-  transform: translateY(-0.5rem); /* -translate-y-2 */
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* shadow-2xl */
+  transform: translateY(-5px);
 }
 
-.card-header {
-  height: 14rem; /* h-56 */
-  background-color: #f3f4f6; /* gray-100 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
-.card-header img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-}
-
-.card-header img:hover {
-  transform: scale(1.1); /* hover:scale-110 */
-}
-
-.badge {
+.card .badge {
   position: absolute;
-  top: 0.75rem; /* top-3 */
-  right: 0.75rem; /* right-3 */
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px; /* full */
-  font-size: 0.75rem; /* text-xs */
-  font-weight: 700; /* bold */
-  text-transform: uppercase;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  color: #fff;
 }
 
-.badge--active {
-  background-color: #dcfce7; /* green-100 */
-  color: #065f46; /* green-800 */
+.card .badge.active {
+  background-color: #38a169;
 }
 
-.badge--inactive {
-  background-color: #fee2e2; /* red-100 */
-  color: #991b1b; /* red-800 */
+.card .badge.inactive {
+  background-color: #e53e3e;
 }
 
-.card-content {
-  padding: 1.25rem;
-}
-
-.card-content h2 {
-  font-size: 1.125rem; /* text-xl */
-  font-weight: 700; /* bold */
-  color: #1f2937; /* gray-800 */
-  margin-bottom: 0.75rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  background-color: #f9fafb; /* gray-50 */
-  border-top: 1px solid #e5e7eb; /* gray-200 */
-}
-
-.button {
-  flex: 1;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem; /* rounded-lg */
+/* Error Message */
+.error-message {
+  background-color: #fff5f5;
+  border-left: 4px solid #e53e3e;
+  padding: 15px;
+  margin-bottom: 20px;
+  color: #e53e3e;
+  font-size: 14px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: 600; /* semi-bold */
-  transition: background-color 0.3s ease;
+  border-radius: 8px;
 }
 
-.button--details {
-  background-color: #3b82f6; /* blue-500 */
-  color: #ffffff; /* white */
+.badge.active {
+  background-color: rgb(162, 214, 162);
+  color: white;
 }
 
-.button--details:hover {
-  background-color: #2563eb; /* blue-600 */
+.badge.inactive {
+  background-color: red;
+  color: white;
 }
 
-.button--edit {
-  background-color: #10b981; /* green-500 */
-  color: #ffffff; /* white */
+
+.error-message .mat-icon {
+  margin-right: 10px;
+}
+.fixed-logo-size {
+  width: 150px; /* Adjust size as needed */
+  height: 150px; /* Adjust size as needed */
+  object-fit: contain; /* Ensures the image maintains its aspect ratio */
 }
 
-.button--edit:hover {
-  background-color: #059669; /* green-600 */
-}
-.mat-button {
-  font-size: 16px;
-  font-weight: bold;
-}
 
-.mat-raised-button {
-  transition: transform 0.1s ease-in-out;
-}
-
-.mat-raised-button:hover {
-  transform: translateY(-2px);
-}

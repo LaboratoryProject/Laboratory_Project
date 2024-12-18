@@ -1,95 +1,117 @@
-<div class="container mx-auto px-6 py-8 bg-gray-50 min-h-screen">
-  <!-- Search Bar Section -->
-  <div class="flex justify-end mb-6">
-    <mat-form-field appearance="fill" class="w-1/2 md:w-1/3 lg:w-1/4">
-      <mat-label>Rechercher un laboratoire</mat-label>
-      <input matInput (input)="onSearch($event)" />
-      <mat-icon matPrefix>search</mat-icon>
-    </mat-form-field>
-  </div>
-  <button
-    class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-    (click)="navigateToAjouter()">
-    Ajouter
-  </button>
-
-  <!-- Header Section -->
-  <h1 class="text-3xl font-extrabold text-gray-800 mb-8 text-center tracking-tight">
-    Liste des Laboratoires
-  </h1>
-
-  <!-- Error Message Section -->
-  <div *ngIf="errorMessage" class="max-w-3xl mx-auto bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 shadow-md rounded-lg">
-    <div class="flex items-center">
-      <mat-icon class="text-red-500 mr-2">error</mat-icon>
-      {{ errorMessage }}
-    </div>
-  </div>
-
-  <!-- Laboratoires Grid Section -->
-  <!-- Laboratoires Grid -->
-  <div *ngIf="laboratoires.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let laboratoire of laboratoires"
-         class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-      <!-- Logo -->
-      <div class="h-56 bg-gray-100 flex items-center justify-center relative overflow-hidden">
-        <img *ngIf="laboratoire.logo"
-             [src]="laboratoire.logo"
-             alt="{{ laboratoire.nom }} logo"
-             class="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-110">
-        <div *ngIf="!laboratoire.logo"
-             class="text-gray-400 text-center flex items-center justify-center w-full h-full">
-          <span class="text-lg">Pas de logo</span>
+<div class="app-container">
+  <app-side-bar-super-admin class="sidebar"></app-side-bar-super-admin>
+  
+  <div class="content-wrapper flex-grow">
+    <div class="content-container max-w-[1600px] mx-auto px-6 py-8">
+      <!-- Header and Buttons Section -->
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 tracking-tight">
+          Liste des Laboratoires
+        </h1>
+        
+        <div class="flex space-x-4">
+          <input
+            type="text"
+            placeholder="Rechercher un laboratoire..."
+            class="form-control w-50"
+            (input)="onSearch($event)"
+          />
         </div>
-
-        <!-- Active Badge -->
-        <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold uppercase"
-              [ngClass]="{
-                'bg-green-100 text-green-800': laboratoire.active,
-                'bg-red-100 text-red-800': !laboratoire.active
-              }">
-          {{ laboratoire.active ? 'Actif' : 'Inactif' }}
-        </span>
+      
+        <div>
+          <button
+            class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center space-x-2"
+            (click)="navigateToAjouter()"
+          >
+            <span>Ajouter un laboratoire</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Laboratoire Details -->
-      <div class="p-5">
-
-        <h2 class="text-xl font-bold text-gray-800 mb-3 truncate">{{ laboratoire.nom }}</h2>
-
-        <div class="grid grid-cols-2 gap-3 text-sm text-gray-600 mb-4">
-          <div class="font-semibold">NRC:</div>
-          <div class="text-gray-800">{{ laboratoire.nrc }}</div>
-
-          <div class="font-semibold">Date d'Activation:</div>
-          <div class="text-gray-800">{{ laboratoire.dateActivation | date:'dd/MM/yyyy' }}</div>
+      <!-- Error Message Section -->
+      <div *ngIf="errorMessage" class="mb-6">
+        <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow">
+          <div class="flex items-center">
+            <mat-icon class="text-red-500 mr-2">error</mat-icon>
+            {{ errorMessage }}
+          </div>
         </div>
-        <div class="mt-4 flex justify-between space-x-2">
-          <button
-            class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md"
-            (click)="showDetails(laboratoire)">
-            Détails
-          </button>
-          <button
-            class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-md"
-            (click)="editLaboratoire(laboratoire)">
-            Modifier
-          </button>
-          <button
-            class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-            (click)="deleteLaboratoire(laboratoire)">
-            Supprimer
-          </button>
-        </div>
-
       </div>
+
+      <!-- Laboratoires Horizontal Scroll Container -->
+      <div *ngIf="laboratoires.length > 0; else noData" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Lab Card -->
+        <div *ngFor="let laboratoire of laboratoires" class="labos-style">
+          <!-- Card Header -->
+          <div class="bg-gradient-to-r from-blue-600 to-blue-400 m-4flex items-center"></div>
+              <h4 class="font-semibold text-gray-700 mb-2">
+                Laboratoire:      <span style="color: rgb(74, 29, 222);"> {{ laboratoire.nom }}</span> 
+              </h4>
+           
+        
+          
+          <!-- Card Body -->
+          <div class="p-6 flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center justify-center">
+                <img 
+                  *ngIf="laboratoire.logo" 
+                  [src]="laboratoire.logo" 
+                  alt="{{ laboratoire.nom }} logo" 
+                  class="fixed-logo-size">
+                <div *ngIf="!laboratoire.logo" class="text-gray-400 text-center flex items-center justify-between w-full h-full">
+                  <span class="text-sm">Pas de logo</span>
+                </div>
+              </div>
+              <span class="badge" [ngClass]="{ 'active': laboratoire.active, 'inactive': !laboratoire.active }">
+                {{ laboratoire.active ? 'Actif' : 'Inactif' }}
+              </span>
+      
+              <h2 class="text-2xl font-bold text-gray-900 mb-4 truncate">{{ laboratoire.nom }}</h2>
+      
+              <div>
+                <h5 class="font-semibold text-gray-700 mb-2 inline"> NRC : </h5>
+                <h5 class="font-semibold text-gray-700 mb-2 non-bold-text inline">{{ laboratoire.nrc }}</h5><br/> 
+        
+                <h5 class="font-semibold text-gray-700 mb-2 inline">Date d'Activation : </h5>
+                <h5 class="font-semibold text-gray-700 mb-2 non-bold-text inline">{{ laboratoire.dateActivation | date:'dd/MM/yyyy' }}</h5><br/> 
+
+              </div>
+            </div>
+          </div>
+  
+          
+          <!-- Action Buttons -->
+          <div class="flex space-x-3 mt-4">
+            <button 
+              class="flex-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors flex items-center justify-center space-x-2"
+              (click)="showDetails(laboratoire.id)">
+              <mat-icon class="text-base mr-1">visibility</mat-icon>
+              Détails
+            </button>
+            <button 
+              class="flex-1 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors flex items-center justify-center space-x-2"
+              (click)="openEditDialog(laboratoire)">
+              <mat-icon class="text-base mr-1">edit</mat-icon>
+              Modifier
+            </button>
+            <button 
+              class="flex-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors flex items-center justify-center space-x-2"
+              (click)="deleteLaboratoire(laboratoire)">
+              <mat-icon class="text-base mr-1">delete</mat-icon>
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Data Found Template -->
+      <ng-template #noData>
+        <div class="text-center text-gray-600 text-lg mt-10 bg-gray-100 p-8 rounded-lg">
+          <mat-icon class="text-4xl text-gray-400 mb-4">inbox</mat-icon>
+          Aucun laboratoire trouvé dans la base de données.
+        </div>
+      </ng-template>
     </div>
   </div>
-
-  <!-- No Data Fallback -->
-  <ng-template #noData>
-    <div class="text-center text-gray-600 text-lg mt-10">
-      Aucun laboratoire trouvé dans la base de données.
-    </div>
-  </ng-template>
 </div>

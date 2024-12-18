@@ -44,4 +44,9 @@ public class DossierService {
     public void deleteDossier(Long id) {
         dossierRepository.deleteById(id);
     }
+
+    // Récupérer un dossier par son numéro
+    public Optional<Dossier> getDossierByNum(String numDossier) {
+        return dossierRepository.findByNumDossier(numDossier);
+    }
 }

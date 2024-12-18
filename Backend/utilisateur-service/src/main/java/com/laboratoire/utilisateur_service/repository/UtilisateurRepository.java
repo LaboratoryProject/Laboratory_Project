@@ -14,4 +14,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     Optional<Utilisateur> findByEmail(String email);
     List<Utilisateur> findByFkIdLaboratoire(Long laboratoireId);
     List<Utilisateur> findByRole(Role role);
+    Optional<Utilisateur> findByFkIdLaboratoireAndRole(Long fkIdLaboratoire, Role role);
+    void deleteByFkIdLaboratoireAndRole(Long fkIdLaboratoire, Role role);
+    Optional<Utilisateur> findByKeycloakId(String keycloakId);
 }

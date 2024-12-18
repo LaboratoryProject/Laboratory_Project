@@ -1,0 +1,46 @@
+<div class="container">
+    <h2>Ajouter un Nouveau Dossier</h2>
+    <form [formGroup]="dossierForm" (ngSubmit)="submitForm()">
+      
+      <!-- Champ Numéro de Dossier -->
+      <div>
+        <label>Numéro de Dossier :</label>
+        <input type="text" formControlName="numDossier" />
+      </div>
+  
+      <!-- Champ Email Utilisateur -->
+      <div>
+        <label>Email Utilisateur :</label>
+        <input type="email" formControlName="emailUtilisateur" />
+      </div>
+  
+      <!-- Champ CIN Patient -->
+      <div>
+        <label>CIN du Patient :</label>
+        <input type="text" formControlName="cinPatient" />
+      </div>
+  
+      <!-- Champ Date -->
+      <div>
+        <label>Date :</label>
+        <input type="date" formControlName="date" />
+      </div>
+  
+      <!-- Liste déroulante des analyses -->
+      <div>
+        <label>Analyse :</label>
+        <select formControlName="analyse">
+          <option value="">-- Sélectionnez une analyse --</option>
+          <option *ngFor="let analyse of analyses" [value]="analyse.id">
+            {{ analyse.nom }}
+          </option>
+        </select>
+      </div>
+  
+      <!-- Bouton pour soumettre le formulaire -->
+      <div>
+        <button type="submit" mat-raised-button color="primary">Créer le Dossier</button>
+      </div>
+    </form>
+  </div>
+  

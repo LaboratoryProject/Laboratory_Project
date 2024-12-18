@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ai_db:
+    image: postgres:13
+    volumes:
+      - ai_data:/var/lib/postgresql/data
+      - ./initai.sql:/docker-entrypoint-initdb.d/initai.sql
+    environment:
+      POSTGRES_DB: ai_service
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5440:5432"
+
+volumes:
+  ai_data:

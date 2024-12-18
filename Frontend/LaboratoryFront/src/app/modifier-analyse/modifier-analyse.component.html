@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>Modifier l'analyse</h2>
+    <form [formGroup]="analyseForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Nom de l'analyse :</label>
+        <input type="text" formControlName="nomAnalyse" />
+      </div>
+      <div>
+        <label>Description :</label>
+        <input type="text" formControlName="descriptionAnalyse" />
+      </div>
+      <div>
+        <label>Laboratoire :</label>
+        <input type="text" formControlName="laboratoire" />
+      </div>
+      <div>
+        <label>Epreuves :</label>
+        <select formControlName="epreuve">
+          <option value="En cours">Taux de glucose</option>
+          <option value="En attente">Taux de cholestérol</option>
+          <option value="Taux d'hémoglobine">Taux d'hémoglobine</option>
+          <option value="Présence de protéines dans l’urine">Présence de protéines dans l’urine</option>
+          <option value="Culture bactérienne">Culture bactérienne</option>
+          <option value="Taux de cortisol">Taux de cortisol</option>
+          <option value="Détection de parasites">Détection de parasites</option>
+          <option value="Analyse des mutations génétiques">Analyse des mutations génétiques</option>
+        </select>
+      </div>
+      <div>
+        <label>Statut :</label>
+        <select formControlName="statutAnalyse">
+          <option value="En cours">En cours</option>
+          <option value="En attente">En attente</option>
+          <option value="Terminé">Terminé</option>
+        </select>
+      </div>
+      <div>
+        <label>Date de l'analyse :</label>
+        <input type="date" formControlName="dateAnalyse" />
+      </div>
+      <div>
+        <label>Coût de l'analyse :</label>
+        <input type="number" formControlName="coutAnalyse" />
+      </div>
+      <div>
+        <button type="submit" mat-raised-button color="primary">Valider</button>
+        <button type="button" mat-raised-button color="warn" (click)="revenir()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  

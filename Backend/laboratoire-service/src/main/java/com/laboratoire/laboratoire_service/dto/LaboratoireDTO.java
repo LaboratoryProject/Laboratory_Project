@@ -23,6 +23,15 @@ public class LaboratoireDTO {
         this.dateActivation = dateActivation;
     }
 
+    public LaboratoireDTO(LaboratoireDTO labo1) {
+        this.nom = labo1.nom;
+        this.logo = labo1.logo;
+        this.nrc = labo1.nrc;
+        this.active = labo1.active;
+        this.dateActivation = labo1.dateActivation;
+
+    }
+
     // Getters et Setters
     // ... (à ajouter)
 

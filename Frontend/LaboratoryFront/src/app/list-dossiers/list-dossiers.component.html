@@ -1,0 +1,25 @@
+<!-- dossiers.component.html -->
+<h1>Dossiers</h1>
+
+<div class="actions">
+  <button (click)="openDialog()">Add</button>
+  <input type="text" [(ngModel)]="searchText" placeholder="Search by date, identity, name, or dossier number" />
+  <button (click)="searchDossiers()">Search</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dossier Number</th>
+      <th>Patient Name</th>
+      <th>Patient Identity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dossier of dossiers" (click)="navigateToDossier(dossier)">
+      <td>{{ dossier.dossierNumber }}</td>
+      <td>{{ dossier.patientName }}</td>
+      <td>{{ dossier.patientIdentity }}</td>
+    </tr>
+  </tbody>
+</table>

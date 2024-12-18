@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>Détails du Laboratoire</h2>
+<mat-dialog-content class="dialog-content">
+  <!-- Laboratory Details Section -->
+  <div class="section">
+    <h3>Informations du Laboratoire</h3>
+    <div class="detail-row">
+      <span class="detail-label">Nom :</span>
+      <span>{{ data.laboratoire.nom }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">NRC :</span>
+      <span>{{ data.laboratoire.nrc }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Statut :</span>
+      <span>{{ data.laboratoire.active ? 'Actif' : 'Inactif' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Date d'activation :</span>
+      <span>{{ data.laboratoire.dateActivation }}</span>
+    </div>
+    <div class="logo-container">
+      <img [src]="data.laboratoire.logo" alt="Logo du laboratoire" class="logo" />
+    </div>
+  </div>
+  
+  <!-- Address Section -->
+  <div class="section">
+    <h3>Adresse</h3>
+    <div class="detail-row">
+      <span class="detail-label">Code Postal :</span>
+      <span>{{ data.adresse.codePostal }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Commune :</span>
+      <span>{{ data.adresse.commune }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Numéro de voie :</span>
+      <span>{{ data.adresse.numVoie }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Nom de voie :</span>
+      <span>{{ data.adresse.nomVoie }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Ville :</span>
+      <span>{{ data.adresse.ville }}</span>
+    </div>
+  </div>
+
+  <!-- Contact Information Section -->
+  <div class="section">
+    <h3>Contact</h3>
+    <div class="detail-row">
+      <span class="detail-label">Email :</span>
+      <span>{{ data.contactLaboratoire.email }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Téléphone :</span>
+      <span>{{ data.contactLaboratoire.numTel }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Fax :</span>
+      <span>{{ data.contactLaboratoire.fax }}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

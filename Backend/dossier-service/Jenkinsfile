@@ -1,0 +1,98 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven-4.0.0'
+        jdk 'JDK17'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/LaboratoryProject/Laboratory_Project.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Navigate to the dossier service folder and build the Spring Boot app (skip tests during build)
+                dir('Backend/dossier-service') {
+                    bat 'mvn clean package -DskipTests'
+                }
+            }
+        }
+
+        stage('Docker Build & Run') {
+            steps {
+                script {
+                    def imageName = 'local/dossier-service:latest'
+                    bat "docker build -t ${imageName} Backend/dossier-service"
+                    bat "docker run --rm -d -p 8090:8080 ${imageName}"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Test Docker command (ensure Docker is accessible)
+                script {
+                    def dockerAvailable = bat(script: 'docker ps', returnStatus: true) == 0
+                    if (!dockerAvailable) {
+                        error('Docker is not available. Please check your Docker installation.')
+                    }
+                }
+                dir('Backend/dossier-service') {
+                    bat 'mvn clean test'  // Run Maven tests with Testcontainers
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                // Run unit tests using Maven
+                dir('Backend/dossier-service') {
+                    bat 'mvn test'
+                }
+            }
+            post {
+                always {
+                    // Archive JUnit test reports generated after running unit tests
+                    junit 'Backend/dossier-service/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        stage('Integration Tests') {
+            steps {
+                // Execute integration tests, assuming integration test profile is configured
+                dir('Backend/dossier-service') {
+                    bat 'mvn verify -Pintegration-tests'
+                }
+            }
+        }
+
+        stage('Docker Test') {
+            steps {
+                script {
+                    // Test if Docker is accessible with the configured environment
+                    bat 'docker ps'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive any JAR artifacts built during the build stage
+            archiveArtifacts artifacts: 'Backend/dossier-service/target/*.jar', allowEmptyArchive: true
+        }
+        success {
+            // Notify success in the logs
+            echo 'Build was successful!'
+        }
+        failure {
+            // Notify failure in the logs
+            echo 'Build failed! Check the logs for details.'
+        }
+    }
+}

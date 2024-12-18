@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { LaboratoireService } from '../services/laboratoire.service';
+import { LaboratoireService, Laboratoire } from '../laboratoire.service';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -12,8 +12,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Laboratoire } from '../models/laboratoire.model';
-
+import { LaboratoireEditDialogComponent } from './laboratoire-edit-dialog/laboratoire-edit-dialog.component';
+import { LaboratoireDetailsDialogComponent } from './laboratoire-details-dialog/laboratoire-details-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBar } from '@angular/material/snack-bar'; 
+import { SideBarSuperAdminComponent } from '../side-bar-super-admin/side-bar-super-admin.component';
 @Component({
   selector: 'app-laboratoire-list',
   templateUrl: './list-laboratoire.component.html',
@@ -30,9 +33,11 @@ import { Laboratoire } from '../models/laboratoire.model';
     MatIconModule,
     MatToolbarModule,
     MatSelectModule,
+    SideBarSuperAdminComponent,
   ]
 })
 export class LaboratoireListComponent implements OnInit {
+  logoFile: File | null = null; 
   laboratoires: Laboratoire[] = []; // Data for UI
   allLaboratoires: Laboratoire[] = []; // Cache of the full data set
   errorMessage: string | null = null;
@@ -40,8 +45,10 @@ export class LaboratoireListComponent implements OnInit {
   constructor(
     private laboratoireService: LaboratoireService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar 
   ) {}
+
 
   navigateToAjouter() {
     this.router.navigate(['/add']);
@@ -52,7 +59,7 @@ export class LaboratoireListComponent implements OnInit {
   }
 
   /**
-   * Fetches all laboratoires and initializes allLaboratoires.
+   * Fetches all laboratoires and initializes `allLaboratoires`.
    */
   fetchLaboratoires(): void {
     this.laboratoireService.getAllLaboratoires().subscribe(
@@ -63,13 +70,13 @@ export class LaboratoireListComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching laboratories', error);
-        this.errorMessage = `Erreur de chargement : ${error.message || "Erreur inconnue"}`; // Fixed string interpolation
+        this.errorMessage = `Erreur de chargement : ${error.message || 'Erreur inconnue'}`;
       }
     );
   }
 
   /**
-   * Handles search input logic by filtering allLaboratoires.
+   * Handles search input logic by filtering `allLaboratoires`.
    * Ensures server data remains cached and uses it directly for better performance.
    * @param searchTerm - The string typed by the user in search input
    */
@@ -96,48 +103,118 @@ export class LaboratoireListComponent implements OnInit {
    * Show details of a laboratory
    * @param laboratoire laboratory to show details for
    */
-  showDetails(laboratoire: Laboratoire) {
-    // Corrected alert message interpolation
-    alert(`Détails de : ${laboratoire.nom}`);
-    // Alternatively, you could open a dialog or navigate to a details page
-    // this.dialog.open(LaboratoireDetailsComponent, { data: laboratoire });
+  showDetails(laboratoireId: number) {
+    if (!laboratoireId) {
+      console.error('Invalid laboratoireId:', laboratoireId);
+      alert('Invalid laboratoire ID.');
+      return;
+    }
+  
+    this.laboratoireService.getLaboratoireById(laboratoireId).subscribe({
+      next: (data) => {
+        this.dialog.open(LaboratoireDetailsDialogComponent, {
+          data,
+          width: '800px',
+          maxHeight: '90vh'
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching laboratoire details:', error);
+        alert('Erreur lors de la récupération des détails');
+      }
+    });
   }
+  
+
+  openEditDialog(laboratoire: Laboratoire): void {
+    const dialogRef = this.dialog.open(LaboratoireEditDialogComponent, {
+      data: laboratoire,
+      width: '1200px', // Adjusted width for better content visibility
+      height: '800px', // Adjusted height
+    });
+  
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this.updateLaboratoireInList(result);
+        }
+      },
+      error: (error) => {
+        console.error('Error while closing the dialog', error);
+      },
+    });
+  }
+  
+  
 
   /**
-   * Edit a laboratory
-   * @param laboratoire laboratory to edit
+   * Updates a laboratoire in the lists after editing in the dialog
+   * @param updatedLab - Updated laboratoire data from dialog
    */
-  editLaboratoire(laboratoire: Laboratoire) {
-    // Corrected alert message interpolation
-    alert(`Modifier : ${laboratoire.nom}`);
-    // Typically, you would open a dialog or navigate to an edit form
-    // this.dialog.open(LaboratoireEditComponent, { data: laboratoire });
+  updateLaboratoireInList(updatedLab: Laboratoire) {
+    const indexInLaboratoires = this.laboratoires.findIndex(lab => lab.id === updatedLab.id);
+    const indexInAllLaboratoires = this.allLaboratoires.findIndex(lab => lab.id === updatedLab.id);
+
+    if (indexInLaboratoires !== -1) {
+      this.laboratoires[indexInLaboratoires] = updatedLab;
+    }
+
+    if (indexInAllLaboratoires !== -1) {
+      this.allLaboratoires[indexInAllLaboratoires] = updatedLab;
+    }
   }
+
+
+ 
 
   /**
    * Delete a laboratory
    * @param laboratoire laboratory to delete
    */
   deleteLaboratoire(laboratoire: Laboratoire) {
-    if (laboratoire.id === undefined) {
-      alert("ID du laboratoire est manquant.");
-      return; // Si l'ID est indéfini, on arrête la suppression
-    }
-
-    const confirmDelete = confirm(`Êtes-vous sûr de vouloir supprimer ${laboratoire.nom}?`); // Fixed string interpolation
+    const confirmDelete = confirm(`Êtes-vous sûr de vouloir supprimer ${laboratoire.nom}?`);
     if (confirmDelete) {
       this.laboratoireService.deleteLaboratoire(laboratoire.id).subscribe(
         () => {
-          // Remove from local array
+          // Update local arrays
           this.laboratoires = this.laboratoires.filter(lab => lab.id !== laboratoire.id);
           this.allLaboratoires = this.allLaboratoires.filter(lab => lab.id !== laboratoire.id);
+  
+          // Notify the user
           alert('Laboratoire supprimé avec succès');
+          console.log(`Laboratoire supprimé avec ID: ${laboratoire.id}`);
         },
         (error) => {
-          console.error('Erreur lors de la suppression', error);
-          alert('Erreur lors de la suppression du laboratoire');
+          // Log and notify about the error
+          console.error('Erreur lors de la suppression du laboratoire:', error);
+          alert('Erreur lors de la suppression du laboratoire.');
         }
       );
     }
   }
-}
+
+  updatePartiellementLaboratoire(laboratoire: Partial<Laboratoire>): void {
+    if (!laboratoire.id) {
+      this.snackBar.open('Identifiant du laboratoire manquant', 'Fermer', { duration: 3000 });
+      return;
+    }
+  
+    this.laboratoireService.updateLaboratoireParcellement(
+      laboratoire.id, 
+      laboratoire, 
+      this.logoFile // Optional logo file
+    ).subscribe({
+      next: (updatedLaboratoire) => {
+        // Update local list or show success message
+        this.snackBar.open('Mise à jour réussie', 'Fermer', { duration: 3000 });
+        
+        // Update the local list of laboratoires
+        this.updateLaboratoireInList(updatedLaboratoire);
+      },
+      error: (error) => {
+        console.error('Erreur de mise à jour', error);
+        this.snackBar.open('Erreur de mise à jour', 'Fermer', { duration: 3000 });
+      }
+    });
+  }
+  }

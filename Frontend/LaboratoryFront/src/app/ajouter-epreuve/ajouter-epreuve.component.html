@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Ajouter une nouvelle épreuve</h2>
+    <form [formGroup]="epreuveForm" (ngSubmit)="onSubmit()">
+      <!-- Nom de l'épreuve -->
+      <div>
+        <label>Nom de l'épreuve :</label>
+        <input type="text" formControlName="nomEpreuve" />
+      </div>
+  
+      <!-- Analyse associée -->
+      <div>
+        <label>ID de l'analyse associée :</label>
+        <input type="number" formControlName="fkIdAnalyse" />
+      </div>
+  
+      <!-- Boutons -->
+      <div>
+        <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Valider</button>
+        <button type="button" mat-raised-button color="warn" (click)="revenir()">Annuler</button>
+      </div>
+    </form>
+  </div>
+  

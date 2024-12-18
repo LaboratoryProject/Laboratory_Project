@@ -1,0 +1,68 @@
+package com.laboratoire.laboratoire_service;
+
+
+import org.apache.jmeter.control.LoopController;
+import org.apache.jmeter.engine.StandardJMeterEngine;
+import org.apache.jmeter.protocol.http.control.HeaderManager;
+import org.apache.jmeter.protocol.http.sampler.HTTPSamplerProxy;
+import org.apache.jmeter.threads.ThreadGroup;
+import org.apache.jmeter.testelement.TestPlan;
+import org.apache.jmeter.util.JMeterUtils;
+import org.apache.jorphan.collections.HashTree;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+
+public class PerformanceTest {
+    @Test
+    public void testAdditionEndpointPerformance() {
+        try {
+            String propertiesPath = new File("src/test/resources/jmeter.properties").getAbsolutePath();
+            JMeterUtils.loadJMeterProperties(propertiesPath);
+            JMeterUtils.initLocale();
+            JMeterUtils.initLogging();
+
+            // JMeter Engine
+            StandardJMeterEngine jmeter = new StandardJMeterEngine();
+
+            // Test Plan Tree
+            HashTree testPlanTree = new HashTree();
+
+            // HTTP Sampler
+            HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
+            httpSampler.setDomain("localhost");
+            httpSampler.setPort(8080);
+            httpSampler.setPath("/api/v1/resource");
+            httpSampler.setMethod("GET");
+            httpSampler.setName("HTTP Request");
+            httpSampler.setFollowRedirects(true);
+
+            // Header Manager (optional)
+            HeaderManager headerManager = new HeaderManager();
+            httpSampler.setHeaderManager(headerManager);
+
+            // Thread Group
+            ThreadGroup threadGroup = new ThreadGroup();
+            threadGroup.setNumThreads(10);
+            threadGroup.setRampUp(5);
+            threadGroup.setSamplerController(new LoopController());
+
+            // Test Plan
+            TestPlan testPlan = new TestPlan("Simple Test Plan");
+
+            // Build Test Plan
+            testPlanTree.add(testPlan);
+            HashTree threadGroupTree = testPlanTree.add(threadGroup);
+            threadGroupTree.add(httpSampler);
+
+            // Run Test Plan
+            jmeter.configure(testPlanTree);
+            jmeter.run();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Performance test failed: " + e.getMessage());
+        }
+    }
+}

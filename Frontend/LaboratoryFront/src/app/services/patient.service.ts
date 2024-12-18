@@ -1,43 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Patient } from '../models/patient.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PatientService {
-  private baseUrl = 'http://localhost:8072/patients'; // URL de l'API pour les patients
+  private apiUrl = 'http://localhost:8072/api/patients'; // URL de l'API backend
 
   constructor(private http: HttpClient) {}
 
-  // Récupérer tous les patients
-  getAllPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${this.baseUrl}`);
-  }
-
-  // Récupérer un patient par ID
-  getPatientById(id: number): Observable<Patient> {
-    return this.http.get<Patient>(`${this.baseUrl}/${id}`);
-  }
-
   // Ajouter un patient
-  createPatient(data: Patient): Observable<Patient> {
-    return this.http.post<Patient>(`${this.baseUrl}`, data);
+  ajouterPatient(patient: any): Observable<any> {
+    return this.http.post(this.apiUrl, patient);
   }
 
-  // Mettre à jour un patient
-  updatePatient(id: number, data: Patient): Observable<Patient> {
-    return this.http.put<Patient>(`${this.baseUrl}/${id}`, data);
+  // Lister tous les patients
+  listerPatients(): Observable<any> {
+    return this.http.get(this.apiUrl);
   }
+
+  getPatientById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  // Modifier les données d'un patient
+  modifierPatient(id: number, updatedData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, updatedData);
+  }
+
+  
 
   // Supprimer un patient
-  deletePatient(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-
-  // Récupérer les dossiers d'un patient par CIN
-  getDossiersByCin(cin: string): Observable<any[]> {
-    return this.http.get<any[]>(`http://localhost:8072/dossiers/${cin}`);
+  supprimerPatient(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

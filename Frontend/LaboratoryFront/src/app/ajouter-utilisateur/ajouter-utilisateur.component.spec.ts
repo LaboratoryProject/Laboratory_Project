@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { AjouterUtilisateurComponent } from './ajouter-utilisateur.component';
 
 describe('AjouterUtilisateurComponent', () => {
@@ -7,8 +8,9 @@ describe('AjouterUtilisateurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AjouterUtilisateurComponent],
-    }).compileComponents();
+      declarations: [AjouterUtilisateurComponent]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(AjouterUtilisateurComponent);
     component = fixture.componentInstance;

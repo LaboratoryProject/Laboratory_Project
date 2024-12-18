@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+[mat-dialog-content] {
+    text-align: center;
+    padding: 20px;
+    color: #333;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+[mat-dialog-actions] {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+[mat-button] {
+    min-width: 120px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+[mat-button]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}

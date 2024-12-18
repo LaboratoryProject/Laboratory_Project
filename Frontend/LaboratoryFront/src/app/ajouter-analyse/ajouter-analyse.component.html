@@ -1,0 +1,41 @@
+<div class="container">
+    <h2>Ajouter une nouvelle analyse</h2>
+    <form [formGroup]="analyseForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Nom de l'analyse :</label>
+        <input type="text" formControlName="nomAnalyse" />
+      </div>
+      <div>
+        <label>Description :</label>
+        <input type="text" formControlName="descriptionAnalyse" />
+      </div>
+      <div>
+        <label>Laboratoire :</label>
+        <input type="text" formControlName="laboratoire" />
+      </div>
+  
+      <div>
+        <label>Statut :</label>
+        <select formControlName="statutAnalyse">
+          <option value="En cours">En cours</option>
+          <option value="En attente">En attente</option>
+          <option value="Terminé">Terminé</option>
+        </select>
+      </div>
+      <div>
+        <label>Date de l'analyse :</label>
+        <input type="date" formControlName="dateAnalyse" />
+      </div>
+      <div>
+        <label>Coût de l'analyse :</label>
+        <input type="number" formControlName="coutAnalyse" />
+      </div>
+      <div>
+        <button class="btn btn-primary me-2" (click)="onSubmit()">Valider</button>
+        <button class="btn btn-primary me-2"  (click)="revenir()">Annuler</button>
+      </div>
+    </form>
+  
+    <button class="btn btn-secondary" (click)="navigateToAjouter()">Ajouter des épreuves à cette analyse</button>
+  </div>
+  

@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/api/contact-laboratoire")
 public class ContactLaboratoireController {
 
@@ -24,7 +27,7 @@ public class ContactLaboratoireController {
         return contactLaboratoireService.getAllContacts();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getcontact/{id}")
     public ResponseEntity<ContactLaboratoire> getContactById(@PathVariable Long id) {
         return contactLaboratoireService.getContactById(id)
                 .map(ResponseEntity::ok)
@@ -50,5 +53,18 @@ public class ContactLaboratoireController {
     public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
         contactLaboratoireService.deleteContact(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/idLaboratoire/{id}")
+    public ResponseEntity<Long> getIdContact(@PathVariable Long id) {
+        Long contactId = contactLaboratoireService.getContactByIdLabo(id);
+        return ResponseEntity.ok(contactId); // Return HTTP 200 with the contact ID
+    }
+
+    @GetMapping("/idAdresse/{id}")
+    public ResponseEntity<Long> getIdAdresse(@PathVariable Long id) {
+        Long adresseId = contactLaboratoireService.getAdresseByIdLabo(id);
+        return ResponseEntity.ok(adresseId); // Return HTTP 200 with the address ID
     }
 }

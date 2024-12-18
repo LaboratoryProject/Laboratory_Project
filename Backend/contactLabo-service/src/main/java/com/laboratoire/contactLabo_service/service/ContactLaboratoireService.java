@@ -23,11 +23,19 @@ public class ContactLaboratoireService {
     }
 
     public Optional<ContactLaboratoire> getContactById(Long id) {
-        return contactLaboratoireRepository.findById(id);
+        return Optional.ofNullable(contactLaboratoireRepository.findByFkIdLaboratoire(id));
     }
 
     public ContactLaboratoire saveContact(ContactLaboratoire contactLaboratoire) {
         return contactLaboratoireRepository.save(contactLaboratoire);
+    }
+
+  public Long getContactByIdLabo (Long id){
+        return contactLaboratoireRepository.findByFkIdLaboratoire(id).getId();
+  }
+
+  public Long getAdresseByIdLabo (Long id){
+        return contactLaboratoireRepository.findByFkIdLaboratoire(id).getFkIdAdresse();
     }
 
     public void deleteContact(Long id) {

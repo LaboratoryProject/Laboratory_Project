@@ -14,7 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -65,6 +70,9 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         return mapToLaboratoireResponse(savedLaboratoire);
     }
 */
+    public Long getIdByNrc(String nrc) {
+        return laboratoireRepository.findIdLaboratoireByNrc(nrc);
+    }
     // Méthode de création de laboratoire complet (avec adresse et contact)
     @Transactional
     public Laboratoire createLaboratoireComplet(LaboratoireCompletDTO completDto, MultipartFile logoFile) throws IOException {
@@ -115,6 +123,143 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         return savedLaboratoire;
     }
+
+    public LaboratoireCompletDTO getLaboratoireInfos(Long idLaboratoire) {
+        // Récupérer le laboratoire
+        Optional<Laboratoire> laboratoireOpt = laboratoireRepository.findById(idLaboratoire);
+        if (laboratoireOpt.isEmpty()) {
+            throw new NoSuchElementException("Laboratoire not found with ID: " + idLaboratoire);
+        }
+
+        Laboratoire laboratoire = laboratoireOpt.get();
+        System.out.println(laboratoire);
+        System.out.println(laboratoire.getNom());
+        System.out.println(laboratoire.getNrc());
+
+        // Récupérer l'adresse via Feign Client ou Repository
+        AdresseDTO adresse = adresseClient.getAdresseById(contactClient.getIdAdresse(idLaboratoire)).getBody();
+
+        // Récupérer le contact via Feign Client
+        ContactLaboratoireDTO contact = contactClient.getContactById(idLaboratoire).getBody();
+
+        System.out.println(contact.getFax());
+        // Remplir le DTO pour le retour
+
+
+        LaboratoireDTO labo1 = new LaboratoireDTO();
+        labo1.setNom(laboratoire.getNom());
+        labo1.setNrc(laboratoire.getNrc());
+        labo1.setId(laboratoire.getId());
+        labo1.setActive(laboratoire.isActive());
+        labo1.setDateActivation(laboratoire.getDateActivation());
+        labo1.setLogo(laboratoire.getLogo());
+
+        LaboratoireCompletDTO detailsDTO = new LaboratoireCompletDTO(labo1,adresse,contact);
+
+
+        return detailsDTO;
+    }
+
+
+    @Transactional
+    public Laboratoire updateLaboratoireParcellement(Long id, Map<String, Object> updates, MultipartFile logoFile) throws IOException {
+        // Find the existing laboratory
+        Laboratoire existingLaboratoire = laboratoireRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Laboratoire not found with id: " + id));
+
+        // Handle logo update
+        if (logoFile != null && !logoFile.isEmpty()) {
+            // Delete existing logo if present
+            if (existingLaboratoire.getLogo() != null) {
+                minioService.deleteFile(existingLaboratoire.getLogo());
+            }
+            // Upload and set new logo
+            String logoFileName = minioService.uploadFile(logoFile, logoFile.getOriginalFilename());
+            existingLaboratoire.setLogo(logoFileName);
+        }
+
+        // Dynamically update fields only if they are provided
+        if (updates.containsKey("nom")) {
+            existingLaboratoire.setNom((String) updates.get("nom"));
+        }
+
+        if (updates.containsKey("nrc")) {
+            existingLaboratoire.setNrc((String) updates.get("nrc"));
+        }
+
+        if (updates.containsKey("active")) {
+            existingLaboratoire.setActive((Boolean) updates.get("active"));
+        }
+
+        if (updates.containsKey("dateActivation")) {
+            String dateStr = (String) updates.get("dateActivation");
+            try {
+                LocalDate date = LocalDate.parse(dateStr); // Use a custom formatter if needed
+                existingLaboratoire.setDateActivation(date);
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("Invalid date format for dateActivation: " + dateStr, e);
+            }
+        }
+
+
+        // Save laboratory updates
+        Laboratoire updatedLaboratoire = laboratoireRepository.save(existingLaboratoire);
+
+        // Update address if provided
+        if (updates.containsKey("adresse")) {
+            AdresseDTO adresseDto = (AdresseDTO) updates.get("adresse");
+            Long idAdr = contactClient.getIdAdresse(updatedLaboratoire.getId());
+            adresseDto.setId(idAdr); // Preserve existing ID
+            adresseClient.updateAdresse(adresseDto);
+        }
+
+        // Update contact if provided
+        if (updates.containsKey("contactLaboratoire")) {
+            ContactLaboratoireDTO contactDto = (ContactLaboratoireDTO) updates.get("contactLaboratoire");
+            contactDto.setFkIdLaboratoire(updatedLaboratoire.getId());
+            Long idAdr = contactClient.getIdAdresse(updatedLaboratoire.getId());
+            contactDto.setFkIdAdresse(idAdr);
+            contactClient.updateContact(contactDto);
+        }
+
+        return updatedLaboratoire;
+    }
+
+    @Transactional
+    public void deleteLaboratoire(Long laboratoireId) {
+        // Fetch the Laboratoire entity to retrieve related IDs
+        Optional<Laboratoire> laboratoireOpt = laboratoireRepository.findById(laboratoireId);
+        System.out.println("first");
+        if (!laboratoireOpt.isPresent()) {
+            throw new IllegalArgumentException("Laboratoire not found with ID: " + laboratoireId);
+        }
+        System.out.println("second");
+        Laboratoire laboratoire = laboratoireOpt.get();
+        System.out.println("third");
+
+        try {
+            // Call delete on Adresse and Contact services using their respective clients
+            // reje3 id dial adresse mn l'objet
+            System.out.println("true0");
+            Long idCont=contactClient.getIdContact(laboratoireId).getBody();
+            System.out.println("true1");
+            Long idAdr= contactClient.getIdAdresse(laboratoireId);
+            System.out.println("true2");
+            adresseClient.deleteAdresse(idAdr);
+            contactClient.deleteContact(idCont);
+            System.out.println("true3");
+            System.out.println(true);
+
+            // Delete the Laboratoire itself
+            laboratoireRepository.deleteById(laboratoireId);
+            System.out.println(false);
+
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error occurred while deleting the associated data or Laboratoire", e);
+        }
+    }
+
 
 
     @Transactional
@@ -191,7 +336,7 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         try {
             // Supprimer les contacts associés via le client Feign
             try {
-                contactClient.deleteContactsByLaboratoireId(id);
+                contactClient.deleteContact(id);
                 log.info("Contacts for Laboratoire {} deleted", id);
             } catch (Exception e) {
                 log.error("Error deleting contacts for Laboratoire {}: {}", id, e.getMessage());
@@ -200,7 +345,7 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
             // Supprimer les adresses associées via le client Feign
             try {
-                adresseClient.deleteAdressesByLaboratoireId(id);
+                adresseClient.deleteAdresse(id);
                 log.info("Adresses for Laboratoire {} deleted", id);
             } catch (Exception e) {
                 log.error("Error deleting adresses for Laboratoire {}: {}", id, e.getMessage());

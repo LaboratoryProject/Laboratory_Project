@@ -1,0 +1,49 @@
+<div class="container" >
+  <h2>Liste des Analyses</h2>
+
+  <!-- Barre de recherche -->
+  <div class="d-flex justify-content-between mb-3">
+    <input
+      type="text"
+      placeholder="Rechercher une analyse..."
+      class="search-bar"
+      (input)="onSearch($event)"
+    />
+    <div>
+      <button class="btn btn-primary me-2" (click)="navigateToAjouter()">Ajouter une analyse</button>
+      <button class="btn btn-secondary" (click)="exportAnalyses()">Exporter les analyses</button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Patient</th>
+      <th>Description</th>
+      <th>Laboratoire</th>
+      <th>Statut</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let analyse of filteredAnalyses">
+      <td>{{ analyse.id }}</td>
+      <td>{{ analyse.titre }}</td>
+      <td>{{ analyse.date }}</td>
+      <td>{{ analyse.patient }}</td>
+      <td>{{ analyse.description }}</td>
+      <td>{{ analyse.laboratoire }}</td>
+      <td>{{ analyse.statut }}</td>
+      <td class="d-flex">
+        <button class="btn btn-primary me-2" (click)="navigateToModifier()">Modifier</button>
+        <button class="btn btn-primary me-2" (click)="navigateToConsulter()">Consulter</button>
+        <button class="btn btn-primary me-2" (click)="confirmDelete(analyse.id)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

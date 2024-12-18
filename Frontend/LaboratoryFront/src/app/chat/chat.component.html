@@ -1,0 +1,30 @@
+<div class="app-container">
+    <div class="chat-container">
+      <div class="chat-box">
+        <div *ngFor="let message of messages">
+          <p [ngClass]="{ 'user-message': message.sender === 'You', 'ai-message': message.sender === 'AI' }">
+            <strong>{{ message.sender }}:</strong> {{ message.content }}
+          </p>
+        </div>
+      </div>
+  
+      <!-- Input section -->
+      <div class="chat-input">
+        <input
+          type="text"
+          [(ngModel)]="userMessage"
+          placeholder="Ecrit ton message..."
+          (keydown.enter)="sendMessage()"
+        />
+        <button (click)="sendMessage()">Envoyer</button>
+      </div>
+    </div>
+    
+    <!-- Image container -->
+    <div class="chat-image-container">
+      <div class="chat-image">
+        <img src="./doctor ai.png" alt="Chat Image">
+      </div>
+    </div>
+  </div>
+  

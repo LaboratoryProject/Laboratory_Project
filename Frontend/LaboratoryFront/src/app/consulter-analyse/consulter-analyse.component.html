@@ -1,0 +1,37 @@
+<div class="container">
+    <!-- Nom de l'analyse au centre -->
+    <h2 class="text-center">{{ analyseData.nom }}</h2>
+  
+    <!-- Description -->
+    <div class="form-group">
+      <label>Description :</label>
+      <textarea class="form-control" rows="3" [value]="analyseData.description" readonly></textarea>
+    </div>
+  
+    <!-- Statut -->
+    <div class="form-group">
+      <label>Statut :</label>
+      <input class="form-control" type="text" [value]="analyseData.statut" readonly />
+    </div>
+  
+    <!-- Epreuves associées -->
+    <div>
+      <h4>Epreuves Associées :</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Date</th>
+        </tr>
+        </thead>
+        <tbody [innerHTML]="epreuvesHtml"></tbody>
+      </table>
+    </div>
+  
+    <!-- Bouton Revenir -->
+    <div class="text-center">
+      <button class="btn btn-primary" (click)="revenir()">Revenir</button>
+    </div>
+  </div>
+  

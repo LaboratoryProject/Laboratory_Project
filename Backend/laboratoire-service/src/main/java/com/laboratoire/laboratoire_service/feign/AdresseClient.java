@@ -3,9 +3,7 @@ package com.laboratoire.laboratoire_service.feign;
 import com.laboratoire.laboratoire_service.dto.AdresseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "adresse-service")
 public interface AdresseClient {
@@ -16,8 +14,12 @@ public interface AdresseClient {
     @PutMapping("/api/adresse/{id}")
     ResponseEntity<AdresseDTO> updateAdresse( AdresseDTO adresseDTO);
 
-    @DeleteMapping("/api/adresse/by-laboratoire/{laboratoireId}")
-    ResponseEntity<Void> deleteAdressesByLaboratoireId( Long laboratoireId);
+    @DeleteMapping("/api/adresse/{laboratoireId}")
+    ResponseEntity<Void> deleteAdresse(@PathVariable Long laboratoireId);
+
+    @GetMapping("/api/adresse/{id}")
+    ResponseEntity<AdresseDTO> getAdresseById(@PathVariable Long id);
 }
+
 
 

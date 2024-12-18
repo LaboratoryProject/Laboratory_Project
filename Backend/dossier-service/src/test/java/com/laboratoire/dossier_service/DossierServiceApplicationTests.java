@@ -10,6 +10,7 @@ class DossierServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// Teste simplement si le contexte de Spring peut se charger sans erreurs
 	}
 
 }

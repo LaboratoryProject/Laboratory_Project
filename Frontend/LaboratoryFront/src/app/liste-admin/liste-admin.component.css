@@ -1,0 +1,205 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+
+.content-wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  flex-grow: 1;
+  overflow-y: auto; /* Add this to enable scrolling in the content area */
+}
+
+.labos-style {
+  margin-top: 20px; /* Adds margin at the top */
+  padding-top: 20px; /* Adds internal padding at the top */
+  border-radius: 12px; /* Soft rounded corners */
+  background-color: #e6ebf7; /* White background for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  overflow: hidden; /* Ensures content stays within the rounded borders */
+}
+
+.non-bold-text {
+  font-weight: normal !important; /* Forces text inside h5 to not be bold */
+}
+
+  
+  
+.labos-style:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+.labos-style h3 {
+  font-size: 1.25rem; /* Slightly larger title font */
+  color: #1a202c; /* Dark gray for better readability */
+}
+
+.labos-style span {
+  color: #4a5568; /* Softer gray for supporting text */
+}
+
+.labos-style .border-t {
+  border-top: 1px solid #e2e8f0; /* Light gray separator line */
+}
+
+.sidebar {
+  width: 280px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Add a custom class to make the input slightly longer */
+.custom-width {
+  width: 350px;  /* Set to any desired length */
+}
+
+  
+.inline {
+  display: inline; /* Makes both h5 elements appear inline */
+}
+
+
+.search-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+/* Input search styling */
+input[type="text"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  width: 100%; /* Set it to take full width of its container */
+}
+
+input[type="text"]:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+
+.mat-form-field {
+  width: 100%; /* Ensure the input field takes full width within its container */
+}
+
+
+.content-container {
+  max-width: 100%;
+  margin-left:10px;
+}
+
+.rechercher-style{
+  position: absolute;
+  align-items: center;
+  top: 20px;
+  left: 330px;
+  max-width:700px;
+}
+
+/* Styling for the header and buttons */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:60px;
+}
+
+.search-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+  button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  button.bg-green-500 {
+    background-color: #38a169;
+    color: white;
+  }
+  
+  button.bg-blue-500 {
+    background-color: #3182ce;
+    color: white;
+  }
+  
+  button.bg-red-500 {
+    background-color: #e53e3e;
+    color: white;
+  }
+  
+  
+  button:focus {
+    outline: none;
+  }
+  
+  .inline {
+    display: inline; /* Makes both h5 elements appear inline */
+  }
+  
+  .labos-style {
+    margin-top: 20px; /* Adds margin at the top */
+    padding-top: 20px; /* Adds internal padding at the top */
+    border-radius: 12px; /* Soft rounded corners */
+    background-color: #e6ebf7; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    overflow: hidden; /* Ensures content stays within the rounded borders */
+  }
+  .non-bold-text {
+    font-weight: normal !important; /* Forces text inside h5 to not be bold */
+  }
+  
+  
+  .labos-style:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  }
+  
+  .labos-style h3 {
+    font-size: 1.25rem; /* Slightly larger title font */
+    color: #1a202c; /* Dark gray for better readability */
+  }
+  
+  .labos-style span {
+    color: #4a5568; /* Softer gray for supporting text */
+  }
+  
+  .labos-style .border-t {
+    border-top: 1px solid #e2e8f0; /* Light gray separator line */
+  }
+  
+  
+  .content-container {
+    max-width: 1600px;
+    margin:1px;
+     /* Reduced padding from 2rem to 1rem */
+  }
+  
+  button.bg-green-500 {
+    background-color: #38a169;
+    color: white;
+  }
+  
+  .form-control {
+    width: 300px;
+  }
+  
+  .mat-icon {
+    font-size: 20px;
+  }

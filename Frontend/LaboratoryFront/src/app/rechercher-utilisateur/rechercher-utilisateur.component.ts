@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { UtilisateurService } from '../services/utilisateur.service';
+import { UtilisateurService } from '../utilisateur.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../security-management/user.service';
 
 @Component({
   selector: 'app-rechercher-utilisateur',
@@ -17,7 +18,7 @@ export class RechercherUtilisateurComponent {
   utilisateurs: any[] = []; // Résultats d'une recherche par rôle
   message: string = ''; // Message d'erreur ou d'information
 
-  constructor(private utilisateurService: UtilisateurService) {}
+  constructor(private utilisateurService: UserService) {}
 
   // Rechercher un utilisateur par ID
   rechercherParId(): void {

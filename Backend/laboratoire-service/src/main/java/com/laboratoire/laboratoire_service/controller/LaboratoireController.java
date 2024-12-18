@@ -1,9 +1,11 @@
 package com.laboratoire.laboratoire_service.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
 import com.laboratoire.laboratoire_service.dto.LaboratoireDTO;
 import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
 import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
-import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
 import com.laboratoire.laboratoire_service.model.Laboratoire;
 import com.laboratoire.laboratoire_service.service.LaboratoireServiceImpl;
 
@@ -11,91 +13,117 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH},
+        allowedHeaders = "*",
+        allowCredentials = "true")
 @RequestMapping("/api/laboratoires")
 public class LaboratoireController {
 
     private final LaboratoireServiceImpl laboratoireService;
-    //  private final EmailService emailService;  // Inject EmailService
-    // Injection de dépendance via constructeur
+
     public LaboratoireController(LaboratoireServiceImpl laboratoireService) {
         this.laboratoireService = laboratoireService;
-        // this.emailService = emailService;  // Initialize EmailService
     }
 
-    // Endpoint pour créer un laboratoire simple
+    @GetMapping("/findIdByNrc")
+    public ResponseEntity<Long> findIdByNrc(@RequestParam String nrc) {
+        Long id = laboratoireService.getIdByNrc(nrc);
+        if (id != null) {
+            return ResponseEntity.ok(id);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/update-partiel/{id}")
+    public ResponseEntity<Laboratoire> updateLaboratoireParcellement(
+            @PathVariable Long id,
+            @RequestPart(value = "updates") String updates,
+            @RequestPart(value = "logoFile", required = false) MultipartFile logoFile
+    ) {
+        try {
+            // Convert JSON string back to Map
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> updatesMap = objectMapper.readValue(updates, new TypeReference<Map<String, Object>>() {});
+
+            Laboratoire updatedLaboratoire = laboratoireService.updateLaboratoireParcellement(id, updatesMap, logoFile);
+            return ResponseEntity.ok(updatedLaboratoire);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+
+
     @PostMapping
-    public ResponseEntity<LaboratoireResponse> creerLaboratoire(
+    public ResponseEntity<LaboratoireResponse> createSimpleLaboratoire(
             @Valid @RequestBody LaboratoireRequest laboratoireRequest) {
         LaboratoireResponse response = laboratoireService.createLaboratoire(laboratoireRequest);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    /*   @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createLaboratoire(@RequestBody LaboratoireRequest laboratoireRequest) {
-        laboratoireService.createLaboratoire(laboratoireRequest);
-
-        // Send email notification after laboratoire creation
-        String recipientEmail = "afraeafrae01@gmail.com";
-        String subject = "New Laboratoire Created";
-        String body = "A new laboratoire has been created: " + laboratoireRequest.getNom();
-
-        // Call the EmailService to send the email
-        emailService.sendEmail(recipientEmail, subject, body);
-    }*/
-
-    // Endpoint pour créer un laboratoire complet (avec adresse et contact)
     @PostMapping(value = "/complet", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Laboratoire> createLaboratoire(
+    public ResponseEntity<Laboratoire> createCompletLaboratoire(
             @RequestPart("laboratoireCompletDTO") LaboratoireCompletDTO laboratoireDTO,
             @RequestPart(value = "logoFile", required = false) MultipartFile logo
     ) throws IOException {
         Laboratoire createdLaboratoire = laboratoireService.createLaboratoireComplet(laboratoireDTO, logo);
-        return ResponseEntity.ok(createdLaboratoire);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdLaboratoire);
     }
 
-    // Endpoint pour récupérer tous les laboratoires
     @GetMapping
     public ResponseEntity<List<Laboratoire>> getAllLaboratoires() {
         List<Laboratoire> laboratoires = laboratoireService.getAllLaboratoires();
         return ResponseEntity.ok(laboratoires);
     }
 
-    // Endpoint pour récupérer un laboratoire par ID
-    @GetMapping("/{id}")
-    public ResponseEntity<LaboratoireResponse> getLaboratoireById(@PathVariable Long id) {
-        LaboratoireResponse laboratoire = laboratoireService.getLaboratoireById(id);
+
+    @GetMapping("/laboratoire/{id}")
+    public ResponseEntity<LaboratoireCompletDTO> getLaboratoireById(@PathVariable Long id) {
+        LaboratoireCompletDTO laboratoire = laboratoireService.getLaboratoireInfos(id);
         return ResponseEntity.ok(laboratoire);
     }
 
-    // Endpoint pour récupérer le nom d'un laboratoire par ID
+
     @GetMapping("/{id}/nom")
     public ResponseEntity<String> getLaboratoireNameById(@PathVariable Long id) {
         String nomLaboratoire = laboratoireService.getLaboratoireNameById(id);
         return ResponseEntity.ok(nomLaboratoire);
     }
 
-
-
-    // Gestion des exceptions spécifiques au contrôleur
-    @ExceptionHandler(LaboratoireServiceImpl.ResourceNotFoundException.class)
-    public ResponseEntity<String> handleResourceNotFoundException(LaboratoireServiceImpl.ResourceNotFoundException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteLaboratoire(@PathVariable Long id) {
+        try {
+            laboratoireService.deleteLaboratoire(id);
+            return ResponseEntity.ok("Laboratoire deleted successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting the Laboratoire: " + e.getMessage());
+        }
     }
 
-    // Gestion des exceptions de validation
-    @ExceptionHandler(jakarta.validation.ValidationException.class)
-    public ResponseEntity<String> handleValidationException(jakarta.validation.ValidationException ex) {
-        return new ResponseEntity<>("Erreur de validation : " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+    // Global Exception Handlers
+    @ExceptionHandler({
+            LaboratoireServiceImpl.ResourceNotFoundException.class,
+            jakarta.validation.ValidationException.class
+    })
+    public ResponseEntity<String> handleExceptions(Exception ex) {
+        if (ex instanceof LaboratoireServiceImpl.ResourceNotFoundException) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ex.getMessage());
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Validation error: " + ex.getMessage());
+        }
     }
 }

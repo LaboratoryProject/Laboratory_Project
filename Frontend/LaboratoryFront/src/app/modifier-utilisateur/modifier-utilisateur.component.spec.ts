@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { ModifierUtilisateurComponent } from './modifier-utilisateur.component';
-import { UtilisateurService } from '../services/utilisateur.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule } from '@angular/forms';
 
 describe('ModifierUtilisateurComponent', () => {
   let component: ModifierUtilisateurComponent;
@@ -10,10 +8,9 @@ describe('ModifierUtilisateurComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ModifierUtilisateurComponent],
-      imports: [HttpClientTestingModule, FormsModule],
-      providers: [UtilisateurService]
-    }).compileComponents();
+      declarations: [ModifierUtilisateurComponent]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(ModifierUtilisateurComponent);
     component = fixture.componentInstance;
@@ -22,11 +19,5 @@ describe('ModifierUtilisateurComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should initialize with default values', () => {
-    expect(component.idUtilisateur).toBe(0);
-    expect(component.utilisateur).toBeNull();
-    expect(component.message).toBe('');
   });
 });

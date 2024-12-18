@@ -1,6 +1,8 @@
 package com.laboratoire.laboratoire_service.dto;
 
 
+import com.laboratoire.laboratoire_service.model.Laboratoire;
+
 public class LaboratoireCompletDTO {
     private LaboratoireDTO laboratoire;
     private AdresseDTO adresse;
@@ -15,6 +17,8 @@ public class LaboratoireCompletDTO {
         this.contactLaboratoire = contactLaboratoire;
     }
 
+
+
     public LaboratoireDTO getLaboratoire() {
         return laboratoire;
     }
@@ -22,6 +26,16 @@ public class LaboratoireCompletDTO {
     public void setLaboratoire(LaboratoireDTO laboratoire) {
         this.laboratoire = laboratoire;
     }
+
+    public void setLaboratoireAvecLabo(Laboratoire laboratoire) {
+        this.laboratoire.setNom(laboratoire.getNom());
+        this.laboratoire.setNrc(laboratoire.getNrc());
+        this.laboratoire.setLogo(laboratoire.getLogo());
+        this.laboratoire.setDateActivation(laboratoire.getDateActivation());
+        this.laboratoire.setActive(laboratoire.isActive());
+
+    }
+
 
     public AdresseDTO getAdresse() {
         return adresse;
@@ -38,6 +52,5 @@ public class LaboratoireCompletDTO {
     public void setContactLaboratoire(ContactLaboratoireDTO contactLaboratoire) {
         this.contactLaboratoire = contactLaboratoire;
     }
-// Getters et Setters
-    // ... (à ajouter)
+
 }

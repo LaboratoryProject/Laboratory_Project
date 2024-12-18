@@ -12,7 +12,12 @@ class TestcontainersConfiguration {
 	@Bean
 	@ServiceConnection
 	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+		// Démarre explicitement le conteneur PostgreSQL
+		PostgreSQLContainer<?> container = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+		container.start();
+		// Affiche l'URL de la base de données dans les logs pour vérifier la connexion
+		System.out.println("PostgreSQL container started at: " + container.getJdbcUrl());
+		return container;
 	}
 
 }

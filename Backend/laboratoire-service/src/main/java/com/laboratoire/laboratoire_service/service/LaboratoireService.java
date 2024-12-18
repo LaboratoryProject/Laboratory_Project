@@ -1,5 +1,7 @@
 package com.laboratoire.laboratoire_service.service;
 
+import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
+import com.laboratoire.laboratoire_service.dto.LaboratoireDTO;
 import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
 import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
 import com.laboratoire.laboratoire_service.model.Laboratoire;
@@ -13,4 +15,6 @@ public interface LaboratoireService {
     Laboratoire mapToLaboratoireResponse(Laboratoire laboratoire) ;
     LaboratoireResponse getLaboratoireById(Long id);
     String getLaboratoireNameById(Long id);
+    Long getIdByNrc(String nrc);
+    LaboratoireCompletDTO getLaboratoireInfos(Long idLaboratoire);
 }

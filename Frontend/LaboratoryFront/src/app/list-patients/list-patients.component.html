@@ -1,0 +1,33 @@
+
+  <div class="container">
+    <div class="header">
+      <h2>Liste des Patients</h2>
+      <button class="btn btn-success" (click)="ouvrirFormulaireAjout()">
+        Ajouter Patient
+      </button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom Complet</th>
+          <th>Téléphone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patients">
+          <td>{{ patient.nomComplet }}</td>
+          <td>{{ patient.numTel }}</td>
+          <td>
+            <button class="btn btn-warning" (click)="modifierPatient(patient)">
+              Modifier
+            </button>
+            <button class="btn btn-danger" (click)="supprimerPatient(patient.id)">
+              Supprimer
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    
