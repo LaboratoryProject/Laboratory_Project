@@ -1,0 +1,5 @@
+com\laboratoire\patient_service\PatientServiceApplicationTests.class
+com\laboratoire\patient_service\PerformanceTest.class
+com\laboratoire\patient_service\PerformanceTest$1.class
+com\laboratoire\patient_service\PatientControllerSeleniumTest.class
+com\laboratoire\patient_service\PatientControllerTest.class

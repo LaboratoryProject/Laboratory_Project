@@ -1,0 +1,6 @@
+com\laboratoire\analyse_service\TestAnalyseServiceApplication.class
+com\laboratoire\analyse_service\MathServiceTest.class
+com\laboratoire\analyse_service\TestcontainersConfiguration.class
+com\laboratoire\analyse_service\PerformanceTest.class
+com\laboratoire\analyse_service\AnalyseServiceApplicationTests.class
+com\laboratoire\analyse_service\MathControllerSeleniumTest.class

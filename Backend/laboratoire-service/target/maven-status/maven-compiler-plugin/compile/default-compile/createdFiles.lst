@@ -1,0 +1,13 @@
+com\laboratoire\laboratoire_service\service\LaboratoireServiceImpl.class
+com\laboratoire\laboratoire_service\LaboratoireServiceApplication.class
+com\laboratoire\laboratoire_service\controller\ApiResponse.class
+com\laboratoire\laboratoire_service\dto\LaboratoireRequest.class
+com\laboratoire\laboratoire_service\controller\KeycloakConfig.class
+com\laboratoire\laboratoire_service\controller\LaboratoireController.class
+com\laboratoire\laboratoire_service\model\Laboratoire.class
+com\laboratoire\laboratoire_service\Calculator.class
+com\laboratoire\laboratoire_service\controller\SecurityConfig.class
+com\laboratoire\laboratoire_service\service\LaboratoireService.class
+com\laboratoire\laboratoire_service\controller\JwtAuthConverter.class
+com\laboratoire\laboratoire_service\repository\LaboratoireRepository.class
+com\laboratoire\laboratoire_service\dto\LaboratoireResponse.class

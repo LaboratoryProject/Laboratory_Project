@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.laboratoire.laboratoire_service.LaboratoireControllerSeleniumTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.278 s - in com.laboratoire.laboratoire_service.LaboratoireControllerSeleniumTest

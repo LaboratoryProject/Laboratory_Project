@@ -1,0 +1,9 @@
+com\laboratoire\laboratoire_service\PerformanceTest$1.class
+com\laboratoire\laboratoire_service\LaboratoireControllerTest.class
+com\laboratoire\laboratoire_service\LaboratoireServiceApplicationTests.class
+com\laboratoire\laboratoire_service\CalculatorTest.class
+com\laboratoire\laboratoire_service\LaboratoireControllerSeleniumTest.class
+com\laboratoire\laboratoire_service\TestLaboratoireServiceApplication.class
+com\laboratoire\laboratoire_service\TestSecurityConfig.class
+com\laboratoire\laboratoire_service\PerformanceTest.class
+com\laboratoire\laboratoire_service\TestcontainersConfiguration.class

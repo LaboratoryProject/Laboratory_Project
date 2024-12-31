@@ -1,0 +1,9 @@
+com\laboratoire\analyse_service\model\Analyse.class
+com\laboratoire\analyse_service\feign\LaboratoireInterface.class
+com\laboratoire\analyse_service\controller\MathController.class
+com\laboratoire\analyse_service\service\AnalyseService.class
+com\laboratoire\analyse_service\repository\AnalyseRepository.class
+com\laboratoire\analyse_service\AnalyseServiceApplication.class
+com\laboratoire\analyse_service\controller\AnalyseController.class
+com\laboratoire\analyse_service\service\MathService.class
+com\laboratoire\analyse_service\service\AnalyseServiceImpl.class

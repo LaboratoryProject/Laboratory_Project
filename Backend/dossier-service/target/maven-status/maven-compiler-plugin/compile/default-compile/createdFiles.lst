@@ -1,0 +1,7 @@
+com\laboratoire\dossier_service\service\DossierService.class
+com\laboratoire\dossier_service\controller\DossierController.class
+com\laboratoire\dossier_service\feign\DossierInterface.class
+com\laboratoire\dossier_service\model\Dossier.class
+com\laboratoire\dossier_service\DossierServiceApplication.class
+com\laboratoire\dossier_service\repository\DossierRepository.class
+com\laboratoire\dossier_service\dto\DossierDTO.class

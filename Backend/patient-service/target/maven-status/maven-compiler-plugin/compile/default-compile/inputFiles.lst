@@ -1,0 +1,10 @@
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\PatientServiceApplication.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\service\PatientService.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\SecurityConfig.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\ApiResponse.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\repository\PatientRepository.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\CorsConfig.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\KeycloakConfig.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\model\Patient.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\JwtAuthConverter.java
+C:\Users\MSI\Desktop\Laboratory_Project\Backend\patient-service\src\main\java\com\laboratoire\patient_service\controller\PatientController.java

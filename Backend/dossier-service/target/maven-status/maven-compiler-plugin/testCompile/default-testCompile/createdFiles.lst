@@ -1,0 +1,7 @@
+com\laboratoire\dossier_service\DossierControllerSeleniumTest.class
+com\laboratoire\dossier_service\TestDossierServiceApplication.class
+com\laboratoire\dossier_service\DossierServiceApplicationTests.class
+com\laboratoire\dossier_service\DossierServicePerformanceTest.class
+com\laboratoire\dossier_service\SeleniumTest.class
+com\laboratoire\dossier_service\DossierControllerTest.class
+com\laboratoire\dossier_service\TestcontainersConfiguration.class
