@@ -21,6 +21,15 @@ import { ModifierUtilisateurComponent } from './modifier-utilisateur/modifier-ut
 import { ListeAdminComponent } from './liste-admin/liste-admin.component';
 import { ModifierAdminDialogComponent } from './liste-admin/modifier-admin-dialog/modifier-admin-dialog.component';
 import { ChatComponent } from './chat/chat.component';
+import { EpreuveListeComponent } from './Analyse/Epreuve/epreuve-liste/epreuve-liste.component';
+import { ConsulterAnalyseComponent } from './consulter-analyse/consulter-analyse.component';
+import { ModifierAnalyseComponent } from './modifier-analyse/modifier-analyse.component';
+import { ModifierEpreuveComponent } from './modifier-epreuve/modifier-epreuve.component';
+import { AjouterAnalyseComponent } from './ajouter-analyse/ajouter-analyse.component';
+import { AjouterEpreuveComponent } from './ajouter-epreuve/ajouter-epreuve.component';
+import { TestAnalyseListeComponent } from './Analyse/test-analyse-liste/test-analyse-liste.component';
+import { TestAnalyseFormComponent } from './Analyse/test-analyse-form/test-analyse-form.component';
+
 
 
 const routes: Routes = [
@@ -36,21 +45,33 @@ const routes: Routes = [
 
   // Si l'utilisateur va sur "/page", affiche le AppComponent
   { path: 'page', component: AppComponent }, // Route pour AppComponent (Page principale)
-  { path: 'list', component: LaboratoireListComponent }, 
+  { path: 'list', component: LaboratoireListComponent },
   // Redirection pour les routes non trouvées
-  { path: 'list-analyse', component: AnalyseListeComponent }, 
-  { path: 'list-dossiers', component: ListDossiersComponent }, 
-  { path: 'add-patient', component: AjouterPatientComponent }, 
-  { path: 'add-dossier', component: AjouterDossierComponent }, 
-  { path: 'options-analyse', component: OptionsAnalyseComponent }, 
-  {path: 'rechercher-utilisateur', component: RechercherUtilisateurComponent }, 
-  {path: 'ajouter-utilisateur', component: AjouterUtilisateurComponent }, 
-  {path: 'modifier-utilisateur', component: ModifierUtilisateurComponent }, 
-  {path: 'list-admin', component: ListeAdminComponent }, 
-  { path: 'list-patients', component: ListPatientsComponent }, 
-  { path: 'modifier-patient', component: PatientModificationDialogComponent }, 
+  { path: 'list-analyse', component: AnalyseListeComponent },
+  { path: 'list-dossiers', component: ListDossiersComponent },
+  { path: 'add-patient', component: AjouterPatientComponent },
+  { path: 'add-dossier', component: AjouterDossierComponent },
+  { path: 'options-analyse', component: OptionsAnalyseComponent },
+  {path: 'rechercher-utilisateur', component: RechercherUtilisateurComponent },
+  {path: 'ajouter-utilisateur', component: AjouterUtilisateurComponent },
+  {path: 'modifier-utilisateur', component: ModifierUtilisateurComponent },
+  {path: 'list-admin', component: ListeAdminComponent },
+  { path: 'list-patients', component: ListPatientsComponent },
+  { path: 'modifier-patient', component: PatientModificationDialogComponent },
   { path: 'modifier-utilisateur/:id', component: ModifierAdminDialogComponent },
   { path: 'chat', component:  ChatComponent },
+
+  { path: 'list-analyse', component: AnalyseListeComponent },
+  { path: 'list-epreuve', component: EpreuveListeComponent },
+  { path: 'consulter-analyse', component:  ConsulterAnalyseComponent},
+  { path: 'modifier-analyse', component: ModifierAnalyseComponent },
+  { path: 'modifier-epreuve', component: ModifierEpreuveComponent },
+  { path: 'consulter-epreuve', component:  AjouterEpreuveComponent},
+  { path: 'ajouter-analyse', component: AjouterAnalyseComponent },
+  { path: 'ajouter-epreuve', component: AjouterEpreuveComponent },
+  { path: 'listTestAnalyse', component: TestAnalyseListeComponent },
+  { path: 'TestAnalyseForm', component: TestAnalyseFormComponent },
+
 
   { path: '**', redirectTo: '' },  // Si l'URL est incorrecte, redirige vers l'accueil
   // Rediriger vers la route par défaut pour toute route invalide

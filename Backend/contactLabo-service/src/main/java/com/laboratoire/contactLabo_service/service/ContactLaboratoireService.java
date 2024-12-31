@@ -2,6 +2,7 @@ package com.laboratoire.contactLabo_service.service;
 
 import com.laboratoire.contactLabo_service.model.ContactLaboratoire;
 import com.laboratoire.contactLabo_service.repository.ContactLaboratoireRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class ContactLaboratoireService {
     public void deleteContact(Long id) {
         contactLaboratoireRepository.deleteById(id);
     }
-
+    @Transactional
     public ContactLaboratoire updateContact(Long id, ContactLaboratoire updatedContact) {
         return contactLaboratoireRepository.findById(id).map(contact -> {
             contact.setFkIdLaboratoire(updatedContact.getFkIdLaboratoire());

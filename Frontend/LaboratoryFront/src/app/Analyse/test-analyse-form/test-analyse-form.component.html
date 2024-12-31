@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Ajouter un Test Analyse</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="testAnalyseForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom du Test</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Valeur Minimale</mat-label>
+          <input matInput formControlName="minValue" type="number" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Valeur Maximale</mat-label>
+          <input matInput formControlName="maxValue" type="number" required>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Unité</mat-label>
+          <input matInput formControlName="unite" required>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit" [disabled]="testAnalyseForm.invalid">Ajouter</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

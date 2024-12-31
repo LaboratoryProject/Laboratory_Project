@@ -17,8 +17,18 @@ public class PerformanceTest {
     @Test
     public void testAdditionEndpointPerformance() {
         try {
+            // Programmatically set JMeter home and properties
+            // Use a temporary directory or your project's resource directory
+
+
+            // Use this to set the properties path
             String propertiesPath = new File("src/test/resources/jmeter.properties").getAbsolutePath();
             JMeterUtils.loadJMeterProperties(propertiesPath);
+
+
+
+
+
             JMeterUtils.initLocale();
             JMeterUtils.initLogging();
 

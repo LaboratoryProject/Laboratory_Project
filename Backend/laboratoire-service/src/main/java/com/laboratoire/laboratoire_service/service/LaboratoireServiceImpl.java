@@ -9,6 +9,7 @@ import io.minio.MinioClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,9 +50,9 @@ public class LaboratoireServiceImpl implements LaboratoireService {
         this.defaultBucket = defaultBucket;
         this.minioEndpoint = minioEndpoint;
     }
-
+/*
     // Méthode de création de laboratoire avec gestion des services externes
-    /*@Transactional
+    @Transactional
     public LaboratoireResponse createLaboratoire(LaboratoireRequest laboratoireRequest) {
         // Créer l'entité Laboratoire
         Laboratoire laboratoire = new Laboratoire(
@@ -68,8 +69,8 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         // Mapper et retourner la réponse
         return mapToLaboratoireResponse(savedLaboratoire);
-    }
-*/
+    }*/
+
     public Long getIdByNrc(String nrc) {
         return laboratoireRepository.findIdLaboratoireByNrc(nrc);
     }
@@ -159,8 +160,6 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         return detailsDTO;
     }
-
-
     @Transactional
     public Laboratoire updateLaboratoireParcellement(Long id, Map<String, Object> updates, MultipartFile logoFile) throws IOException {
         // Find the existing laboratory
@@ -169,11 +168,9 @@ public class LaboratoireServiceImpl implements LaboratoireService {
 
         // Handle logo update
         if (logoFile != null && !logoFile.isEmpty()) {
-            // Delete existing logo if present
             if (existingLaboratoire.getLogo() != null) {
                 minioService.deleteFile(existingLaboratoire.getLogo());
             }
-            // Upload and set new logo
             String logoFileName = minioService.uploadFile(logoFile, logoFile.getOriginalFilename());
             existingLaboratoire.setLogo(logoFileName);
         }
@@ -201,25 +198,54 @@ public class LaboratoireServiceImpl implements LaboratoireService {
             }
         }
 
-
         // Save laboratory updates
         Laboratoire updatedLaboratoire = laboratoireRepository.save(existingLaboratoire);
+        Long idAdr = contactClient.getIdAdresse(updatedLaboratoire.getId());
 
-        // Update address if provided
+
+            // Retrieve existing contact ID based on laboratoire ID
+        Long contactId = contactClient.getIdContact(updatedLaboratoire.getId()).getBody();
+
+
         if (updates.containsKey("adresse")) {
-            AdresseDTO adresseDto = (AdresseDTO) updates.get("adresse");
-            Long idAdr = contactClient.getIdAdresse(updatedLaboratoire.getId());
-            adresseDto.setId(idAdr); // Preserve existing ID
-            adresseClient.updateAdresse(adresseDto);
+            AdresseDTO adresseDto = new AdresseDTO();
+            Map<String, Object> adresseMap = (Map<String, Object>) updates.get("adresse");
+            if (adresseMap != null) {
+                if (adresseMap.containsKey("numVoie") && adresseMap.get("numVoie") != null) {
+                    adresseDto.setNumVoie(String.valueOf(adresseMap.get("numVoie")));
+                }
+                if (adresseMap.containsKey("nomVoie") && adresseMap.get("nomVoie") != null) {
+                    adresseDto.setNomVoie((String) adresseMap.get("nomVoie"));
+                }
+                if (adresseMap.containsKey("codePostal") && adresseMap.get("codePostal") != null) {
+                    adresseDto.setCodePostal((String) adresseMap.get("codePostal"));
+                }
+                if (adresseMap.containsKey("commune") && adresseMap.get("commune") != null) {
+                    adresseDto.setCommune((String) adresseMap.get("commune"));
+                }
+                if (adresseMap.containsKey("ville") && adresseMap.get("ville") != null) {
+                    adresseDto.setVille((String) adresseMap.get("ville"));
+                }
+            }
+            adresseClient.updateAdresse(idAdr, adresseDto);
         }
-
-        // Update contact if provided
+        // Map individual contact fields
         if (updates.containsKey("contactLaboratoire")) {
-            ContactLaboratoireDTO contactDto = (ContactLaboratoireDTO) updates.get("contactLaboratoire");
+            ContactLaboratoireDTO contactDto = new ContactLaboratoireDTO();
             contactDto.setFkIdLaboratoire(updatedLaboratoire.getId());
-            Long idAdr = contactClient.getIdAdresse(updatedLaboratoire.getId());
             contactDto.setFkIdAdresse(idAdr);
-            contactClient.updateContact(contactDto);
+            Map<String, Object> contactMap = (Map<String, Object>) updates.get("contactLaboratoire");
+
+            if (contactMap.containsKey("numTel") && contactMap.get("numTel") != null) {
+                contactDto.setNumTel((String) contactMap.get("numTel"));
+            }
+            if (contactMap.containsKey("fax") && contactMap.get("fax") != null) {
+                contactDto.setFax((String) contactMap.get("fax"));
+            }
+            if (contactMap.containsKey("email")&& contactMap.get("email") != null) {
+                contactDto.setEmail((String) contactMap.get("email"));
+            }
+            contactClient.updateContact(contactId, contactDto);
         }
 
         return updatedLaboratoire;

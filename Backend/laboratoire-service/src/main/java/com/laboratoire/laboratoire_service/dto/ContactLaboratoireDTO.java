@@ -17,6 +17,10 @@ public class ContactLaboratoireDTO {
         this.fkIdAdresse = fkIdAdresse;
     }
 
+    public ContactLaboratoireDTO() {
+
+    }
+
     public Long getId() {
         return Id;
     }

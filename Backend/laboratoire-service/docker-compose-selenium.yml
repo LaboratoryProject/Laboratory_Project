@@ -1,0 +1,35 @@
+version: '3'
+services:
+  selenium-hub:
+    image: selenium/hub:4.11.0
+    container_name: selenium-hub-new
+    ports:
+      - "4444:4444"
+    networks:
+      - selenium-grid-network
+    environment:
+      - GRID_TIMEOUT=30000
+
+  chrome:
+    image: selenium/node-chrome:latest
+    container_name: selenium-node-chrome-new
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_OVERRIDE_HOST=host.docker.internal
+    ports:
+      - "5900:5900"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - selenium-grid-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  selenium-grid-network:
+    driver: bridge

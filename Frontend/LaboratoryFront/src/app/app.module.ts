@@ -1,4 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+//import { ChartsModule } from 'ng2-charts';
+//import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -10,6 +12,7 @@ import { MainContentComponent } from './main-content/main-content.component';
 // Import standalone components
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddLaboratoireComponent } from './add-laboratoire/add-laboratoire.component';
+
 
 // Angular Material modules
 import { MatCardModule } from '@angular/material/card';
@@ -49,10 +52,15 @@ import { ChatComponent } from './chat/chat.component';
 import { AjouterAnalyseComponent } from './ajouter-analyse/ajouter-analyse.component';
 import { AjouterEpreuveComponent } from './ajouter-epreuve/ajouter-epreuve.component';
 import { ConsulterAnalyseComponent } from './consulter-analyse/consulter-analyse.component';
-import {EpreuveListeComponent} from './epreuve-liste/epreuve-liste.component';
+import {EpreuveListeComponent} from './Analyse/Epreuve/epreuve-liste/epreuve-liste.component';
 import { ModifierAnalyseComponent } from './modifier-analyse/modifier-analyse.component';
 import { ModifierEpreuveComponent } from './modifier-epreuve/modifier-epreuve.component';
-import { TestAnalyseListeComponent } from './test-analyse-liste/test-analyse-liste.component';
+import { TestAnalyseListeComponent } from './Analyse/test-analyse-liste/test-analyse-liste.component';
+import { TestAnalyseFormComponent } from './Analyse/test-analyse-form/test-analyse-form.component';
+
+
+
+
 
 
 @NgModule({
@@ -61,12 +69,12 @@ import { TestAnalyseListeComponent } from './test-analyse-liste/test-analyse-lis
     HomeComponent,
     MainContentComponent,
 
-   
   ],
 
-    
+
    imports: [
     BrowserModule,
+    KeycloakAngularModule,
 
     AppRoutingModule,
     MatCardModule,
@@ -80,13 +88,25 @@ import { TestAnalyseListeComponent } from './test-analyse-liste/test-analyse-lis
     CommonModule,
     FormsModule,
     HttpClientModule,
-    
+    TestAnalyseFormComponent,
+
     OptionsAnalyseComponent,
-    
+
     AjouterPatientComponent,
     AjouterDossierComponent,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
 
+    //ChartsModule,
+    //RouterModule.forRoot(routes),
+
+
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
     // Import standalone components
     SidebarComponent,
     AddLaboratoireComponent,
@@ -94,10 +114,10 @@ import { TestAnalyseListeComponent } from './test-analyse-liste/test-analyse-lis
     AddLaboratoireComponent,
     BrowserModule,
     AppRoutingModule,
-    CommonModule,  
+    CommonModule,
     LaboratoireListComponent,
     HttpClientModule ,
-    MatCardModule,
+
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,

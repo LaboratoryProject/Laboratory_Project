@@ -4,7 +4,6 @@ import com.laboratoire.analyse_service.feign.LaboratoireInterface;
 import com.laboratoire.analyse_service.model.Analyse;
 import com.laboratoire.analyse_service.repository.AnalyseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,16 +28,7 @@ public class AnalyseServiceImpl implements AnalyseService {
 
     @Override
     public String getAnalyseByLaboratoire(Long laboratoireId) {
-        // Get the laboratory name directly
-        String laboratoireName = laboratoireInterface.getLaboratoireNameById(laboratoireId);
-
-        // Fetch analyses by laboratoire ID
-        List<Analyse> analyses = analyseRepository.findByFkIdLaboratoire(laboratoireId);
-
-        // If you need to set the name in each analyse object
-
-
-        return laboratoireName;
+        return laboratoireInterface.getLaboratoireNameById(laboratoireId);
     }
 
     @Override
@@ -52,24 +42,11 @@ public class AnalyseServiceImpl implements AnalyseService {
     }
 
     @Override
-    public void deleteAnalyse(Long id) {
-        analyseRepository.deleteById(id);
-    }
-/*
-    @Override
-    public List<Analyse> getAnalysesByLaboratoire(Long laboratoireId) {
-        // Call the Feign client to fetch the laboratoire by ID
-        ResponseEntity<?> laboratoireResponse = laboratoireInterface.getAnalyseByLaboratoire(laboratoireId);
-
-        // Check if the laboratoire exists
-        if (laboratoireResponse.getStatusCode().is2xxSuccessful() && laboratoireResponse.getBody() != null) {
-            // If the laboratory exists, fetch analyses by laboratoire ID
-            return analyseRepository.findByFkIdLaboratoire(laboratoireId);
-        } else {
-            // Handle the case where the laboratory is not found
-            throw new RuntimeException("Laboratory with ID " + laboratoireId + " not found.");
+    public boolean deleteAnalyse(Long id) {
+        if (analyseRepository.existsById(id)) {
+            analyseRepository.deleteById(id);
+            return true;
         }
+        return false;
     }
-
- */
 }

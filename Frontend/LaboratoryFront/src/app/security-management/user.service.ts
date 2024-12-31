@@ -21,7 +21,7 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8085/utilisateurs'; // Remplacer par l'URL de votre API
+  private baseUrl = 'http://localhost:8085/utilisateurs';
 
   constructor(private http: HttpClient, private userStateService: UserStateService) {}
 
@@ -57,16 +57,16 @@ export class UserService {
       signature: data.signature,
       nrc: data.nrc, // Signature en base64
     };
-  
+
     const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',  // Utilisation de JSON pour les données
     });
-  
+
     return this.http.post<any>(this.baseUrl, body, { headers });
   }
-  
+
 
   // Récupérer tous les utilisateurs
   getAllUtilisateurs(): Observable<any> {
@@ -77,23 +77,23 @@ export class UserService {
   getUtilisateurById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-  
+
 
   // Récupérer des utilisateurs par rôle
   getUtilisateursByRole(role: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/role/${role}`);
   }
-  
+
 
   // Mettre à jour un utilisateur
   updateUtilisateur(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
   }
-  
+
 
   // Supprimer un utilisateur
   deleteUtilisateur(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-  
+
 }

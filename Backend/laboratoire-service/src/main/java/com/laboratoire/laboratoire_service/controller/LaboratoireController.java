@@ -22,10 +22,6 @@ import java.util.Map;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH},
-        allowedHeaders = "*",
-        allowCredentials = "true")
 @RequestMapping("/api/laboratoires")
 public class LaboratoireController {
 
@@ -52,16 +48,30 @@ public class LaboratoireController {
             @RequestPart(value = "logoFile", required = false) MultipartFile logoFile
     ) {
         try {
-            // Convert JSON string back to Map
+            // Parse JSON string into a Map
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> updatesMap = objectMapper.readValue(updates, new TypeReference<Map<String, Object>>() {});
 
+            System.out.println("Received updates: " + updatesMap);
+
+            // Special handling for nested "contactLaboratoire" field
+            if (updatesMap.containsKey("contactLaboratoire")) {
+                Map<String, Object> contactMap = (Map<String, Object>) updatesMap.get("contactLaboratoire");
+                System.out.println("Received contactLaboratoire: " + contactMap);
+
+            }
+
+            // Pass the updates to the service layer
             Laboratoire updatedLaboratoire = laboratoireService.updateLaboratoireParcellement(id, updatesMap, logoFile);
+
+            System.out.println("Updated laboratoire: " + updatedLaboratoire);
             return ResponseEntity.ok(updatedLaboratoire);
         } catch (IOException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 
 
 
@@ -90,10 +100,19 @@ public class LaboratoireController {
 
     @GetMapping("/laboratoire/{id}")
     public ResponseEntity<LaboratoireCompletDTO> getLaboratoireById(@PathVariable Long id) {
+        System.out.println("oui hia") ;
         LaboratoireCompletDTO laboratoire = laboratoireService.getLaboratoireInfos(id);
+        System.out.println(laboratoire.getLaboratoire().getNrc());
         return ResponseEntity.ok(laboratoire);
     }
 
+    @GetMapping("/laboratoireDTO/{id}")
+    public ResponseEntity<LaboratoireDTO> getLaboratoireDTOById(@PathVariable Long id) {
+        System.out.println("oui hia") ;
+        LaboratoireDTO laboratoire = laboratoireService.getLaboratoireInfos(id).getLaboratoire();
+        System.out.println(laboratoire.getNrc());
+        return ResponseEntity.ok(laboratoire);
+    }
 
     @GetMapping("/{id}/nom")
     public ResponseEntity<String> getLaboratoireNameById(@PathVariable Long id) {

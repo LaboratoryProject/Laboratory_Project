@@ -5,104 +5,90 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e1a410c-455d-46e2-a520-0b904de05ca3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/test/java/com/laboratoire/laboratoire_service/LaboratoireControllerSeleniumTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/test/java/com/laboratoire/laboratoire_service/LaboratoireControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/test/java/com/laboratoire/laboratoire_service/PerformanceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../laboratoire-service/src/test/java/ressources/jmeter.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../patient-service/src/main/java/com/laboratoire/patient_service/controller/PatientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../patient-service/src/main/java/com/laboratoire/patient_service/model/Patient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../patient-service/src/main/java/com/laboratoire/patient_service/repository/PatientRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../patient-service/src/main/java/com/laboratoire/patient_service/service/PatientService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/docker-compose-ai.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/initai.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/ServiceAiApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/controller/ChatRestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/dto/QuestionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/model/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/service/AIChatService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/java/com/laboratoire/service_ai/service/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service-ai/src/test/java/com/laboratoire/service_ai/ServiceAiApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/ApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/JwtAuthConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/KeycloakConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/dto/AdminUtilisateurDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/dto/LaboratoireDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/dto/UtilisateurDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/feign/LaboratoireClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/controller/AdresseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../adresse-service/src/main/java/com/laboratoire/adresse_service/controller/AdresseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/AnalyseControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/AnalyseSelenium.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/ControllerTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/EpreuveControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/EpreuveSeleniumTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/TestAnalyseControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/TestAnalyseSelenium.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dossier-service/src/test/java/com/laboratoire/dossier_service/SeleniumTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/P3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/fe.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/gg.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/hh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/hid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/ho.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/logg.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/test.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/public/tt.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/Epreuve/epreuve-liste/epreuve-liste.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/Epreuve/epreuve-liste/epreuve-liste.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/Epreuve/epreuve-liste/epreuve-liste.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/Epreuve/epreuve-liste/epreuve-liste.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/Epreuve/epreuve-liste/epreuve-liste.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/epreuve.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-form/test-analyse-form.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-form/test-analyse-form.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-form/test-analyse-form.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-form/test-analyse-form.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-liste/test-analyse-liste.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-liste/test-analyse-liste.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-liste/test-analyse-liste.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-liste/test-analyse-liste.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-service.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse-service.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/Analyse/test-analyse.model.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/services/dossier.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/services/dossier.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/main/java/com/laboratoire/analyse_service/controller/AnalyseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/main/java/com/laboratoire/analyse_service/controller/AnalyseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/main/java/com/laboratoire/analyse_service/model/Analyse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/main/java/com/laboratoire/analyse_service/model/Analyse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../analyse-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../analyse-service/src/test/java/com/laboratoire/analyse_service/PerformanceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../config/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../config/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/controller/ContactLaboratoireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/controller/ContactLaboratoireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/repository/ContactLaboratoireRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/repository/ContactLaboratoireRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/service/ContactLaboratoireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../contactLabo-service/src/main/java/com/laboratoire/contactLabo_service/service/ContactLaboratoireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/controller/LaboratoireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireCompletDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireCompletDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/dto/LaboratoireDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/AdresseClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/AdresseClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/feign/ContactClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/repository/LaboratoireRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/repository/LaboratoireRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/java/com/laboratoire/laboratoire_service/service/LaboratoireServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../laboratoire-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/UtilisateurServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/UtilisateurServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/UtilisateurController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/controller/UtilisateurController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/model/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/model/Utilisateur.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/repository/UtilisateurRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/repository/UtilisateurRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/service/UtilisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/service/UtilisateurService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/service/UtilisateurServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/java/com/laboratoire/utilisateur_service/service/UtilisateurServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/TestUtilisateurServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/TestUtilisateurServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/TestcontainersConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/TestcontainersConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/UtilisateurServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../utilisateur-service/src/test/java/com/laboratoire/utilisateur_service/UtilisateurServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/controller/DossierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/controller/DossierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/repository/DossierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/repository/DossierRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/service/DossierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/src/main/java/com/laboratoire/dossier_service/service/DossierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/src/test/java/com/laboratoire/dossier_service/DossierControllerSeleniumTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/src/test/java/com/laboratoire/dossier_service/DossierControllerSeleniumTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dossier-service/src/test/java/com/laboratoire/dossier_service/DossierServicePerformanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../dossier-service/src/test/java/com/laboratoire/dossier_service/DossierServicePerformanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service-ai/docker-compose-ai.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service-ai/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-utilisateur/ajouter-utilisateur.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-dossier/ajouter-dossier.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-dossier/ajouter-dossier.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-dossier/ajouter-dossier.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/ajouter-dossier/ajouter-dossier.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/analyse.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/analyse.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/chat/chat.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/chat/chat.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/chat/chat.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/chat/chat.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/epreuve-liste/epreuve-liste.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/epreuve-liste/epreuve-liste.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/epreuve-liste/epreuve-liste.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/epreuve-liste/epreuve-liste.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/epreuve-liste/epreuve-liste.module.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/laboratoire.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/laboratoire.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-laboratoire/list-laboratoire.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/modifier-utilisateur/modifier-utilisateur.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/rechercher-utilisateur/rechercher-utilisateur.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/supprimer-utilisateur/supprimer-utilisateur.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/utilisateur.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/utilisateur.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-dossiers/list-dossiers.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/list-dossiers/list-dossiers.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/main-content/main-content.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/main-content/main-content.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/main-content/main-content.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/main-content/main-content.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/TestService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/TestService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/keycloak-init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/keycloak-init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/security-management/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/side-bar-super-admin/side-bar-super-admin.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/side-bar-super-admin/side-bar-super-admin.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/side-bar-super-admin/side-bar-super-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/side-bar-super-admin/side-bar-super-admin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse-liste/test-analyse-liste.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse-liste/test-analyse-liste.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse-liste/test-analyse-liste.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse-liste/test-analyse-liste.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/LaboratoryFront/src/app/test-analyse.service.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

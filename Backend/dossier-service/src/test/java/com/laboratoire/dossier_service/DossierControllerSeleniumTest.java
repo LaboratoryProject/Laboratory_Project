@@ -1,104 +1,123 @@
 package com.laboratoire.dossier_service;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.File;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@ActiveProfiles("test") // Ensure you're using the test profile
 public class DossierControllerSeleniumTest {
 
-    private WebDriver webDriver;
-    private final String baseUrl = "http://localhost:8090"; // Assuming the web server is running on this port
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private WebDriverWait shortWait;
 
     @BeforeEach
-    public void setUp() throws MalformedURLException {
+    void setUp() {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
-                "--remote-allow-origins=*",
-                "--headless", // Run tests in headless mode
+                "--disable-web-security",
+                "--allow-insecure-localhost",
+                "--ignore-certificate-errors",
+                "--disable-dev-shm-usage",
                 "--no-sandbox",
-                "--disable-dev-shm-usage"
+                "--disable-gpu"
         );
 
-        // Connect to the Selenium Hub (Ensure that the Selenium Grid is running on localhost:4444)
-        webDriver = new RemoteWebDriver(
-                new URL("http://localhost:4444/wd/hub"), // Selenium Hub address
-                options
-        );
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        keycloakLogin();
     }
 
     @AfterEach
-    public void tearDown() {
-        if (webDriver != null) {
-            webDriver.quit(); // Close the WebDriver instance after each test
+    void tearDown() {
+        if (driver != null) {
+            driver.quit();
         }
     }
 
-    // Test for GET /dossier to verify that the API returns a list of dossiers
-    @Test
-    public void testGetAllDossiers() {
-        webDriver.get(baseUrl + "/dossier");
-
-        String bodyText = webDriver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains("Dossier"), "Response text should contain 'Dossier'");
-    }
-
-    // Test for GET /dossier/{numDossier} to retrieve a dossier by its number
-    @Test
-    public void testGetDossierByNum() {
-        String numDossier = "123";  // Replace with a valid dossier number
-        webDriver.get(baseUrl + "/dossier/" + numDossier);
-
-        String bodyText = webDriver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains(numDossier), "Response text should contain the dossier number");
-    }
-
-    // Test for POST /dossier to add a new dossier
     @Test
     public void testCreateDossier() {
-        String jsonBody = "{\"fkEmailUtilisateur\":\"test@example.com\", \"fkIdPatient\":1, \"date\":\"2024-12-18\"}";
+        try {
+            driver.get("http://localhost:4200/add-dossier");
+            shortWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
-        // Use a POST request to create a dossier (ensure that this endpoint is implemented in your web app)
-        webDriver.get(baseUrl + "/dossier/create?json=" + jsonBody);
+            // Use JavaScript to fill form fields faster
+            JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        String bodyText = webDriver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains("Created"), "Response text should contain 'Created'");
+            System.out.println("Page loaded successfully.");
+
+            // Fill in the form fields
+            fillField(By.id("numDossier"), "D123456");
+            fillField(By.id("fkEmailUtilisateur"), "user@example.com");
+            fillField(By.id("fkIdPatient"), "1");
+            fillField(By.id("date"), "2024-12-28");
+
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".spinner")));
+
+            // Click submit button
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[text()='Ajouter']")));
+            js.executeScript("arguments[0].click();", addButton);
+
+            // Validate success message
+            validateSuccess("Dossier ajouté avec succès");
+
+        } catch (Exception e) {
+            System.out.println("Test failed: " + e.getMessage());
+            throw e;
+        }
     }
 
-    // Test for PUT /dossier/{id} to update a dossier
-    @Test
-    public void testUpdateDossier() {
-        Long dossierId = 1L;
-        String jsonBody = "{\"fkEmailUtilisateur\":\"updated@example.com\", \"fkIdPatient\":1, \"date\":\"2024-12-19\"}";
+    private void keycloakLogin() {
+        driver.get("http://localhost:9090/realms/Laboratory-realm/protocol/openid-connect/auth?client_id=Angular&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fadd-dossier&response_mode=fragment&response_type=code&scope=openid");
 
-        // Use a PUT request to update a dossier
-        webDriver.get(baseUrl + "/dossier/" + dossierId + "/update?json=" + jsonBody);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 
-        String bodyText = webDriver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains("Updated"), "Response text should contain 'Updated'");
+        driver.findElement(By.id("username")).sendKeys("nouvel.email@example.com");
+        driver.findElement(By.id("password")).sendKeys("nouveauMotDePasse");
+
+        driver.findElement(By.id("kc-login")).click();
+
+        wait.until(ExpectedConditions.urlContains("/add-dossier"));
     }
 
-    // Test for DELETE /dossier/{id} to delete a dossier
-    @Test
-    public void testDeleteDossier() {
-        Long dossierId = 1L;
+    private void fillField(By locator, String value) {
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        field.clear();
+        field.sendKeys(value);
+    }
 
-        // Use a DELETE request to delete a dossier
-        webDriver.get(baseUrl + "/dossier/" + dossierId + "/delete");
+    private void validateSuccess(String successMessage) {
+        try {
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            System.out.println("Alert text: " + alertText);
 
-        String bodyText = webDriver.findElement(By.tagName("body")).getText();
-        assertTrue(bodyText.contains("Deleted"), "Response text should contain 'Deleted'");
+            if (alertText.contains(successMessage)) {
+                alert.accept();
+                return;
+            }
+
+            alert.dismiss();
+            throw new AssertionError("Alert found but didn't contain expected message. Alert text: " + alertText);
+
+        } catch (TimeoutException e) {
+            throw new AssertionError("No success alert found: " + successMessage);
+        }
     }
 }

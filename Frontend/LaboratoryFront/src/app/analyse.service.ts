@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { TestAnalyse } from './Analyse/test-analyse.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalyseService {
-  private baseUrl = 'http://localhost:8082/api/analyse';
+  private baseUrl = 'http://localhost:8082/api/analyse/test-analyses';
 
   constructor(private http: HttpClient) {}
 
+  createTestAnalyse(testAnalyse: TestAnalyse): Observable<TestAnalyse> {
+      return this.http.post<TestAnalyse>(this.baseUrl, testAnalyse);
+    } 
+    
   // Créer une nouvelle analyse
   createAnalyse(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}`, data).pipe(

@@ -33,7 +33,7 @@ export class AppComponent implements OnInit{
   userId: string | null = null;
   user: User | null = null;
 
-  
+
   async ngOnInit(): Promise<void> {
     try {
       // Attendez que Keycloak soit bien initialisé
@@ -46,16 +46,22 @@ export class AppComponent implements OnInit{
         initOptions: {
           onLoad: 'login-required',
           checkLoginIframe: true,
+          checkLoginIframeInterval: 30,
         },
         enableBearerInterceptor: true,
         bearerPrefix: 'Bearer',
       });
 
       console.log('Keycloak initialized successfully');
-    
+
+       // Start token refresh loop
+       console.log('scheduling the Token refresher:');
+    this.scheduleTokenRefresh();
+
     // Une fois initialisé, vous pouvez obtenir le token
     const token = await this.keycloakService.getToken();
     console.log('Token:', token);
+    localStorage.setItem('access_token', token);
 
     // Appel des autres méthodes après l'initialisation de Keycloak
     await this.displayToken();  // Afficher le token
@@ -79,6 +85,25 @@ export class AppComponent implements OnInit{
     console.error('Keycloak initialization failed', error);
   }
 }
+private scheduleTokenRefresh(): void {
+  setInterval(async () => {
+    try {
+      const token = await this.keycloakService.getToken();
+      console.log('Current Token:', token); // Always log the current token
+
+      const refreshed = await this.keycloakService.updateToken(30); // Refresh if token expires in the next 30 seconds
+      if (refreshed) {
+        const newToken = await this.keycloakService.getToken();
+        console.log('Token refreshed:', newToken);
+        localStorage.setItem('access_token', newToken);
+      }
+    } catch (error) {
+      console.error('Failed to refresh token:', error);
+    }
+  }, 30000); // Check every 10 seconds
+}
+
+
 
   private loadUserDetails(id: string): void {
     this.userService.getUserById(id).subscribe(
@@ -97,7 +122,7 @@ export class AppComponent implements OnInit{
       const token = await this.keycloakService.getToken();
       console.log('JWT Token:', token);
 
-      
+
     } catch (error) {
       console.error('Error fetching token:', error);
     }
@@ -115,5 +140,5 @@ export class AppComponent implements OnInit{
       console.error('Error during logout:', error);
     });
   }
-  
+
 }

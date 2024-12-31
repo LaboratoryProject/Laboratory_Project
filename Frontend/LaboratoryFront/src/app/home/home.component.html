@@ -1,15 +1,48 @@
-<!-- home-container.component.html -->
 <div class="home-container">
-    <app-side-bar-super-admin></app-side-bar-super-admin>
-  
-    <div class="main-content">
-      <h1>Bienvenue sur la page d'accueil !</h1>
-      <p>Ceci est la page d'accueil de votre application.</p>
+  <!-- Sidebar Component -->
+  <app-side-bar-super-admin></app-side-bar-super-admin>
 
-        <!-- Le bouton pour revenir au HomeComponent (route /home) -->
-  <button mat-raised-button color="accent" routerLink="/">Retour à la page principale</button>
+  <div class="main-content">
+    <!-- Welcome Message -->
+    <div class="welcome-message">
+      <h1>Bienvenue sur la page d'accueil</h1>
+      <p>Ceci est la page d'accueil de votre application. Découvrez un tableau de bord complet pour gérer toutes les informations clés.</p>
+    </div>
 
+    <!-- Dashboard Section -->
+    <div class="dashboard-container">
+      <h2>Tableau de Bord</h2>
 
+      <div class="stats-cards">
+        <!-- Stat Card 1 -->
+        <div class="stat-card">
+          <h3>Laboratoires</h3>
+          <p>10</p>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="stat-card">
+          <h3>Administrateurs</h3>
+          <p>5</p>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="stat-card">
+          <h3>Patients</h3>
+          <p>250</p>
+        </div>
+
+        <!-- Stat Card 4 -->
+        <div class="stat-card">
+          <h3>Tests effectués</h3>
+          <p>350</p>
+        </div>
+      </div>
+
+      <!-- Navigation Button -->
+      <div class="go-back-button-container">
+        <button routerLink="/">Retour à la page principale</button>
+      </div>
     </div>
   </div>
-  
+</div>

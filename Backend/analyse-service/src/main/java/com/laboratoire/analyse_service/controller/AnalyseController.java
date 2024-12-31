@@ -1,34 +1,48 @@
 package com.laboratoire.analyse_service.controller;
 
+import com.laboratoire.analyse_service.model.Analyse;
 import com.laboratoire.analyse_service.service.AnalyseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import com.laboratoire.analyse_service.model.Analyse;
 
+import java.util.Collection;
 import java.util.List;
+
 @RestController
-@RequestMapping("/api/analyse")
+@RequestMapping("/api/an/analyses")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnalyseController {
 
     private final AnalyseService analyseService;
-    //  private final EmailService emailService;  // Inject EmailService
 
     @Autowired
     public AnalyseController(AnalyseService analyseService) {
         this.analyseService = analyseService;
-
     }
 
     @PostMapping
     public ResponseEntity<Analyse> createAnalyse(@RequestBody Analyse analyse) {
         Analyse createdAnalyse = analyseService.saveAnalyse(analyse);
-        return new ResponseEntity<>(createdAnalyse, HttpStatus.CREATED);
+        return ResponseEntity.status(201).body(createdAnalyse);
     }
 
+
+
+
+
+    @PreAuthorize("hasRole('ROLE_ADMINN')")
     @GetMapping
     public ResponseEntity<List<Analyse>> getAllAnalyses() {
+        // Ajouter cette ligne pour déboguer les autorités de l'utilisateur authentifié
+        Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        System.out.println("les autorisationnnnnnnnnnnnnnnnn");
+        authorities.forEach(authority -> System.out.println(authority.getAuthority()));
+        System.out.println("lfu9");
+
         List<Analyse> analyses = analyseService.getAllAnalyses();
         return ResponseEntity.ok(analyses);
     }
@@ -40,30 +54,17 @@ public class AnalyseController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Analyse> updateAnalyse(@PathVariable Long id, @RequestBody Analyse analyse) {
-        return analyseService.getAnalyseById(id)
-                .map(existingAnalyse -> {
-                    analyse.setId(id);
-                    Analyse updatedAnalyse = analyseService.saveAnalyse(analyse);
-                    return ResponseEntity.ok(updatedAnalyse);
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAnalyse(@PathVariable Long id) {
-        if (analyseService.getAnalyseById(id).isPresent()) {
-            analyseService.deleteAnalyse(id);
+        if (analyseService.deleteAnalyse(id)) {
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/laboratoire/{laboratoireId}")
-    public ResponseEntity<String> getAnalysesByLaboratoire(@PathVariable Long laboratoireId) {
-       String name = analyseService.getAnalyseByLaboratoire(laboratoireId);
-        return ResponseEntity.ok(name);
+    public ResponseEntity<String> getAnalyseByLaboratoire(@PathVariable Long laboratoireId) {
+        String laboratoireName = analyseService.getAnalyseByLaboratoire(laboratoireId);
+        return ResponseEntity.ok(laboratoireName);
     }
 }

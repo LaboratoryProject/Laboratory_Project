@@ -1,92 +1,170 @@
 package com.laboratoire.laboratoire_service;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.File;
+import java.time.Duration;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@ActiveProfiles("test")
 public class LaboratoireControllerSeleniumTest {
 
-    private WebDriver webDriver;
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    private WebDriverWait shortWait; // Add short wait for faster operations
 
     @BeforeEach
-    public void setUp() throws MalformedURLException {
+    void setUp() {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
-                "--remote-allow-origins=*", // Important for newer Chrome versions
-                "--headless",               // Headless mode to run without UI
+                "--disable-web-security",
+                "--allow-insecure-localhost",
+                "--ignore-certificate-errors",
+                "--disable-dev-shm-usage", // Add performance options
                 "--no-sandbox",
-                "--disable-dev-shm-usage"
+                "--disable-gpu"
         );
 
-        // Use actual IP or hostname where Selenium Grid is running
-        webDriver = new RemoteWebDriver(
-                new URL("http://localhost:4444/wd/hub"),  // Adjust for your Selenium Hub location
-                options
-        );
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+
+        // Reduce default wait time from 30 to 10 seconds
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Add short wait for quick operations
+        shortWait = new WebDriverWait(driver, Duration.ofSeconds(5));
+
+        keycloakLogin();
     }
 
+
     @AfterEach
-    public void tearDown() {
-        if (webDriver != null) {
-            webDriver.quit(); // Quit the browser session after the test
+    void tearDown() {
+        // Close the browser after each test
+        if (driver != null) {
+            driver.quit();
         }
     }
 
     @Test
     public void testCreateLaboratoire() {
-        String baseUrl = "http://localhost:8080";  // Update with the correct port if different
+        try {
+            driver.get("http://localhost:4200/add");
+            shortWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
-        // Access the page where the form to create a new "Laboratoire" exists
-        webDriver.get(baseUrl + "/createLaboratoire");
+            // Use JavaScript to fill form fields faster
+            JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        // Fill out the form (Assuming there's a form to create a new Laboratoire)
-        webDriver.findElement(By.name("nom")).sendKeys("Laboratoire Test");
-        webDriver.findElement(By.name("logo")).sendKeys("logo.png");
-        webDriver.findElement(By.name("nrc")).sendKeys("NRC123");
-        webDriver.findElement(By.name("active")).click(); // Assuming there's a checkbox or button for 'active'
+            driver.get("http://localhost:4200/add");
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+            System.out.println("Page loaded successfully.");
 
-        // Submit the form
-        webDriver.findElement(By.name("submit")).click();
+            // Fill in the form fields
+            fillField(By.id("nom"), "Laboratoire Test");
+            uploadFile(By.id("logo"), "src/test/ressources/test-logo.png");
+            fillField(By.id("nrc"), "NA3331155");
+            toggleCheckbox(By.id("active"), true);
+            fillField(By.id("dateActivation"), "11-02-2002");
+            fillField(By.id("numTel"), "0131128911");
+            fillField(By.id("fax"), "0983117021");
+            fillField(By.id("email"), "test21189@laboratoire.com");
+            fillField(By.id("numVoie"), "4031");
+            fillField(By.id("nomVoie"), "Rue de Test");
+            fillField(By.id("codePostal"), "75021");
+            fillField(By.id("ville"), "Paris");
+            fillField(By.id("commune"), "Paris");
 
-        // Verify if the result is as expected (e.g., success message or new page)
-        String confirmationText = webDriver.findElement(By.id("confirmationMessage")).getText().trim();
-        assertEquals("Laboratoire created successfully!", confirmationText, "The confirmation message should match.");
+
+            // Quick check for spinner
+            shortWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".spinner")));
+
+            // Click submit button
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[text()='Ajouter']")));
+            js.executeScript("arguments[0].click();", addButton);
+
+            // Validate success (this will now handle the alert)
+            validateSuccess("Laboratoire ajouté avec succès");
+
+        } catch (Exception e) {
+            System.out.println("Test failed: " + e.getMessage());
+            throw e;
+        }
     }
 
-    @Test
-    public void testGetLaboratoireById() {
-        String baseUrl = "http://localhost:8080";  // Update with the correct port if different
+    private void keycloakLogin() {
+        driver.get("http://localhost:9090/realms/Laboratory-realm/protocol/openid-connect/auth?client_id=Angular&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fadd&state=f91fc17c-b574-4b20-bfc4-fc8a74f3553c&response_mode=fragment&response_type=code&scope=openid&nonce=0beb5d8b-6b63-4c4d-b1b4-fb8978d907b5&code_challenge=muXZmdVWIzHxi6lIDa2uWbR1s4YIx2KUxTtu_Us9LFg&code_challenge_method=S256");
 
-        // Simulate visiting the page that retrieves a "Laboratoire" by ID
-        webDriver.get(baseUrl + "/laboratoires/1");
+        // Wait for Keycloak login page
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("username")));
 
-        // Verify that the details of the laboratoire are shown
-        String laboratoireName = webDriver.findElement(By.id("laboratoireName")).getText().trim();
-        assertEquals("Laboratoire Test", laboratoireName, "The laboratoire name should be 'Laboratoire Test'");
+        // Enter username and password
+        driver.findElement(By.id("username")).sendKeys("hibamoustaoukkkdi@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("hibamoustaoudi");
+
+        // Submit login form
+        driver.findElement(By.id("kc-login")).click();
+
+        // Wait for redirection to the Angular app
+        wait.until(ExpectedConditions.urlContains("http://localhost:4200"));
     }
 
-    @Test
-    public void testDeleteLaboratoire() {
-        String baseUrl = "http://localhost:8080";  // Update with the correct port if different
+    private void fillField(By locator, String value) {
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        field.clear();
+        field.sendKeys(value);
+    }
 
-        // Visit the page that handles the deletion of a laboratoire
-        webDriver.get(baseUrl + "/laboratoires/delete/1");
+    private void uploadFile(By locator, String relativePath) {
+        WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        fileInput.sendKeys(getAbsolutePath(relativePath));
+    }
 
-        // Verify the success message after deletion
-        String confirmationText = webDriver.findElement(By.id("confirmationMessage")).getText().trim();
-        assertEquals("Laboratoire deleted successfully.", confirmationText, "The deletion message should match.");
+    private void toggleCheckbox(By locator, boolean state) {
+        WebElement checkbox = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        if (checkbox.isSelected() != state) {
+            checkbox.click();
+        }
+    }
+
+    private void validateSuccess(String successMessage) {
+        try {
+            // Wait for and check alert
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            String alertText = alert.getText();
+            System.out.println("Alert text: " + alertText);
+
+            if (alertText.contains(successMessage)) {
+                // Accept the alert if it contains our success message
+                alert.accept();
+                return;
+            }
+
+            // If we get here, the alert didn't contain our success message
+            alert.dismiss();
+            throw new AssertionError("Alert found but didn't contain expected message. Alert text: " + alertText);
+
+        } catch (TimeoutException e) {
+            // No alert found, throw error
+            throw new AssertionError("No success alert found: " + successMessage);
+        }
+    }
+
+    private String getAbsolutePath(String relativePath) {
+        File file = new File(relativePath);
+        if (!file.exists()) {
+            throw new RuntimeException("File not found: " + relativePath);
+        }
+        return file.getAbsolutePath();
     }
 }

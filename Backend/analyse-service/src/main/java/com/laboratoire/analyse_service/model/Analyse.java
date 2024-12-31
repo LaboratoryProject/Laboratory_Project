@@ -1,8 +1,12 @@
 package com.laboratoire.analyse_service.model;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="analyse_table")
+@Table(name = "analyse_table")
 public class Analyse {
 
     @Id
@@ -16,18 +20,18 @@ public class Analyse {
 
     private String description;
 
-    public Analyse() {
-    }
+    @OneToMany(mappedBy = "analyse", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Epreuve> epreuves = new ArrayList<>();
+
+    // Constructeurs
+    public Analyse() {}
 
     public Analyse(Long id, Long fkIdLaboratoire, String nom, String description) {
         this.id = id;
         this.fkIdLaboratoire = fkIdLaboratoire;
         this.nom = nom;
         this.description = description;
-    }
-    public Analyse(Long id,String nom) {
-        this.id = id;
-        this.nom = nom;
     }
 
     public Analyse(Long fkIdLaboratoire, String nom, String description) {
@@ -36,6 +40,7 @@ public class Analyse {
         this.description = description;
     }
 
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -66,5 +71,13 @@ public class Analyse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Epreuve> getEpreuves() {
+        return epreuves;
+    }
+
+    public void setEpreuves(List<Epreuve> epreuves) {
+        this.epreuves = epreuves;
     }
 }

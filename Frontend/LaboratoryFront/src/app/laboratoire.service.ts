@@ -24,61 +24,73 @@ export interface Laboratoire {
   providedIn: 'root',
 })
 export class LaboratoireService {
-  private baseUrl = 'http://localhost:8081/api/laboratoires'; // Remplacez par votre URL
+  private baseUrl = 'http://localhost:8081/api/laboratoires'; // Replace with your URL
 
   constructor(private http: HttpClient) {}
 
+  // Create a laboratoire
   createLaboratoire(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/complet`, data);
   }
-   // Get all laboratoires
-   getAllLaboratoires(): Observable<any[]> {
+
+  // Get all laboratoires
+  getAllLaboratoires(): Observable<any[]> {
     console.log('Fetching laboratoires from URL:', this.baseUrl);
-    return this.http.get<any[]>(`${this.baseUrl}`).pipe( tap(data => console.log('Received laboratoires:', data)),
-      catchError(error => {
+    return this.http.get<any[]>(`${this.baseUrl}`).pipe(
+      tap((data) => console.log('Received laboratoires:', data)),
+      catchError((error) => {
         console.error('Error fetching laboratoires:', error);
-        return throwError(error);
+        return throwError(() => error);
       })
     );
   }
+
+  // Delete a laboratoire
   deleteLaboratoire(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete/${id}`, { responseType: 'text' });
   }
-  
+
+  // Get laboratoire by ID
   getLaboratoireById(id: number): Observable<Laboratoire> {
     return this.http.get<Laboratoire>(`${this.baseUrl}/laboratoire/${id}`);
   }
 
- showDetails(id: number): Observable<Laboratoire> {
-   return this.http.get<Laboratoire>(`${this.baseUrl}/laboratoire/{id}`);
- }
- updateLaboratoire(id: number, laboratoire: Laboratoire): Observable<Laboratoire> {
-  return this.http.put<Laboratoire>(`${this.baseUrl}/update/${id}`, laboratoire).pipe(
-    tap(updatedLab => console.log('Laboratoire updated:', updatedLab)),
-    catchError(error => {
-      console.error('Error updating laboratoire:', error);
-      return throwError(error);
-    })
-  );
-}
-updateLaboratoireParcellement(
-  id: number, 
-  laboratoire: Partial<Laboratoire>, 
-  logoFile?: File | null
-): Observable<Laboratoire> {
-  const formData = new FormData();
-  
-  // Convert laboratoire data to JSON string
-  formData.append('updates', JSON.stringify(laboratoire));
-  
-  // Add logo file if present
-  if (logoFile) {
-    formData.append('logoFile', logoFile);
+  // Show laboratoire details
+  showDetails(id: number): Observable<Laboratoire> {
+    return this.http.get<Laboratoire>(`${this.baseUrl}/laboratoire/${id}`);
   }
 
-  // Use HttpClient to send a PATCH request
-  return this.http.patch<Laboratoire>(
-    `${this.baseUrl}/update-partiel/${id}`, 
-    formData
-  );
-}}
+  // Update a laboratoire
+  updateLaboratoire(id: number, laboratoire: Laboratoire): Observable<Laboratoire> {
+    return this.http.put<Laboratoire>(`${this.baseUrl}/update/${id}`, laboratoire).pipe(
+      tap((updatedLab) => console.log('Laboratoire updated:', updatedLab)),
+      catchError((error) => {
+        console.error('Error updating laboratoire:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  // Partial update of a laboratoire
+  updateLaboratoireParcellement(
+    id: number,
+    laboratoire: Partial<Laboratoire>,
+    logoFile?: File | null
+  ): Observable<Laboratoire> {
+    const formData = new FormData();
+
+    // Convert laboratoire data to JSON string
+    formData.append('updates', JSON.stringify(laboratoire));
+
+    // Add logo file if present
+    if (logoFile) {
+      formData.append('logoFile', logoFile);
+    }
+
+    // Use HttpClient to send a PATCH request
+    return this.http.patch<Laboratoire>(
+      `${this.baseUrl}/update-partiel/${id}`,
+      formData
+    );
+  }
+}

@@ -58,6 +58,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+		<!-- Add spring-cloud-context for ConfigurationBeanFactoryMetadata -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-context</artifactId>
+		</dependency>
 
 		<!-- OpenTelemetry -->
 		<dependency>

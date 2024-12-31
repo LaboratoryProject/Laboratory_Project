@@ -58,6 +58,38 @@ public class Patient {
         this.visiblePour = visiblePour;
     }
 
+    public Patient(Long l, String nomComplet, String dateNaissance, String lieuDeNaissance,
+                   String sexe, String typePieceIdentite, String numPieceIdentite,
+                   String adresse, String numTel, String email){
+        this.id=l;
+        this.nomComplet = nomComplet;
+        this.dateNaissance = dateNaissance;
+        this.lieuDeNaissance = lieuDeNaissance;
+        this.sexe = sexe;
+        this.typePieceIdentite = typePieceIdentite;
+        this.numPieceIdentite = numPieceIdentite;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.email = email;
+
+    }
+    public Patient(Long id, String nomComplet, String dateNaissance, String lieuDeNaissance,
+                   String sexe, String typePieceIdentite, String numPieceIdentite,
+                   String adresse, String numTel, String email, boolean visiblePour) {
+        this.id = id; // Ensure this is explicitly set
+        this.nomComplet = nomComplet;
+        this.dateNaissance = dateNaissance;
+        this.lieuDeNaissance = lieuDeNaissance;
+        this.sexe = sexe;
+        this.typePieceIdentite = typePieceIdentite;
+        this.numPieceIdentite = numPieceIdentite;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.email = email;
+        this.visiblePour = visiblePour;
+    }
+
+
     public Long getId() {
         return id;
     }

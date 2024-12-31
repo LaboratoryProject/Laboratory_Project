@@ -1,23 +1,115 @@
-/* home-container.component.css */
-
-/* Container global qui contient la sidebar et le contenu principal */
+/* Global container containing sidebar and main content */
 .home-container {
-    display: flex; /* Utilisation de Flexbox pour aligner les éléments */
-    height: 100vh;
-    height: 100vh; /* Prend toute la hauteur de la fenêtre */
-  }
-  
- 
-  
-  /* Style pour le contenu principal */
-  .main-content {
-    height: 100vh;
-    margin-left: 250px; /* Décale le contenu principal vers la droite pour faire de la place pour la sidebar */
-    padding: 20px; /* Espacement autour du contenu */
-    flex-grow: 1; /* Le contenu principal prend toute la largeur restante */
-    background-color: #8facc9;
-    width: 100%; 
-  }
-  
- 
-  
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+  background-color: #f4f6f9;
+}
+
+/* Sidebar styles */
+app-side-bar-super-admin {
+  width: 250px;
+  background-color: #263238;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+/* Main content area styles */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-image: url('/analyse.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: #333;
+}
+
+/* Welcome message */
+.welcome-message {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  margin: 20px auto;
+}
+
+.welcome-message h1 {
+  font-size: 3rem;
+  color: #007BFF;
+  font-weight: bold;
+}
+
+.welcome-message p {
+  font-size: 1.5rem;
+  color: #34495e;
+}
+
+/* Dashboard container and card styles */
+.dashboard-container {
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.dashboard-container h2 {
+  font-size: 2.8rem;
+  color: #007BFF;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+
+/* Stat card styles */
+.stat-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.stat-card h3 {
+  color: #3498db;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Button styles */
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

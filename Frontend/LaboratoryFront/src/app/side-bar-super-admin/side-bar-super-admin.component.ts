@@ -24,17 +24,17 @@ import { KeycloakService } from 'keycloak-angular'; // Import KeycloakService
   ],
   template: `
     <mat-sidenav-container class="admin-layout">
-      <mat-sidenav 
-        #drawer 
+      <mat-sidenav
+        #drawer
         [mode]="sideNavMode"
         [opened]="isSidenavOpen"
         class="sidebar"
         [class.mobile-sidebar]="isMobile">
         <div class="sidebar-header">
           <h2>Super Admin</h2>
-          <button 
-            *ngIf="isMobile" 
-            mat-icon-button 
+          <button
+            *ngIf="isMobile"
+            mat-icon-button
             (click)="toggleSidenav()">
             <mat-icon>close</mat-icon>
           </button>
@@ -66,18 +66,18 @@ import { KeycloakService } from 'keycloak-angular'; // Import KeycloakService
     .admin-layout {
       height: 100vh;
     }
-    
+
     .sidebar {
       width: 330px;
       background-color: #ffffff;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    
+
     .mobile-sidebar {
       width: 100%;
       max-width: 100%;
     }
-    
+
     .sidebar-header {
       display: flex;
       justify-content: space-between;
@@ -86,33 +86,33 @@ import { KeycloakService } from 'keycloak-angular'; // Import KeycloakService
       color: white;
       padding: 20px;
     }
-    
+
     .sidebar-header h2 {
       margin: 0;
       font-weight: 300;
     }
-    
+
     .sidebar-footer {
       position: absolute;
       bottom: 20px;
       width: 100%;
       padding: 0 20px;
     }
-    
+
     .mat-list-item {
       transition: background-color 0.3s ease;
     }
-    
+
     .mat-list-item:hover {
       background-color: rgba(63, 81, 181, 0.1);
     }
-    
+
     .mat-list-item.active {
       color: #3f51b5;
       font-weight: bold;
       background-color: rgba(63, 81, 181, 0.1);
     }
-    
+
     .content {
       padding: 20px;
       background-color: #f5f5f5;
@@ -134,7 +134,7 @@ export class SideBarSuperAdminComponent {
     this.breakpointObserver.observe([Breakpoints.Small, Breakpoints.XSmall])
       .subscribe(result => {
         this.isMobile = result.matches;
-        
+
         if (this.isMobile) {
           this.sideNavMode = 'over';
           this.isSidenavOpen = false;

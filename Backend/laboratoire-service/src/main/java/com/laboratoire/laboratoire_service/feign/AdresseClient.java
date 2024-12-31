@@ -11,8 +11,10 @@ public interface AdresseClient {
     @PostMapping("/api/adresse")
     ResponseEntity<AdresseDTO> creerAdresse(AdresseDTO adresseDto);
 
-    @PutMapping("/api/adresse/{id}")
-    ResponseEntity<AdresseDTO> updateAdresse( AdresseDTO adresseDTO);
+
+    @PutMapping("/api/adresse/modifier/{id}")
+    ResponseEntity<AdresseDTO> updateAdresse(@PathVariable Long id, @RequestBody AdresseDTO adresse);
+
 
     @DeleteMapping("/api/adresse/{laboratoireId}")
     ResponseEntity<Void> deleteAdresse(@PathVariable Long laboratoireId);

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "laboratoire-service")
 public interface LaboratoireClient {
-        @GetMapping("/api/laboratoires/laboratoire/{id}")
-        LaboratoireDTO getLaboratoireById(@PathVariable Long id);
+        @GetMapping("/api/laboratoires/laboratoireDTO/{id}")
+        LaboratoireDTO getLaboratoireDTOById(@PathVariable Long id);
 
         @GetMapping("/api/laboratoires/findIdByNrc")
         ResponseEntity<Long> findIdByNrc(@RequestParam String nrc);}

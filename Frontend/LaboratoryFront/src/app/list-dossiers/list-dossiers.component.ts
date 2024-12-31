@@ -5,7 +5,11 @@ import { PatientDialogComponent } from './patient-dialog/patient-dialog.componen
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { DossierService } from '../services/dossier.service';
 import { AjouterDossierComponent } from '../ajouter-dossier/ajouter-dossier.component';
+
+
+
 interface Dossier {
 id: number;
 patientName: string;

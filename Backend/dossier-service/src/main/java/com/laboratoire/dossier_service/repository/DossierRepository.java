@@ -8,6 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface DossierRepository extends JpaRepository<Dossier, Long> {
-    Dossier findByFkEmailUtilisateur(String fkEmailUtilisateur);
-    Optional<Dossier> findByNumDossier(String numDossier);  // Recherche par numDossier
+
+    // Recherche par email utilisateur
+    Optional<Dossier> findByFkEmailUtilisateur(String fkEmailUtilisateur);
+
+    // Recherche par numéro de dossier
+    Optional<Dossier> findByNumDossier(Long numDossier);
 }

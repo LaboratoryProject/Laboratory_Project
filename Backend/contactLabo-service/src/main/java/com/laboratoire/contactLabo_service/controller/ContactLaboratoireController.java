@@ -40,7 +40,7 @@ public class ContactLaboratoireController {
         return ResponseEntity.ok(cts);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/modifier/{id}")
     public ResponseEntity<ContactLaboratoire> updateContact(@PathVariable Long id, @RequestBody ContactLaboratoire updatedContact) {
         try {
             return ResponseEntity.ok(contactLaboratoireService.updateContact(id, updatedContact));

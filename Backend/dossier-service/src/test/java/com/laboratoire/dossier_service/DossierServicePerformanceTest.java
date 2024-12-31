@@ -35,14 +35,14 @@ public class DossierServicePerformanceTest {
             HTTPSamplerProxy httpSampler = new HTTPSamplerProxy();
             httpSampler.setDomain("localhost");
             httpSampler.setPort(8090);
-            httpSampler.setPath("/api/v1/dossier"); // Remplace par le bon endpoint
-            httpSampler.setMethod("GET"); // Utilise POST si nécessaire
+            httpSampler.setPath("/api/v1/dossier");
+            httpSampler.setMethod("GET");
             httpSampler.setName("HTTP Request - Dossier");
             httpSampler.setFollowRedirects(true);
 
             // Ajouter un Header Manager avec un en-tête
             HeaderManager headerManager = new HeaderManager();
-            headerManager.add(new Header("Content-Type", "application/json"));  // Ajout de l'en-tête Content-Type
+            headerManager.add(new Header("Content-Type", "application/json"));
             httpSampler.setHeaderManager(headerManager);
 
             // Configurer le Thread Group

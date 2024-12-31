@@ -1,14 +1,9 @@
-// ajouter-dossier.component.ts
+
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
-interface Analyse {
-  id: number;
-  nom: string;
-}
 
 @Component({
   selector: 'app-ajouter-dossier',
@@ -19,40 +14,40 @@ interface Analyse {
 })
 export class AjouterDossierComponent {
   dossierForm: FormGroup;
-  analyses: Analyse[] = [];
 
   constructor(private fb: FormBuilder, private http: HttpClient,  private router: Router) {
-    this.dossierForm = this.fb.group({
-      numDossier: ['', Validators.required],
-      emailUtilisateur: ['', [Validators.required, Validators.email]],
-      cinPatient: ['', Validators.required],
-      date: ['', Validators.required],
-      analyse: ['', Validators.required]
-    });
-
-    this.loadAnalyses();
-  }
-
-  loadAnalyses() {
-    // Récupération de la liste des analyses depuis l'API
-    this.http.get<Analyse[]>('http://your-api-url.com/analyses').subscribe(
-      (data) => {
-        this.analyses = data;
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des analyses', error);
-      }
-    );
-  }
-
-  submitForm() {
-    if (this.dossierForm.valid) {
-      console.log('Formulaire soumis avec les données : ', this.dossierForm.value);
-      alert('Dossier créé avec succès');
-          // Navigation vers l'autre route
-      this.router.navigate(['/list-dossiers']);
-    } else {
-      alert('Veuillez remplir correctement tous les champs');
+      this.dossierForm = this.fb.group({
+        numDossier: ['', Validators.required],
+        fkEmailUtilisateur: ['', [Validators.required, Validators.email]],  // Updated to match the back-end field
+        fkIdPatient: ['', Validators.required],  // Updated to match the back-end field
+        date: ['', Validators.required],
+      });
     }
-  }
-}
+
+ submitForm() {
+     if (this.dossierForm.valid) {
+       const dossierData = {
+         numDossier: this.dossierForm.value.numDossier,
+         fkEmailUtilisateur: this.dossierForm.value.fkEmailUtilisateur,
+         fkIdPatient: this.dossierForm.value.fkIdPatient,
+         date: this.dossierForm.value.date,
+       };
+
+       this.http.post('http://localhost:8090/api/dossier', dossierData)
+         .subscribe(
+           (response) => {
+             console.log('Dossier created successfully:', response);
+             this.router.navigate(['/list-dossiers']);
+           },
+           (error) => {
+             console.error('Error creating dossier:', error);
+             alert('An error occurred while creating the dossier');
+           }
+         );
+     } else {
+       alert('Please fill in all required fields');
+     }
+   }
+ }
+
+

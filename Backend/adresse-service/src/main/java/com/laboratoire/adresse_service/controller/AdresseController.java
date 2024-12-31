@@ -3,13 +3,12 @@ package com.laboratoire.adresse_service.controller;
 import com.laboratoire.adresse_service.model.Adresse;
 import com.laboratoire.adresse_service.service.AdresseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/adresse")
 public class AdresseController {
@@ -40,15 +39,20 @@ public class AdresseController {
     }
 
     // Mettre à jour une adresse
-    @PutMapping("/{id}")
+    @PutMapping("/modifier/{id}")
     public ResponseEntity<Adresse> updateAdresse(@PathVariable Long id, @RequestBody Adresse updatedAdresse) {
         try {
+            System.out.println("one");
             Adresse updated = adresseService.updateAdresse(id, updatedAdresse);
+            System.out.println("two");
             return ResponseEntity.ok(updated);
-        } catch (RuntimeException e) {
+        } catch (AdresseNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     // Supprimer une adresse
     @DeleteMapping("/{id}")

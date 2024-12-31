@@ -12,8 +12,12 @@ public interface ContactClient {
     @PostMapping("/api/contact-laboratoire")
     ResponseEntity<ContactLaboratoireDTO> createContact(ContactLaboratoireDTO contactDTO);
 
-    @PutMapping("/api/contact-laboratoire/{id}")
-    ResponseEntity<ContactLaboratoireDTO> updateContact(ContactLaboratoireDTO contactDTO);
+    @PutMapping("/api/contact-laboratoire/modifier/{id}")
+    ResponseEntity<ContactLaboratoireDTO> updateContact(
+            @PathVariable Long id,
+            @RequestBody ContactLaboratoireDTO contactDTO
+    );
+
     @DeleteMapping("/api/contact-laboratoire/{id}")
     ResponseEntity<Void> deleteContact(@PathVariable Long id);  // Added @PathVariable
 

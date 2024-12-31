@@ -64,9 +64,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             // Récupérer les informations du laboratoire
             try {
                 System.out.println("one");
-                LaboratoireDTO laboratoire = laboratoireClient.getLaboratoireById(utilisateur.getFkIdLaboratoire());
+                LaboratoireDTO laboratoire = laboratoireClient.getLaboratoireDTOById(utilisateur.getFkIdLaboratoire());
                 System.out.println("two");
-                dto.setLaboratoireDetails(laboratoire);
+                dto.setLaboratoireNom(laboratoire.getNom());
+                dto.setLaboratoireNrc(laboratoire.getNrc());
+                System.out.println(laboratoire.getId());
+                System.out.println(laboratoire.getNrc());
+                System.out.println(laboratoire.getNom());
                 System.out.println("three");
                 dto.getLaboratoireNom();
                 System.out.println(dto.getLaboratoireNrc());
@@ -99,7 +103,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         dto.setRole(utilisateur.getRole());
 
         // Récupérer les informations du laboratoire
-        LaboratoireDTO laboratoire = laboratoireClient.getLaboratoireById(utilisateur.getFkIdLaboratoire());
+        LaboratoireDTO laboratoire = laboratoireClient.getLaboratoireDTOById(utilisateur.getFkIdLaboratoire());
         dto.setLaboratoireDetails(laboratoire);
 
         return dto;

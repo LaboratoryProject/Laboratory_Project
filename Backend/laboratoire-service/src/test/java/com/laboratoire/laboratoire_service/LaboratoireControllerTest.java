@@ -1,71 +1,95 @@
 package com.laboratoire.laboratoire_service;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.laboratoire.laboratoire_service.controller.LaboratoireController;
-import com.laboratoire.laboratoire_service.dto.LaboratoireRequest;
-import com.laboratoire.laboratoire_service.dto.LaboratoireResponse;
+import com.laboratoire.laboratoire_service.dto.AdresseDTO;
+import com.laboratoire.laboratoire_service.dto.ContactLaboratoireDTO;
+import com.laboratoire.laboratoire_service.dto.LaboratoireCompletDTO;
+import com.laboratoire.laboratoire_service.dto.LaboratoireDTO;
+import com.laboratoire.laboratoire_service.model.Laboratoire;
 import com.laboratoire.laboratoire_service.service.LaboratoireServiceImpl;
-
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(LaboratoireController.class)
+@SpringBootTest // Full context, including security and authentication
+@AutoConfigureMockMvc // Configures MockMvc
 class LaboratoireControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private LaboratoireServiceImpl laboratoireService;
-
     @Autowired
     private ObjectMapper objectMapper;
 
-    private LaboratoireRequest laboratoireRequest;
-
-    @BeforeEach
-    void setUp() {
-        LaboratoireRequest request = new LaboratoireRequest("Lab A", "logo.png", "NRC123",
-                true, LocalDate.now());
-
-    }
+    @MockBean
+    private LaboratoireServiceImpl laboratoireService;
 
     @Test
-    void createSimpleLaboratoireTest() throws Exception {
-        LaboratoireResponse response = new LaboratoireResponse(
-                "Laboratoire Test", // nom
-                "logoTest.png",     // logo
-                null,               // nrc (par exemple un tableau vide ou null si non nécessaire)
-                "NRC123",           // laboratoireNrc
-                true,               // active
-                LocalDate.now()     // dateActivation (ou une autre date pertinente)
+    void createCompletLaboratoireTest() throws Exception {
+        // Prepare the nested DTOs
+        LaboratoireDTO laboratoireDTO = new LaboratoireDTO();
+        laboratoireDTO.setNom("Lab B");
+        laboratoireDTO.setNrc("NRC456");
+        laboratoireDTO.setLogo("logo.png");
+        laboratoireDTO.setActive(true);
+        laboratoireDTO.setDateActivation(LocalDate.now());
+
+        AdresseDTO adresseDTO = new AdresseDTO();
+        adresseDTO.setNumVoie("123");
+        adresseDTO.setNomVoie("Main Street");
+        adresseDTO.setVille("Paris");
+        adresseDTO.setCommune("Paris");
+        adresseDTO.setCodePostal("75001");
+
+        ContactLaboratoireDTO contactDTO = new ContactLaboratoireDTO();
+        contactDTO.setEmail("labB@example.com");
+        contactDTO.setNumTel("0123456789");
+        contactDTO.setFax("0123456789");
+
+        // Combine into LaboratoireCompletDTO
+        LaboratoireCompletDTO completDTO = new LaboratoireCompletDTO(laboratoireDTO, adresseDTO, contactDTO);
+
+        // Simulate a multipart file for the logo
+        MockMultipartFile logoFile = new MockMultipartFile(
+                "logoFile", "logo.png", MediaType.IMAGE_PNG_VALUE, "Fake Image Content".getBytes()
         );
 
-        when(laboratoireService.createLaboratoire(any(LaboratoireRequest.class))).thenReturn(response);
+        // Simulate a multipart file for LaboratoireCompletDTO
+        MockMultipartFile dtoFile = new MockMultipartFile(
+                "laboratoireCompletDTO", "", MediaType.APPLICATION_JSON_VALUE,
+                objectMapper.writeValueAsBytes(completDTO)
+        );
 
-        mockMvc.perform(post("/api/laboratoires")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(laboratoireRequest)))
+        // Simulated response from the service
+        Laboratoire createdLaboratoire = new Laboratoire(1L, "Lab B", "logo.png", "NRC456", true, LocalDate.now());
+        when(laboratoireService.createLaboratoireComplet(any(LaboratoireCompletDTO.class), any()))
+                .thenReturn(createdLaboratoire);
+
+        // Perform the multipart request
+        mockMvc.perform(multipart("/api/laboratoires/complet")
+                        .file(dtoFile)
+                        .file(logoFile)
+                        .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.nom").value("Laboratoire Test"));
+                .andExpect(jsonPath("$.nom").value("Lab B"))
+                .andExpect(jsonPath("$.logo").value("logo.png"))
+                .andExpect(jsonPath("$.nrc").value("NRC456"))
+                .andExpect(jsonPath("$.active").value(true));
     }
 
     @Test

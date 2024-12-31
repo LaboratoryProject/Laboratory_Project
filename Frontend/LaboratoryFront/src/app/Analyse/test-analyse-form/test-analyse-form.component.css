@@ -1,0 +1,60 @@
+/* Style général pour mat-card */
+mat-card {
+    max-width: 600px; /* Limite la largeur du mat-card */
+    margin: 20px auto; /* Centre le card horizontalement */
+    padding: 20px; /* Ajoute du padding autour du card */
+    background-color: #f5f5f5; /* Couleur de fond légère */
+    border-radius: 8px; /* Bordures arrondies */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  }
+  
+  /* Style pour mat-card-header */
+  mat-card-header {
+    background-color: #1976d2; /* Couleur de fond pour le header */
+    color: white; /* Texte en blanc */
+    padding: 10px; /* Ajoute du padding autour du header */
+    border-radius: 8px 8px 0 0; /* Bordures arrondies en haut */
+  }
+  
+  /* Style pour le titre du card */
+  mat-card-title {
+    font-size: 1.5em; /* Augmente la taille du titre */
+    font-weight: bold; /* Rend le titre en gras */
+    text-align: center; /* Centre le titre */
+  }
+  
+  /* Style pour mat-card-content */
+  mat-card-content {
+    padding: 20px;
+    background-color: white; /* Fond blanc pour le contenu */
+    border-radius: 0 0 8px 8px; /* Bordures arrondies en bas */
+  }
+  
+  /* Style pour les champs de formulaire */
+  mat-form-field {
+    width: 100%; /* Assure que le champ prend toute la largeur disponible */
+    margin-bottom: 20px; /* Espace entre les champs */
+  }
+  
+  /* Style pour le bouton d'ajout */
+  button {
+    width: 100%; /* Le bouton prend toute la largeur */
+    padding: 12px; /* Padding du bouton */
+    font-size: 1.1em; /* Augmente la taille du texte du bouton */
+    border-radius: 4px; /* Bordures arrondies pour le bouton */
+  }
+  
+  /* Désactive le bouton lorsqu'il est désactivé */
+  button:disabled {
+    background-color: #ccc; /* Couleur de fond gris pour un bouton désactivé */
+    color: #666; /* Texte gris */
+  }
+  
+  /* Style pour l'input (champ de texte) */
+  mat-input {
+    width: 100%;
+    padding: 10px; /* Padding pour les champs de texte */
+    font-size: 1em; /* Taille de texte */
+    border-radius: 4px; /* Bordures arrondies pour les champs */
+  }
+  
